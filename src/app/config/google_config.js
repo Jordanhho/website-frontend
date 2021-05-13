@@ -1,0 +1,1 @@
+export const RE_CAPTCHA_PUBLIC_KEY = "6Le3Fc8aAAAAAKBXi3l7YapjWeDofPZtcXdr-6Oa";

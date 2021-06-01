@@ -12,7 +12,7 @@ import LoginLayout from "../auth/LoginLayout";
 import staticRoutes from "../../routes/static_routes";
 
 import { 
-    verifyTokenAsync 
+    verifyLoginSessionAsync
 } from '../../redux/asyncActions/authAsyncActions';
 
 function AuthLayout() {
@@ -24,7 +24,7 @@ function AuthLayout() {
 
     // verify token on app load
     useEffect(() => {
-        dispatch(verifyTokenAsync());
+        dispatch(verifyLoginSessionAsync());
     }, [dispatch]);
 
     // checking authentication

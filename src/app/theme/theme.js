@@ -9,8 +9,10 @@ const theme = createMuiTheme({
         primary: {
             light: '#A7FFEB',
             main: '#1DE9B6',
-            dark: '#000',
+            active: '#FF4081',
+            dark: '#FF4081', //TODO figure out how to override button color
             contrastText: '#000',
+            
         },
         secondary: {
             light: '#FF80AB',
@@ -18,6 +20,15 @@ const theme = createMuiTheme({
             dark: '#F50057',
             contrastText: '#000',
         },
+    },
+    overrides: {
+        MuiButton: {
+            outlined: {
+                "&:hover": {
+                    backgroundColor: '#FF4081 !important',
+                }
+            },
+        }
     },
 });
 

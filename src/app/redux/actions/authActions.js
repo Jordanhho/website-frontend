@@ -1,10 +1,6 @@
 import {
-    VERIFY_TOKEN_STARTED, 
-    VERIFY_TOKEN_END,
-
-    USER_SIGNUP_STARTED,
-    USER_SIGNUP_FAILURE,
-    USER_SIGNUP_SUCCESS,
+    VERIFY_LOGIN_SESSION_STARTED,
+    VERIFY_LOGIN_SESSION_END,
 
     USER_LOGIN_STARTED, 
     USER_LOGIN_FAILURE, 
@@ -18,53 +14,12 @@ import {
 } from "../../services/auth_api";
 
 
-
-
-
-// user sign up  - start
-export const userSignUpStarted = () => {
-    return {
-        type: USER_SIGNUP_STARTED
-    }
-}
-
-
-// user sign up  - failure
-export const userSignUpFailure = (error = 'Something went wrong. Please try again later.') => {
-    return {
-        type: USER_SIGNUP_FAILURE,
-        payload: {
-            error
-        }
-    }
-}
-
-
-
-// user sign up - success
-export const userSignUpSuccess = ({ token, expiredAt, user }) => {
-    return {
-        type: USER_SIGNUP_SUCCESS,
-        payload: {
-            token,
-            expiredAt,
-            user
-        }
-    }
-}
-
-
-
-
-
-
 // user login - start
 export const userLoginStarted = () => {
     return {
         type: USER_LOGIN_STARTED
     }
 }
-
 
 // user login - failure
 export const userLoginFailure = (error = 'Something went wrong. Please try again later.') => {
@@ -75,8 +30,6 @@ export const userLoginFailure = (error = 'Something went wrong. Please try again
         }
     }
 }
-
-
 
 // verify token - success
 export const userLoginSuccess = ({ token, expiredAt, user }) => {
@@ -90,14 +43,10 @@ export const userLoginSuccess = ({ token, expiredAt, user }) => {
     }
 }
 
-
-
-
-
 // verify token - start
-export const verifyTokenStarted = (silentAuth = false) => {
+export const verifyLoginSessionStarted = (silentAuth = false) => {
     return {
-        type: VERIFY_TOKEN_STARTED,
+        type: VERIFY_LOGIN_SESSION_STARTED,
         payload: {
             silentAuth
         }
@@ -105,15 +54,11 @@ export const verifyTokenStarted = (silentAuth = false) => {
 }
 
 // verify token - end/failure
-export const verifyTokenEnd = () => {
+export const verifyLoginSessionEnd = () => {
     return {
-        type: VERIFY_TOKEN_END
+        type: VERIFY_LOGIN_SESSION_END
     }
 }
-
-
-
-
 
 // handle user logout
 export const userLogout = () => {
@@ -122,4 +67,3 @@ export const userLogout = () => {
         type: USER_LOGOUT
     }
 }
-

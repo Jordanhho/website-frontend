@@ -1,6 +1,6 @@
 import {
-    VERIFY_TOKEN_STARTED, 
-    VERIFY_TOKEN_END,
+    VERIFY_LOGIN_SESSION_STARTED, 
+    VERIFY_LOGIN_SESSION_END,
     USER_LOGIN_STARTED, 
     USER_LOGIN_FAILURE,
     USER_LOGIN_SUCCESS, 
@@ -15,20 +15,20 @@ const initialState = {
     authLoading: true, // to indicate that the auth API is in progress
     isAuthenticated: false, // consider as a authentication flag
     userLoginLoading: false, // to indicate that the user signin API is in progress
-    loginError: null // manage the error of the user signin API
+    loginError: null, // manage the error of the user signin API
 }
 
 // update store based on type and payload and return the state
 const auth = (state = initialState, action) => {
     switch (action.type) {
         // verify token - started
-        case VERIFY_TOKEN_STARTED:
+        case VERIFY_LOGIN_SESSION_STARTED:
             const { silentAuth } = action.payload;
             return silentAuth ? {
                 ...state
             } : initialState;
         // verify token - ended/failed
-        case VERIFY_TOKEN_END:
+        case VERIFY_LOGIN_SESSION_END:
             return {
                 ...state,
                 authLoading: false

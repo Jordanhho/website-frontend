@@ -1,1 +1,2 @@
-export const RE_CAPTCHA_PUBLIC_KEY = "6Le3Fc8aAAAAAKBXi3l7YapjWeDofPZtcXdr-6Oa";
+export const RECAPTCHA_PUBLIC_KEY = "6Le3Fc8aAAAAAKBXi3l7YapjWeDofPZtcXdr-6Oa";
+export const RECAPTCHA_INVISIBLE_PUBLIC_KEY = "6LdKZtgaAAAAANFoogKWxN-InASswLWZwo0ucszB";

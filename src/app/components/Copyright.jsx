@@ -5,11 +5,10 @@ import Typography from '@material-ui/core/Typography';
 function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
+            {'© 2021 '}
             <Link color="inherit" href="https://material-ui.com/">
-                Your Website
-      </Link>{' '}
-            {new Date().getFullYear()}
+                Jordan Ho - Powered by Node & React
+        </Link>
             {'.'}
         </Typography>
     );

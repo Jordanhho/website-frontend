@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -8,26 +8,36 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 
+
+import {
+    getAboutMe
+} from "../../services/public_api";
+
 function AboutMe() {
-    const [aboutMeData, setData] = useState({});
+    const [aboutMeData, setData] = useState({
+        "description": "",
+        "linkedin_url": "",
+        "email": "",
+        "youtube_url": "",
+        "github_url": "",
+        "resume_url": "",
+    });
 
-    useEffect(() => {
+    const [loaded, setLoaded] = useState(false);
 
-        let apiData = {
-            "description": "TODO DESCRIPTION",
-            "linkedinUrl": "https://www.linkedin.com/in/jordanhho/",
-            "email": "jordanhho@gmail.com",
-            "youtubeUrl": "https://www.youtube.com/channel/UC8MYJwWZQr6c6Ryjkt6vv4Q",
-            "githubUrl": "https://github.com/Jordanhho",
-            "resumeUrl": "",
-        }
-
-        setData(apiData);
-
+    const fetchData = useCallback(async () => {
+        const data = await getAboutMe();
+        setData(data);
+        setLoaded(true);
     }, []);
 
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
     return (
-        <div>
+       <div>
+            {(loaded) &&
             <Grid
                 container
                 direction="column"
@@ -63,7 +73,7 @@ function AboutMe() {
                         aria-label="Linkedin"
                         target="_blank"
                         rel="noreferrer"
-                        href={aboutMeData.linkedinUrl}
+                        href={aboutMeData.linkedin_url}
                     >
                         <LinkedInIcon fontSize="large" />
                     </IconButton>
@@ -74,7 +84,7 @@ function AboutMe() {
                         aria-label="Youtube"
                         target="_blank"
                         rel="noreferrer"
-                        href={aboutMeData.youtubeUrl}
+                        href={aboutMeData.youtube_url}
                     >
                         <YouTubeIcon fontSize="large" />
                     </IconButton>
@@ -85,7 +95,7 @@ function AboutMe() {
                         aria-label="Youtube"
                         target="_blank"
                         rel="noreferrer"
-                        href={aboutMeData.githubUrl}
+                        href={aboutMeData.github_url}
                     >
                         <GitHubIcon fontSize="large" />
                     </IconButton>
@@ -94,11 +104,11 @@ function AboutMe() {
                 <Grid container item xs={12} spacing={3}>
                     <h1>Resume
                      
-                    Link: aboutMeData.resumeUrl
+                    Link: aboutMeData.resume_url
                         <DescriptionIcon fontSize="large" />
                     </h1>
                 </Grid>
-            </Grid>
+            </Grid>}
         </div>
     );
 }

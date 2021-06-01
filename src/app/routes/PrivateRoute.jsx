@@ -5,9 +5,6 @@ import staticRoutes from "./static_routes";
 
 // handle the private routes
 function PrivateRoute({ component: Component, ...rest }) {
-
-
-    
     return (
         <Route
             {...rest}

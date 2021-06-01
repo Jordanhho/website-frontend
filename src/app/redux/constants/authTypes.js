@@ -1,20 +1,8 @@
-
-
-
-
-
-
-export const USER_SIGNUP_STARTED = "USER_SIGNUP_STARTED";
-
-export const USER_SIGNUP_FAILURE = "USER_SIGNUP_FAILURE";
-
-export const USER_SIGNUP_SUCCESS = "USER_SIGNUP_SUCCESS";
-
-//Used for when verifyTokenService API call will start
-export const VERIFY_TOKEN_STARTED = "VERIFY_TOKEN_STARTED";
+//Used for when verifyLoginSessionApi API call will start
+export const VERIFY_LOGIN_SESSION_STARTED = "VERIFY_LOGIN_SESSION_STARTED";
 
 //Used for when erifyTokenService API finishes
-export const VERIFY_TOKEN_END = "VERIFY_TOKEN_END";
+export const VERIFY_LOGIN_SESSION_END = "VERIFY_LOGIN_SESSION_END";
 
 //Used when userLoginService starts
 export const USER_LOGIN_STARTED = "USER_LOGIN_STARTED";

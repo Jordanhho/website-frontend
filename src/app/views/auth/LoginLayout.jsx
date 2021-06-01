@@ -7,12 +7,11 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
 import Login from "./Login";
 import SignUp from "./SignUp";
-import ForgotPassword from "./ForgotPassword";
-import EmailVerification from "./EmailVerification";
-import ResetPassword from "./ResetPassword";
+import ActivateAccount from "./ActivateAccount";
+
+import ChangePassword from "./ChangePassword";
 
 import staticRoutes from "../../routes/static_routes";
-
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -21,10 +20,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 function LoginLayout() {
     const classes = useStyles();
-
     return (
         <div>
             <Button 
@@ -38,12 +35,8 @@ function LoginLayout() {
             </Button>
             <Switch>
                 <Route
-                    path={staticRoutes.admin.email_verification_link}
-                    component={EmailVerification}
-                />
-                <Route
-                    path={staticRoutes.admin.reset_password_link}
-                    component={ResetPassword}
+                    path={staticRoutes.admin.activateAccount}
+                    component={ActivateAccount}
                 />
                 <Route
                     path={staticRoutes.admin.signUp}
@@ -51,7 +44,7 @@ function LoginLayout() {
                 />
                 <Route
                     path={staticRoutes.admin.forgotPassword}
-                    component={ForgotPassword}
+                    component={ChangePassword}
                 />
                 <Route
                     path={staticRoutes.admin.login}

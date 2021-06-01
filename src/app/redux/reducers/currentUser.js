@@ -1,6 +1,6 @@
 import {
-    VERIFY_TOKEN_STARTED, 
-    VERIFY_TOKEN_END,
+    VERIFY_LOGIN_SESSION_STARTED, 
+    VERIFY_LOGIN_SESSION_END,
     USER_LOGIN_STARTED, 
     USER_LOGIN_FAILURE,
     USER_LOGIN_SUCCESS,
@@ -22,13 +22,13 @@ const initialState = {
 const auth = (state = initialState, action) => {
     switch (action.type) {
         // verify token - started
-        case VERIFY_TOKEN_STARTED:
+        case VERIFY_LOGIN_SESSION_STARTED:
             const { silentAuth } = action.payload;
             return silentAuth ? {
                 ...state
             } : initialState;
         // verify token - ended/failed
-        case VERIFY_TOKEN_END:
+        case VERIFY_LOGIN_SESSION_END:
             return {
                 ...state,
                 authLoading: false

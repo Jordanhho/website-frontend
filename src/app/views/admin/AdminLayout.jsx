@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-
 import { useLocation, Route, Switch, Link  } from 'react-router-dom';
 
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import moment from 'moment';
 
+
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -16,84 +17,38 @@ import Home from "../main/Home";
 
 import staticRoutes from "../../routes/static_routes";
 
-import moment from 'moment';
-
-import { verifyTokenAsync, userLogoutAsync } from "../../redux/asyncActions/authAsyncActions";
+import { 
+    verifyLoginSessionAsync, 
+    userLogoutAsync 
+} from "../../redux/asyncActions/authAsyncActions";
 
 import { setAuthTokenApi } from '../../services/auth_api';
-// import { getUserListService } from '../../services/users_api';
 
 import useStyles from "./styles";
 
-// import {
-//     isAuthenticated
-// } from "../../api/admin-login-api";
-
-
 function AdminLayout() {
-
+    const location = useLocation();
+    const classes = useStyles();
     const dispatch = useDispatch();
     const authObj = useSelector(state => state.auth);
 
-    const {token, expiredAt } = authObj;
-    // const [userList, setUserList] = useState([]);
+    const { token, expiredAt } = authObj;
 
     // handle click event of the logout button
     const handleLogout = () => {
         dispatch(userLogoutAsync());
     }
 
-
-    const location = useLocation();
-    // const history = useHistory();
-
-    //useSelector(state => state.loggedIn)
-
-    const classes = useStyles();
-
-    // set timer to renew token TODO figure this out
+    // set timer to renew token 
     useEffect(() => {
-        console.log("set auth token!");
         setAuthTokenApi(token);
-        const verifyTokenTimer = setTimeout(() => {
-            dispatch(verifyTokenAsync(true));
-        }, moment(expiredAt).diff() - 10 * 1000);
+        const verifyLoginSessionTimeOutTimer = setTimeout(() => {
+            dispatch(verifyLoginSessionAsync(true));
+        }, moment(expiredAt).diff() - 10 * 200);
         return () => {
-            clearTimeout(verifyTokenTimer);
+            clearTimeout(verifyLoginSessionTimeOutTimer);
         }
     }, [expiredAt, token, dispatch])
-
-    
-    
-
-    // // get user list on page load
-    // useEffect(() => {
-    //     getUserList();
-    // }, [getUserList]);
-
-
-
-    // get user list
-    // const getUserList = async () => {
-    //     const result = await getUserListService();
-    //     if (result.error) {
-    //         dispatch(verifyTokenEnd());
-    //         if (result.response && [401, 403].includes(result.response.status))
-    //             dispatch(userLogout());
-    //         return;
-    //     }
-    //     setUserList(result.data);
-    // }
-
-    // async function onLoad() {
-    //     // try {
-    //     //     await isAuthenticated();
-    //     // } catch (e) {
-    //     //     //redirect to 
-    //     // }
-    // }
-
-    console.log(staticRoutes);
 
     return (
         <div> 
@@ -123,14 +78,12 @@ function AdminLayout() {
                         component={Link}
                         label="Admin Apps"
                     />
-
                     <Tab
                         to={staticRoutes.main.home}
                         value={staticRoutes.main.home}
                         component={Link}
                         label="BACK"
                     />
-                 
                 </Tabs>
             </AppBar>
             <Button
@@ -141,10 +94,7 @@ function AdminLayout() {
                 onClick={handleLogout}
             >
                 Logout
-                    </Button>
-            {/* <b>User List:</b> */}
-            {/* <pre>{JSON.stringify(userList, null, 2)}</pre> */}
-
+            </Button>
             <Switch>
                 <Route
                     path={staticRoutes.main.home}
@@ -161,7 +111,6 @@ function AdminLayout() {
                 />
             </Switch> 
         </div>
-
     )
 }
 export default AdminLayout;

@@ -8,6 +8,8 @@ import {
 //force send credentials (cookies) to every axios request
 axios.defaults.withCredentials = true;
 
+let privateAxios = axios;
+
 const VERIFY_LOGIN_SESSION_TIMEOUT = 300; //300 ms for verifying login session.
 
 //** Sign Up Process */
@@ -62,10 +64,10 @@ export const userLogoutApi = async () => {
 
 //** Verify Login Session Process */
 
-// set tokens to the axios header
-export const setAuthTokenApi = (token) => {
-    if (token) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+// set access token to the axios header
+export const setAccessTokenApi = (accessToken) => {
+    if (accessToken) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     }
     else {
         delete axios.defaults.headers.common["Authorization"];
@@ -124,3 +126,7 @@ export const resetPasswordApi = async (data) => {
         };
     }
 }
+
+export {
+    privateAxios
+};

@@ -22,7 +22,7 @@ function AuthLayout() {
 
     const { authLoading, isAuthenticated } = authObj;
 
-    // verify token on app load
+    // verify accessToken on app load
     useEffect(() => {
         dispatch(verifyLoginSessionAsync());
     }, [dispatch]);

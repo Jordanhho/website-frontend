@@ -10,7 +10,7 @@ import {
 } from "../constants/authTypes";
 
 import {
-    setAuthTokenApi
+    setAccessTokenApi
 } from "../../services/auth_api";
 
 
@@ -31,19 +31,19 @@ export const userLoginFailure = (error = 'Something went wrong. Please try again
     }
 }
 
-// verify token - success
-export const userLoginSuccess = ({ token, expiredAt, user }) => {
+//get accessToken from successful login
+export const userLoginSuccess = ({ accessToken, expiredAt, user }) => {
     return {
         type: USER_LOGIN_SUCCESS,
         payload: {
-            token,
+            accessToken,
             expiredAt,
             user
         }
     }
 }
 
-// verify token - start
+// verify accessToken - start
 export const verifyLoginSessionStarted = (silentAuth = false) => {
     return {
         type: VERIFY_LOGIN_SESSION_STARTED,
@@ -53,7 +53,7 @@ export const verifyLoginSessionStarted = (silentAuth = false) => {
     }
 }
 
-// verify token - end/failure
+// verify accessToken - end/failure
 export const verifyLoginSessionEnd = () => {
     return {
         type: VERIFY_LOGIN_SESSION_END
@@ -62,7 +62,7 @@ export const verifyLoginSessionEnd = () => {
 
 // handle user logout
 export const userLogout = () => {
-    setAuthTokenApi();
+    setAccessTokenApi();
     return {
         type: USER_LOGOUT
     }

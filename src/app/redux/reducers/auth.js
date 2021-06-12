@@ -9,7 +9,7 @@ import {
 
 // define initial state of auth reducer
 const initialState = {
-    token: null, // manage the access token
+    accessToken: null, // manage the access token
     expiredAt: null, // manage expiry time of the access token
     user: null, // manage the user details
     authLoading: true, // to indicate that the auth API is in progress
@@ -21,13 +21,13 @@ const initialState = {
 // update store based on type and payload and return the state
 const auth = (state = initialState, action) => {
     switch (action.type) {
-        // verify token - started
+        // verify accessToken - started
         case VERIFY_LOGIN_SESSION_STARTED:
             const { silentAuth } = action.payload;
             return silentAuth ? {
                 ...state
             } : initialState;
-        // verify token - ended/failed
+        // verify accessToken - ended/failed
         case VERIFY_LOGIN_SESSION_END:
             return {
                 ...state,
@@ -47,12 +47,12 @@ const auth = (state = initialState, action) => {
                 loginError: error,
                 userLoginLoading: false
             };
-        // verify token - success
+        // verify accessToken - success
         case USER_LOGIN_SUCCESS:
-            const { token, expiredAt, user } = action.payload;
+            const { accessToken, expiredAt, user } = action.payload;
             return {
                 ...state,
-                token,
+                accessToken,
                 expiredAt,
                 user,
                 isAuthenticated: true,
@@ -69,5 +69,4 @@ const auth = (state = initialState, action) => {
             return state
     }
 }
-
 export default auth;

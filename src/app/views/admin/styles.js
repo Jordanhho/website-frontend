@@ -7,10 +7,6 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
         alignItems: 'center',
     },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
@@ -20,6 +16,29 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         cursor: "pointer"
+    },
+    icon: {
+        width: "30px",
+        height: "30px",
+    },
+    profilePicture: {
+        width: "200px",
+        height: "200px"
+    },
+    pinnedEditBtn: {
+        position: "fixed",
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+    pinnedSaveBtn: {
+        position: "fixed",
+        bottom: theme.spacing(2),
+        right: theme.spacing(2),
+    },
+    pinnedCancelBtn: {
+        position: "fixed",
+        bottom: theme.spacing(2),
+        right: theme.spacing(14),
     }
 }));
 

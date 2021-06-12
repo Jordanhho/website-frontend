@@ -27,3 +27,4 @@ yarn-error.log*
 src/app/views/apps/csgo-app/*
 
 src/app/assets/*
+src/app/services/csgo_api.js

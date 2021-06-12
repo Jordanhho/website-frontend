@@ -11,7 +11,7 @@ npm install react-google-recaptcha for captcha
 
 
 
-
+https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react
 
 Idea:
 - Website to host various personal applications

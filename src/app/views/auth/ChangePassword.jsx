@@ -144,7 +144,6 @@ function ForgotPassword() {
         decrementPage();
     }
 
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />

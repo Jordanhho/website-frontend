@@ -22,5 +22,6 @@ export const publicApiRoutes = {
 export const privateApiRoutes = {
     UPDATE_ABOUT_ME: "/api/about-me/update",
     UPDATE_APPS: "/api/apps/update",
+    REMOVE_APP: "/api/apps/remove",
     UPDATE_HOME: "/api/home/update"
 }

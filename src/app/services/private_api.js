@@ -7,9 +7,38 @@ import {
     privateApiRoutes
 } from "../routes/api_routes";
 
+//** Update Apps */
+
+export const updateApps = async (data) => {
+    try {
+        return await privateAxios.post(
+            API_URL + privateApiRoutes.UPDATE_APPS,
+            data
+        );
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}
+
+export const removeApp = async (app_id) => {
+    try {
+        return await privateAxios.post(
+            API_URL + privateApiRoutes.REMOVE_APP,
+            app_id
+        );
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}
+
 //** Update About Me */
 
-//update about me data
 export const updateAboutMe = async (data) => {
     try {
         return await privateAxios.post(

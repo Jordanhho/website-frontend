@@ -12,13 +12,13 @@ import SchoolIcon from '@material-ui/icons/School';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import GetAppIcon from '@material-ui/icons/GetApp';
-import IconButton from '@material-ui/core/IconButton';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import ComputerIcon from '@material-ui/icons/Computer';
 import WorkIcon from '@material-ui/icons/Work';
 
+import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';

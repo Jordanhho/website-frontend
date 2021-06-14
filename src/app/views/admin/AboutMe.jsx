@@ -15,9 +15,9 @@ import DescriptionIcon from '@material-ui/icons/Description'; //for resume
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
@@ -116,13 +116,16 @@ function AboutMe() {
         //if failed update, load backup
         if(!result.data) {
             setData(aboutMeBak);
+            setReadOnly(true);
             setOpenFailureToast(true);
         }
-        setData(result.data);
+        else {
+            setData(result.data);
 
-        //successfully updated!
-        setReadOnly(true); 
-        setOpenSuccessToast(true);
+            //successfully updated!
+            setReadOnly(true);
+            setOpenSuccessToast(true);
+        }
     }
 
     function handleOnClickEdit() {
@@ -354,7 +357,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="email"
                                                             onClick={() => window.open(aboutMe.email)}
                                                         >
                                                             <EmailIcon />
@@ -379,7 +382,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="Linkedin"
                                                             onClick={() => window.open(aboutMe.linkedin_url)}
                                                         >
                                                             <LinkedInIcon />
@@ -404,7 +407,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="Github"
                                                             onClick={() => window.open(aboutMe.github_url)}
                                                         >
                                                             <GitHubIcon />
@@ -487,7 +490,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Youtube"
                                                         onClick={() => window.open(aboutMe.youtube_url)}
                                                     >
                                                         <YouTubeIcon />
@@ -512,7 +515,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Twitch"
                                                         onClick={() => window.open(aboutMe.twitch_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "twitch"]} />
@@ -537,7 +540,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Steam"
                                                         onClick={() => window.open(aboutMe.steam_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "steam"]} />

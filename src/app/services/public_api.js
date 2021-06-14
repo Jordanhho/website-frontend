@@ -16,6 +16,13 @@ export async function getAboutMe() {
     }
 }
 
-
-
-
+export async function getApps() {
+    try {
+        return await axios.get(API_URL + publicApiRoutes.APPS).then((result) => result);
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}

@@ -1,36 +1,67 @@
-# website-frontend
-Front end website
+# Personal Website Frontend
 
+## Project Description
+This project is to develop my personal website's frontend. The website is developed to access the APIs from the backend.
+The website is split into 2 portions, a public area for showcasing my activites and an admin portion for my use.
 
-Front end ui:
-https://material-ui.com/
-npm install @material-ui/core
-npm install @material-ui/icons
+## Technologies
+This is a ReactJS Single Page Application that uses the following framework and libraries:
+- [ReactJS](https://reactjs.org/)
+- [Redux](https://react-redux.js.org/)
+- [Material UI](https://material-ui.com/)
+- [Fontawesome](https://fontawesome.com/)
+- [Lodash](https://lodash.com/)
+- [Recaptcha](https://www.google.com/recaptcha/about/)
+- [MomentJS](https://momentjs.com/)
+- [axios](https://www.axios.com/)
 
-npm install react-google-recaptcha for captcha
+## NPM Packages
+The application uses the following npm packages:
 
+### ReactJS:
+- react
+- react-dom
+- react-router-dom
+- react-cookie
 
+### Redux:
+- react-redux
+- redux-thunk
 
-https://fontawesome.com/v5.15/how-to-use/on-the-web/using-with/react
+### UI Frameworks:
+Material UI:
+- @material-ui/core"
+- @material-ui/icons
+- @material-ui/lab
 
-Idea:
-- Website to host various personal applications
+### Fontawesome:
+- react-fontawesome
+- fontawesome-svg-core
+- free-brands-svg-icons
+- free-regular-svg-icons
+- free-solid-svg-icons
 
-Application 1:
+### Utilities:
+- react-google-recaptcha
+- lodash
+- moment
+- axios
 
-CSGO Tactical App:
-- Share smokes, upload smokes, delete, select on parts of map
-- Large map for all smokes we know
-- Real Time Strategy room with selections: 
-- positions, setups etc.
+## Requirements
+This project is meant to be paired with the personal website backend in order to load apis. However, the website can still be run.
 
+The application has been developed with NodeJS version 14.17.1 LTS
 
-Auth:
-- login by email, passwords
+It has been developed targeted towards Chrome Browsers desktops.
 
+## How to Run the project
+1. Clone the project to your local directory:
 
-- aws s3 for image upload
-
-
-moment package
-
+2. install all npm packages
+``` 
+    $ npm install
+```
+3.  Run the project to localhost:3000
+``` 
+    $ npm run start
+```

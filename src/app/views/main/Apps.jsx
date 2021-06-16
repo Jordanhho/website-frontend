@@ -10,6 +10,8 @@ import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
+import Loader from "../../components/Loader";
+
 import useStyles from "./styles";
 
 import {
@@ -22,7 +24,7 @@ function Apps() {
 
     const [apps, setData] = useState([]);
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(null);
 
 
     function getAppType(app_type) {
@@ -43,7 +45,9 @@ function Apps() {
         if (result.data) {
             setData(result.data);
             setLoaded(true);
-            return;
+        } 
+        else {
+            setLoaded(false);
         }
     }, []);
 
@@ -51,7 +55,26 @@ function Apps() {
         fetchData();
     }, [fetchData]);
 
-    if (!loaded) {
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
         return (
             <div>
                 Error, something went wrong.

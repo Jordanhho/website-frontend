@@ -29,11 +29,27 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: 'wrap',
     },
     iconInline: {
-        // "paddingLeft": "0px", 
         "fontSize": "50px",
     },
     iconPadding: {
         "paddingRight": "10px"
+    },
+    weatherIcon: {
+        width: "100px",
+        height: "100px",
+        backgroundColor: "skyBlue"
+    },
+    techonologyImg: {
+        maxHeight: "50px",
+        cursor: "pointer",
+        maxWidth: "200px"
+    },
+    center: {
+        textAlign: "center"
+    },
+    loader: { 
+        paddingTop: '30vh', 
+        paddingBottom: '30vh'
     }
 }));
 

@@ -30,6 +30,8 @@ import Fab from '@material-ui/core/Fab';
 
 import useStyles from "./styles";
 
+import Loader from "../../components/Loader";
+
 import {
     getApps,
 } from "../../services/public_api";
@@ -55,7 +57,7 @@ function Apps() {
 
     const [readOnly, setReadOnly] = useState(true)
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(null);
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
     const [successToastMsg, setSuccessToastMsg] = useState("");
     const [openFailureToast, setOpenFailureToast] = useState(false);
@@ -191,7 +193,9 @@ function Apps() {
             setData(result.data);
             setAppsBak(result.data);
             setLoaded(true);
-            return;
+        }
+        else {
+            setLoaded(false);
         }
     }, []);
 
@@ -199,7 +203,26 @@ function Apps() {
         fetchData();
     }, [fetchData]);
 
-    if (!loaded) {
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
         return (
             <div>
                 Error, something went wrong.

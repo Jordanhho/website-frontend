@@ -27,6 +27,8 @@ import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
 
+import Loader from "../../components/Loader";
+
 import useStyles from "./styles";
 
 import {
@@ -54,14 +56,16 @@ function AboutMe() {
         resume_url: ""
     });
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(null);
 
     const fetchData = useCallback(async () => {
         const result = await getAboutMe();
         if(result.data) {
             setData(result.data);
             setLoaded(true);
-            return;
+        }
+        else {
+            setLoaded(false);
         }
     }, []);
 
@@ -69,14 +73,33 @@ function AboutMe() {
         fetchData();
     }, [fetchData]);
 
-    if (!loaded) {
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
         return (
             <div>
                 Error, something went wrong.
             </div>
         );
     }
-    
+
     return (
         <Container>
             <Box p={5}>

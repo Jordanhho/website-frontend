@@ -31,6 +31,8 @@ import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
+import Loader from "../../components/Loader";
+
 import useStyles from "./styles";
 
 import {
@@ -75,7 +77,7 @@ function AboutMe() {
 
     const [ readOnly, setReadOnly ] = useState(true)
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(null);
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
     const [openFailureToast, setOpenFailureToast] = useState(false);
 
@@ -151,7 +153,9 @@ function AboutMe() {
             setData(result.data);
             setAboutMeBak(result.data);
             setLoaded(true);
-            return;
+        }
+        else {
+            setLoaded(false);
         }
     }, []);
 
@@ -159,14 +163,32 @@ function AboutMe() {
         fetchData();
     }, [fetchData]);
 
-    if(!loaded) {
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
         return (
             <div>
                 Error, something went wrong.
             </div>
         );
     }
-
     return (
         <Container>
             <form onSubmit={handleUpdate} ref={formRef}>

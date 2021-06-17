@@ -1,9 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import CancelIcon from '@material-ui/icons/Cancel';
-import SaveIcon from '@material-ui/icons/Save';
-import EditIcon from '@material-ui/icons/Edit';
-
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Paper from '@material-ui/core/Paper';
@@ -14,8 +10,6 @@ import { Typography } from '@material-ui/core';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
 
 import Loader from "../../components/Loader";
 
@@ -36,47 +30,17 @@ function AdminHome() {
     const formRef = React.createRef();
 
     const [adminHomeData, setData] = useState();
-    const [adminHomeDataBak, setBakData] = useState([]);
 
     const [loaded, setLoaded] = useState(null);
-
-    const [readOnly, setReadOnly] = useState(true);
 
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
     const [successToastMsg, setSuccessToastMsg] = useState("");
     const [openFailureToast, setOpenFailureToast] = useState(false);
     const [failureToastMsg, setFailureToastMsg] = useState("");
 
-    function handleOnClickEdit() {
-        setBakData(adminHomeData);
-        setReadOnly(false);
-    }
-
-    function handleOnClickCancel() {
-        setData(adminHomeDataBak);
-        setReadOnly(true);
-    }
-
     function handleClose() {
         setOpenSuccessToast(false);
         setOpenFailureToast(false);
-    }
-
-    function handleOnChange(e) {
-        let value = null;
-
-        //for checkboxes
-        if (e.target.checked) {
-            value = e.target.checked;
-        }
-        else {
-            value = e.target.value;
-        }
-
-        setData({
-            ...adminHomeData,
-            [e.target.name]: value
-        });
     }
 
     async function handleUpdate(e) {
@@ -91,11 +55,9 @@ function AdminHome() {
             }
         }
         const result = await updateAdminSettings(postData);
-        setReadOnly(true);
 
         //if failed update, load backup
         if (!result.data) {
-            setData(adminHomeDataBak);
             setFailureToastMsg("Error, something went wrong.");
             setOpenFailureToast(true);
         }

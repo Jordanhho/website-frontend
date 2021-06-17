@@ -183,12 +183,22 @@ function Home() {
                                             </Typography>
                                         </Grid>
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.nodejs.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
                                                     src={homeData.technologies.nodejs.logo}
                                                     alt="NodeJS"
+                                                />
+                                            </a>
+                                        </Grid>
+
+                                        <Grid item xs={12} md={6}>
+                                            <a href={homeData.technologies.nginx.url}>
+                                                <img
+                                                    className={(classes.techonologyImg)}
+                                                    src={homeData.technologies.nginx.logo}
+                                                    alt="Nginx"
                                                 />
                                             </a>
                                         </Grid>

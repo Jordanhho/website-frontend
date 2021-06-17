@@ -2,7 +2,7 @@
 
 ## Project Description
 This project is to develop my personal website's frontend. The website is developed to access the APIs from the backend.
-The website is split into 2 portions, a public area for showcasing my activites and an admin portion for my use.
+The website is split into 2 portions, a public area for showcasing my activites and an admin portion for my use. The front end is hosted with nginx.
 
 ## Technologies
 This is a ReactJS Single Page Application that uses the following framework and libraries:
@@ -14,6 +14,7 @@ This is a ReactJS Single Page Application that uses the following framework and 
 - [Recaptcha](https://www.google.com/recaptcha/about/)
 - [MomentJS](https://momentjs.com/)
 - [axios](https://www.axios.com/)
+- [nginx](https://www.nginx.com/)
 
 ## NPM Packages
 The application uses the following npm packages:
@@ -66,3 +67,10 @@ It has been developed targeted towards Chrome Browsers desktops.
 ``` 
     $ npm run start
 ```
+
+## to build static files
+1. Build reactjs 
+``` 
+    $ npm run build
+```
+2. The built app will be at /build

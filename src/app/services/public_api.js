@@ -5,6 +5,17 @@ import {
     publicApiRoutes
 } from "../routes/api_routes";
 
+export async function getLoginSettings() {
+    try {
+        return await axios.get(API_URL + publicApiRoutes.LOGIN_SETTINGS).then((result) => result);
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}
+
 export async function getHome() {
     try {
         return await axios.get(API_URL + publicApiRoutes.HOME).then((result) => result);

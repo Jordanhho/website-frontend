@@ -193,7 +193,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.expressjs.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -203,7 +203,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.mongodb.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -213,7 +213,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.aws_s3.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -223,7 +223,7 @@ function Home() {
                                             </a> 
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.aws_cloudfront.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -262,7 +262,7 @@ function Home() {
                                             </Typography>
                                         </Grid>
 
-                                        <Grid item xs={6} >
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.reactjs.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -272,7 +272,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6} >
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.redux.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -282,7 +282,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.material_ui.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}
@@ -292,7 +292,7 @@ function Home() {
                                             </a>
                                         </Grid>
 
-                                        <Grid item xs={6}>
+                                        <Grid item xs={12} md={6}>
                                             <a href={homeData.technologies.fontawesome.url}>
                                                 <img
                                                     className={(classes.techonologyImg)}

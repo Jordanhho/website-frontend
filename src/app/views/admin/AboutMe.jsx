@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import ReactHtmlParser from 'react-html-parser';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
@@ -56,12 +58,14 @@ function AboutMe() {
     const [aboutMe, setData] = useState({
         firstname: "",
         lastname: "",
-        profile_picture_url: "",
-        email: "jordanhho@gmail.com",
+        email: "",
         education_description: "",
-        experience_description: "",
-        specialization_description: "",
+        school_experience_description: "",
+        work_experience_description: "",
+        skill_specialization_description: "",
         hobby_description: "",
+        esports_description: "",
+        goal_description: "",
         crossfire_profile_url: "",
         youtube_url: "",
         linkedin_url: "",
@@ -75,7 +79,7 @@ function AboutMe() {
     const [ resume, setResume ] = useState(null);
     const [ profilePicture, setProfilePicture] = useState(null);
 
-    const [ readOnly, setReadOnly ] = useState(true)
+    const [ readOnly, setReadOnly ] = useState(true);
 
     const [loaded, setLoaded] = useState(null);
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
@@ -214,7 +218,7 @@ function AboutMe() {
                                 endIcon={<CancelIcon />}
                             >
                                 Cancel
-                        </Button>
+                            </Button>
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -249,7 +253,7 @@ function AboutMe() {
                                     <Grid item xs={12}>
                                         <Typography variant="h6">
                                             Update Profile Picture
-                                </Typography>
+                                        </Typography>
                                     </Grid>}
 
                                 {(!readOnly) &&
@@ -282,6 +286,9 @@ function AboutMe() {
                                 spacing={3}
                             >
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.school_experience_description)
+                                    :
                                     <TextField
                                         fullWidth
                                         multiline
@@ -294,39 +301,70 @@ function AboutMe() {
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.school_experience_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
-                                        label="Experience"
-                                        name="experience_description"
+                                        label="School Experience"
+                                        name="school_experience_description"
                                         rows={10}
                                         variant="outlined"
                                         onChange={handleOnChange}
-                                        value={aboutMe.experience_description}
+                                            value={aboutMe.school_experience_description}
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
+
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.work_experience_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
-                                        label="Specialization"
-                                        name="specialization_description"
+                                        label="Work Experience"
+                                        name="work_experience_description"
                                         rows={10}
                                         variant="outlined"
                                         onChange={handleOnChange}
-                                        value={aboutMe.specialization_description}
+                                        value={aboutMe.work_experience_description}
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
+
+                                <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.skill_specialization_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Skill & Specialization"
+                                        name="skill_specialization_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.skill_specialization_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
+                                </Grid>
+
+
                                 <Grid item xs={12}>
+                                    {(readOnly) ?
+                                        ReactHtmlParser(aboutMe.hobby_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
@@ -339,7 +377,45 @@ function AboutMe() {
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.esports_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Esports"
+                                        name="esports_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.esports_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.goal_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Goal"
+                                        name="goal_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.goal_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
                                 </Grid>
                             </Grid>
                         </Box>

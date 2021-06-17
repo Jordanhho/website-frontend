@@ -25,6 +25,4 @@ yarn-error.log*
 .vscode/settings.json
 
 src/app/views/apps/csgo-app/*
-
-src/app/assets/*
 src/app/services/csgo_api.js

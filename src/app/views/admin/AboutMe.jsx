@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import ReactHtmlParser from 'react-html-parser';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
@@ -15,9 +17,9 @@ import DescriptionIcon from '@material-ui/icons/Description'; //for resume
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 
+import InputAdornment from '@material-ui/core/InputAdornment';
 import Fab from '@material-ui/core/Fab';
 import Box from '@material-ui/core/Box';
 import Input from '@material-ui/core/Input';
@@ -30,6 +32,8 @@ import TextField from '@material-ui/core/TextField';
 import { Typography } from '@material-ui/core';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+
+import Loader from "../../components/Loader";
 
 import useStyles from "./styles";
 
@@ -54,12 +58,14 @@ function AboutMe() {
     const [aboutMe, setData] = useState({
         firstname: "",
         lastname: "",
-        profile_picture_url: "",
-        email: "jordanhho@gmail.com",
+        email: "",
         education_description: "",
-        experience_description: "",
-        specialization_description: "",
+        school_experience_description: "",
+        work_experience_description: "",
+        skill_specialization_description: "",
         hobby_description: "",
+        esports_description: "",
+        goal_description: "",
         crossfire_profile_url: "",
         youtube_url: "",
         linkedin_url: "",
@@ -73,9 +79,9 @@ function AboutMe() {
     const [ resume, setResume ] = useState(null);
     const [ profilePicture, setProfilePicture] = useState(null);
 
-    const [ readOnly, setReadOnly ] = useState(true)
+    const [ readOnly, setReadOnly ] = useState(true);
 
-    const [loaded, setLoaded] = useState(false);
+    const [loaded, setLoaded] = useState(null);
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
     const [openFailureToast, setOpenFailureToast] = useState(false);
 
@@ -116,13 +122,16 @@ function AboutMe() {
         //if failed update, load backup
         if(!result.data) {
             setData(aboutMeBak);
+            setReadOnly(true);
             setOpenFailureToast(true);
         }
-        setData(result.data);
+        else {
+            setData(result.data);
 
-        //successfully updated!
-        setReadOnly(true); 
-        setOpenSuccessToast(true);
+            //successfully updated!
+            setReadOnly(true);
+            setOpenSuccessToast(true);
+        }
     }
 
     function handleOnClickEdit() {
@@ -148,7 +157,9 @@ function AboutMe() {
             setData(result.data);
             setAboutMeBak(result.data);
             setLoaded(true);
-            return;
+        }
+        else {
+            setLoaded(false);
         }
     }, []);
 
@@ -156,14 +167,32 @@ function AboutMe() {
         fetchData();
     }, [fetchData]);
 
-    if(!loaded) {
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
         return (
             <div>
                 Error, something went wrong.
             </div>
         );
     }
-
     return (
         <Container>
             <form onSubmit={handleUpdate} ref={formRef}>
@@ -189,7 +218,7 @@ function AboutMe() {
                                 endIcon={<CancelIcon />}
                             >
                                 Cancel
-                        </Button>
+                            </Button>
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -224,7 +253,7 @@ function AboutMe() {
                                     <Grid item xs={12}>
                                         <Typography variant="h6">
                                             Update Profile Picture
-                                </Typography>
+                                        </Typography>
                                     </Grid>}
 
                                 {(!readOnly) &&
@@ -257,6 +286,9 @@ function AboutMe() {
                                 spacing={3}
                             >
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.school_experience_description)
+                                    :
                                     <TextField
                                         fullWidth
                                         multiline
@@ -269,39 +301,70 @@ function AboutMe() {
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.school_experience_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
-                                        label="Experience"
-                                        name="experience_description"
+                                        label="School Experience"
+                                        name="school_experience_description"
                                         rows={10}
                                         variant="outlined"
                                         onChange={handleOnChange}
-                                        value={aboutMe.experience_description}
+                                            value={aboutMe.school_experience_description}
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
+
                                 <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.work_experience_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
-                                        label="Specialization"
-                                        name="specialization_description"
+                                        label="Work Experience"
+                                        name="work_experience_description"
                                         rows={10}
                                         variant="outlined"
                                         onChange={handleOnChange}
-                                        value={aboutMe.specialization_description}
+                                        value={aboutMe.work_experience_description}
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
                                 </Grid>
+
+                                <Grid item xs={12} >
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.skill_specialization_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Skill & Specialization"
+                                        name="skill_specialization_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.skill_specialization_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
+                                </Grid>
+
+
                                 <Grid item xs={12}>
+                                    {(readOnly) ?
+                                        ReactHtmlParser(aboutMe.hobby_description)
+                                    :
                                     <TextField
                                         fullWidth={true}
                                         multiline
@@ -314,7 +377,45 @@ function AboutMe() {
                                         InputProps={{
                                             readOnly: readOnly,
                                         }}
-                                    />
+                                    />}
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.esports_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Esports"
+                                        name="esports_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.esports_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
+                                </Grid>
+
+                                <Grid item xs={12}>
+                                    {(readOnly) ?
+                                    ReactHtmlParser(aboutMe.goal_description)
+                                    :
+                                    <TextField
+                                        fullWidth={true}
+                                        multiline
+                                        label="Goal"
+                                        name="goal_description"
+                                        rows={10}
+                                        variant="outlined"
+                                        onChange={handleOnChange}
+                                        value={aboutMe.goal_description}
+                                        InputProps={{
+                                            readOnly: readOnly,
+                                        }}
+                                    />}
                                 </Grid>
                             </Grid>
                         </Box>
@@ -354,7 +455,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="email"
                                                             onClick={() => window.open(aboutMe.email)}
                                                         >
                                                             <EmailIcon />
@@ -379,7 +480,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="Linkedin"
                                                             onClick={() => window.open(aboutMe.linkedin_url)}
                                                         >
                                                             <LinkedInIcon />
@@ -404,7 +505,7 @@ function AboutMe() {
                                                         <IconButton
                                                             color="primary"
                                                             component="span"
-                                                            aria-label="esea"
+                                                            aria-label="Github"
                                                             onClick={() => window.open(aboutMe.github_url)}
                                                         >
                                                             <GitHubIcon />
@@ -487,7 +588,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Youtube"
                                                         onClick={() => window.open(aboutMe.youtube_url)}
                                                     >
                                                         <YouTubeIcon />
@@ -512,7 +613,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Twitch"
                                                         onClick={() => window.open(aboutMe.twitch_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "twitch"]} />
@@ -537,7 +638,7 @@ function AboutMe() {
                                                     <IconButton
                                                         color="primary"
                                                         component="span"
-                                                        aria-label="esea"
+                                                        aria-label="Steam"
                                                         onClick={() => window.open(aboutMe.steam_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "steam"]} />

@@ -16,11 +16,15 @@ export const authApiRoutes = {
 export const publicApiRoutes = {
     ABOUT_ME: "/api/about-me",
     APPS: "/api/apps",
-    HOME: "/api/home"
+    HOME: "/api/home",
+    LOGIN_SETTINGS: "/api/login-settings"
 }
 
 export const privateApiRoutes = {
     UPDATE_ABOUT_ME: "/api/about-me/update",
     UPDATE_APPS: "/api/apps/update",
-    UPDATE_HOME: "/api/home/update"
+    REMOVE_APP: "/api/apps/remove",
+    UPDATE_HOME: "/api/home/update",
+    GET_ADMIN_SETTINGS: "/api/admin/settings",
+    UPDATE_ADMIN_SETTINGS: "/api/admin/settings/update"
 }

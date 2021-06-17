@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Route, Switch, Link  } from 'react-router-dom';
 
@@ -14,12 +14,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
 import Apps from "./Apps";
 import AboutMe from "./AboutMe";
-import Home from "../main/Home";
+import AdminHome from "./AdminHome";
 
 import staticRoutes from "../../routes/static_routes";
+
+import Loader from "../../components/Loader";
 
 import { 
     verifyLoginSessionAsync, 
@@ -43,16 +47,46 @@ function AdminLayout() {
         dispatch(userLogoutAsync());
     }
 
-    // set timer to renew accessToken to logout
-    useEffect(() => {
-        setAccessTokenApi(accessToken);
+    const [loaded, setLoaded] = useState(null);
+
+    const fetchData = useCallback(async () => {
+        await setAccessTokenApi(accessToken);
+        setLoaded(true);
+    }, [accessToken]);
+
+    const sessionTimeoutTimer = useCallback(async () => {
         const verifyLoginSessionTimeOutTimer = setTimeout(() => {
             dispatch(verifyLoginSessionAsync(true));
         }, moment(expiredAt).diff() - 10 * 200);
         return () => {
             clearTimeout(verifyLoginSessionTimeOutTimer);
         }
-    }, [expiredAt, accessToken, dispatch])
+    }, [dispatch, expiredAt]);
+
+    useEffect(() => {
+        fetchData();
+        sessionTimeoutTimer();
+    }, [fetchData, sessionTimeoutTimer]);
+
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
 
     return (
         <div> 
@@ -113,8 +147,8 @@ function AdminLayout() {
                     component={Apps}
                 />
                 <Route
-                    path={staticRoutes.main.home}
-                    component={Home}
+                    path={staticRoutes.admin.home}
+                    component={AdminHome}
                 />
             </Switch> 
         </div>

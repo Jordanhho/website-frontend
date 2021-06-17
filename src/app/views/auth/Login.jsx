@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 
 import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
+import Box from '@material-ui/core/Box';
+
+import Loader from "../../components/Loader";
 
 import staticRoutes from "../../routes/static_routes";
 
 import { userLoginAsync } from '../../redux/asyncActions/authAsyncActions';
+
+import { 
+    getLoginSettings
+} from "../../services/public_api";
 
 import useStyles from "./styles";
 import useInput from "../../custom_hooks/useInput";
@@ -23,6 +29,10 @@ import useInputPass from "../../custom_hooks/useInputPass";
 
 function Login() {
     const classes = useStyles();
+
+
+    const [loginSettings, setData] = useState(null);
+    const [loaded, setLoaded] = useState(null);
 
     const authObj = useSelector(state => state.auth);
     const dispatch = useDispatch();
@@ -38,12 +48,54 @@ function Login() {
         await dispatch(userLoginAsync(email.value, password.value));
     }
 
+    const fetchData = useCallback(async () => {
+        const result = await getLoginSettings();
+        if (result.data) {
+            setData(result.data);
+            setLoaded(true);
+        }
+        else {
+            setLoaded(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    if (loaded === null) {
+        return (
+            <Container>
+                <Grid
+                    container
+                    spacing={0}
+                    direction="column"
+                    alignItems="center"
+                    justify="center"
+                    className={classes.loader}
+                >
+                    <Grid item xs={3}>
+                        <Loader />
+                    </Grid>
+
+                </Grid>
+            </Container>
+        );
+    }
+    if (loaded === false) {
+        return (
+            <div>
+                Error, something went wrong.
+            </div>
+        );
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Paper elevation={3}>
-                    <Container maxWidth="xs">
+                    <Box p={5}>
                         <Grid container justify="center">
                             <Typography component="h1" variant="h5">
                                 Admin Login
@@ -72,10 +124,8 @@ function Login() {
                                     autoComplete="current-password"
                                     {...password}
                                 />
-                                <FormControlLabel
-                                    control={<Checkbox value="remember" color="secondary" />}
-                                    label="Remember me"
-                                />
+                                <br/>
+                                <br />
                                 <Button
                                     type="submit"
                                     fullWidth
@@ -88,28 +138,34 @@ function Login() {
                                 </Button>
                                 {loginError && <div style={{ color: 'red', marginTop: 10 }}>Something went wrong. Please try again later.</div>}
                             </form>
+                            <br/>
                             <Grid container>
-                                <Grid item xs>
-                                    <Link 
-                                        href={staticRoutes.admin.forgotPassword} 
-                                        variant="body2"
-                                        className={classes.link}
-                                    >
-                                        Forgot password?
+                               {(loginSettings.enable_change_password &&
+                                    <Grid item xs>
+                                        <Link
+                                            href={staticRoutes.admin.forgotPassword}
+                                            variant="body2"
+                                            className={classes.link}
+                                        >
+                                            Forgot password?
                                     </Link>
-                                </Grid>
-                                <Grid item>
-                                    <Link 
-                                        href={staticRoutes.admin.signUp} 
-                                        variant="body2"
-                                        className={classes.link}
-                                    >
-                                        Don't have an account? Sign Up
-                                    </Link>
-                                </Grid>
+                                    </Grid>
+                                )}
+
+                                {(loginSettings.enable_new_accounts &&
+                                    <Grid item>
+                                        <Link
+                                            href={staticRoutes.admin.signUp}
+                                            variant="body2"
+                                            className={classes.link}
+                                        >
+                                            Sign Up
+                                        </Link>
+                                    </Grid>
+                                )}
                             </Grid>
                         </Grid>
-                    </Container>
+                    </Box>
                 </Paper>
             </div>
         </Container>

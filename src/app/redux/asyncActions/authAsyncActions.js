@@ -19,13 +19,14 @@ import {
 export const userLoginAsync = (email, password) => async dispatch => {
     dispatch(userLoginStarted());
     const result = await userLoginApi(email, password);
+
     if (result.error) {
         //no response from server
         if(!result.response) {
             dispatch(userLoginFailure());
         }
         //error code from server
-    else {
+        else {
             dispatch(userLoginFailure(result.response.data.msg));
         }
         return;

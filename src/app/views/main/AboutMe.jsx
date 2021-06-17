@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback  } from 'react';
 
+import ReactHtmlParser from 'react-html-parser';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
@@ -7,6 +9,8 @@ import EseaIcon from "../../assets/img/esea_icon.png";
 import CfsIcon from "../../assets/img/cfs_icon.png";
 
 //icons
+import GamesIcon from '@material-ui/icons/Games';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import ContactMailIcon from '@material-ui/icons/ContactMail';
 import SchoolIcon from '@material-ui/icons/School';
 import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
@@ -43,9 +47,12 @@ function AboutMe() {
         lastname: "",
         email: "",
         education_description: "",
-        experience_description: "",
-        specialization_description: "",
+        school_experience_description: "",
+        work_experience_description: "",
+        skill_specialization_description: "",
         hobby_description: "",
+        esports_description: "",
+        goal_description: "",
         crossfire_profile_url: "",
         youtube_url: "",
         linkedin_url: "",
@@ -147,7 +154,7 @@ function AboutMe() {
                                 <Grid item xs={12}>
                                     <Box p={5}>
                                         <Typography variant="body1" gutterBottom>
-                                            {aboutMe.education_description}
+                                            {ReactHtmlParser(aboutMe.education_description)}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -167,20 +174,20 @@ function AboutMe() {
                             <Paper className={classes.paper}>
                                 <br />
                                 <Grid item xs={12}>
-                                    <WorkIcon
+                                    <ComputerIcon
                                         className={classes.displayIcon}
                                         color="primary"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Experience
+                                    <Typography variant="h4" align="center">
+                                        School Project Experience
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box p={5}>
                                         <Typography variant="body1" gutterBottom>
-                                            {aboutMe.experience_description}
+                                            {ReactHtmlParser(aboutMe.school_experience_description)}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -200,20 +207,53 @@ function AboutMe() {
                             <Paper className={classes.paper}>
                                 <br />
                                 <Grid item xs={12}>
-                                    <ComputerIcon
+                                    <WorkIcon
                                         className={classes.displayIcon}
                                         color="primary"
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Typography variant="h4">
-                                        Specialization
+                                        Work Experience
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
                                     <Box p={5}>
                                         <Typography variant="body1" gutterBottom>
-                                            {aboutMe.specialization_description}
+                                            {ReactHtmlParser(aboutMe.work_experience_description)}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box pd={10}>
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item xs={6}>
+                            <Paper className={classes.paper}>
+                                <br />
+                                <Grid item xs={12}>
+                                    <MenuBookIcon
+                                        className={classes.displayIcon}
+                                        color="primary"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant="h4" align="center">
+                                        Skill & Specialization
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box p={5}>
+                                        <Typography variant="body1" gutterBottom>
+                                            {ReactHtmlParser(aboutMe.skill_specialization_description)}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -233,7 +273,7 @@ function AboutMe() {
                             <Paper className={classes.paper}>
                                 <br />
                                 <Grid item xs={12}>
-                                    <SportsEsportsIcon
+                                    <GamesIcon
                                         className={classes.displayIcon}
                                         color="primary"
                                     />
@@ -246,7 +286,73 @@ function AboutMe() {
                                 <Grid item xs={12}>
                                     <Box p={5}>
                                         <Typography variant="body1" gutterBottom>
-                                            {aboutMe.hobby_description}
+                                            {ReactHtmlParser(aboutMe.hobby_description)}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box pd={10}>
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item xs={6}>
+                            <Paper className={classes.paper}>
+                                <br />
+                                <Grid item xs={12}>
+                                    <SportsEsportsIcon
+                                        className={classes.displayIcon}
+                                        color="primary"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant="h4">
+                                        Esports
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box p={5}>
+                                        <Typography variant="body1" gutterBottom>
+                                            {ReactHtmlParser(aboutMe.esports_description)}
+                                        </Typography>
+                                    </Box>
+                                </Grid>
+                            </Paper>
+                        </Grid>
+                    </Grid>
+                </Box>
+
+                <Box pd={10}>
+                    <Grid
+                        container
+                        justify="center"
+                        alignItems="center"
+                        spacing={3}
+                    >
+                        <Grid item xs={6}>
+                            <Paper className={classes.paper}>
+                                <br />
+                                <Grid item xs={12}>
+                                    <SportsEsportsIcon
+                                        className={classes.displayIcon}
+                                        color="primary"
+                                    />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Typography variant="h4">
+                                        Goal
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <Box p={5}>
+                                        <Typography variant="body1" gutterBottom>
+                                            {ReactHtmlParser(aboutMe.goal_description)}
                                         </Typography>
                                     </Box>
                                 </Grid>
@@ -413,7 +519,7 @@ function AboutMe() {
                                         Other Contacts
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} align="center">
                                     <Box p={5}>
                                         <IconButton
                                             color="primary"
@@ -477,7 +583,7 @@ function AboutMe() {
                                         Esports
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
+                                <Grid item xs={12} align="center">
                                     <Box p={5}>
                                         <IconButton
                                             color="primary"

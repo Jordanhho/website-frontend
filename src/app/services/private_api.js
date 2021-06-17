@@ -7,6 +7,21 @@ import {
     privateApiRoutes
 } from "../routes/api_routes";
 
+//* Get Admin Home */
+export const getAdminSettings = async (data) => {
+    try {
+        return await privateAxios.get(
+            API_URL + privateApiRoutes.GET_ADMIN_SETTINGS,
+            data
+        );
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}
+
 //** Update Apps */
 
 export const updateApps = async (data) => {
@@ -49,6 +64,21 @@ export const updateAboutMe = async (data) => {
                     'content-type': 'multipart/form-data'
                 }
             }
+        );
+    } catch (err) {
+        return {
+            error: true,
+            response: err.response
+        };
+    }
+}
+
+/** Update Admin Home */
+export const updateAdminSettings = async (data) => {
+    try {
+        return await privateAxios.post(
+            API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
+            data
         );
     } catch (err) {
         return {

@@ -46,6 +46,7 @@ Material UI:
 - lodash
 - moment
 - axios
+- react-html-parser
 
 ## Requirements
 This project is meant to be paired with the personal website backend in order to load apis. However, the website can still be run.

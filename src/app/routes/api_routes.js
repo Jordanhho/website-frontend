@@ -1,4 +1,4 @@
-export const API_URL = "https://jordanho.ca";
+export const API_URL = "https://jordanho.ca"; //FIX for prod vs dev build
 
 export const authApiRoutes = {
     LOGIN: "/api/auth/login",

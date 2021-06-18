@@ -21,6 +21,7 @@ import useStyles from "./styles";
 import useInput from "../../custom_hooks/useInput";
 
 function ActivateAccount() {
+    const pageTitle = "Admin Activate Account";
     const classes = useStyles();
 
     const { email, activation_code } = useParams();
@@ -62,6 +63,7 @@ function ActivateAccount() {
 
     //on page load
     useEffect(() => {
+        document.title = pageTitle;
         loadActivationLink();
     }, [loadActivationLink]);
 

@@ -50,6 +50,7 @@ function Alert(props) {
 }
 
 function AboutMe() {
+    const pageTitle = "Admin Manage AboutMe";
     const classes = useStyles();
 
     const formRef = React.createRef();
@@ -164,6 +165,7 @@ function AboutMe() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

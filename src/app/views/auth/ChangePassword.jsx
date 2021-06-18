@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import Button from '@material-ui/core/Button';
@@ -28,6 +28,7 @@ import useInput from "../../custom_hooks/useInput";
 import useInputPass from "../../custom_hooks/useInputPass";
 
 function ForgotPassword() {
+    const pageTitle = "Admin Change Password"
     const classes = useStyles();
     const recaptchaRef = React.createRef();
 
@@ -71,7 +72,6 @@ function ForgotPassword() {
         setConfirmPasswordNotMatch(false);
     }
 
- 
     // handle button click of send email
     async function handleSendEmail(e) {
         e.preventDefault();
@@ -143,6 +143,10 @@ function ForgotPassword() {
     function handleBackBtn() {
         decrementPage();
     }
+
+    useEffect(() => {
+        document.title = pageTitle;
+    }, []);
 
     return (
         <Container component="main" maxWidth="xs">

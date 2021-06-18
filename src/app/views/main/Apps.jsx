@@ -19,6 +19,7 @@ import {
 } from "../../services/public_api";
 
 function Apps() {
+    const pageTitle = "My Projects";
 
     const classes = useStyles();
 
@@ -52,6 +53,7 @@ function Apps() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

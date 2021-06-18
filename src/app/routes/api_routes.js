@@ -1,4 +1,8 @@
-export const API_URL = "https://jordanho.ca"; //FIX for prod vs dev build
+//switch between production and development to the reactjs server
+export const API_URL = ((process.env.NODE_ENV === "development") 
+    ? "http://localhost:3000"
+    : "https://jordanho.ca"
+);
 
 export const authApiRoutes = {
     LOGIN: "/api/auth/login",

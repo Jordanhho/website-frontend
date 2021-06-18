@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
@@ -24,6 +24,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { RECAPTCHA_INVISIBLE_PUBLIC_KEY } from "../../config/google_config";
 
 function SiguUp() {
+    const pageTitle = "Admin Sign Up";
     const classes = useStyles();
     const recaptchaRef = React.createRef();
     const history = useHistory();
@@ -67,6 +68,10 @@ function SiguUp() {
             setCreateAccErr(true);
         }
     }
+
+    useEffect(() => {
+        document.title = pageTitle;
+    }, []);
 
     return (
         <Container component="main" maxWidth="xs">

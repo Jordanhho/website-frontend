@@ -28,8 +28,8 @@ import useInput from "../../custom_hooks/useInput";
 import useInputPass from "../../custom_hooks/useInputPass";
 
 function Login() {
+    const pageTitle = "Admin Login";
     const classes = useStyles();
-
 
     const [loginSettings, setData] = useState(null);
     const [loaded, setLoaded] = useState(null);
@@ -60,6 +60,7 @@ function Login() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

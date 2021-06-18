@@ -25,6 +25,7 @@ function Alert(props) {
 }
 
 function AdminHome() {
+    const pageTitle = "Admin Manage Settings";
     const classes = useStyles();
 
     const formRef = React.createRef();
@@ -82,6 +83,7 @@ function AdminHome() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

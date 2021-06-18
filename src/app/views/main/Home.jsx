@@ -22,6 +22,7 @@ import {
 import useStyles from "./styles";
 
 function Home() {
+    const pageTitle = "Home";
 
     const classes = useStyles();
 
@@ -41,6 +42,7 @@ function Home() {
     }, []);
     
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 
@@ -74,6 +76,10 @@ function Home() {
     return (
         <Container>
             <Box p={5}>
+                <Typography variant="h1" color="primary">
+                    {pageTitle}
+                </Typography>
+              
 
                 <Box pd={10}>
                     <Grid

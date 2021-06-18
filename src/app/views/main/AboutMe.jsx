@@ -40,6 +40,7 @@ import {
 } from "../../services/public_api";
 
 function AboutMe() {
+    const pageTitle = "About Me";
     const classes = useStyles();
 
     const [aboutMe, setData] = useState({
@@ -77,6 +78,7 @@ function AboutMe() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

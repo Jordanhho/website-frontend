@@ -46,6 +46,7 @@ function Alert(props) {
 }
 
 function Apps() {
+    const pageTitle = "Admin Manage My Projects";
     const classes = useStyles();
 
     const formRef = React.createRef();
@@ -200,6 +201,7 @@ function Apps() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 

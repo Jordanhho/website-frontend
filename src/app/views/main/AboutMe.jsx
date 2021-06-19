@@ -75,6 +75,7 @@ function AboutMe() {
     const fetchData = useCallback(async () => {
         const result = await getAboutMeApi();
         if(result.data) {
+            result.data.email = result.data.email.split("").reverse();
             setData(result.data);
             setLoaded(true);
         }

@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 
 import ReCAPTCHA from "react-google-recaptcha";
 import { 
-    RECAPTCHA_INVISIBLE_PUBLIC_KEY
+    getRecaptchaInvisiblePublicKey
  } from "../../config/google_config";
 
 import staticRoutes from "../../routes/static_routes";
@@ -360,7 +360,7 @@ function ForgotPassword() {
                     <ReCAPTCHA
                         ref={recaptchaRef}
                         size="invisible"
-                        sitekey={RECAPTCHA_INVISIBLE_PUBLIC_KEY}
+                        sitekey={getRecaptchaInvisiblePublicKey()}
                     />
               </Paper>
             </div>

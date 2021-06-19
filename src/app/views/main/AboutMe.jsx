@@ -30,13 +30,14 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import { Typography } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 import Loader from "../../components/Loader";
 
 import useStyles from "./styles";
 
 import {
-    getAboutMe
+    getAboutMeApi
 } from "../../services/public_api";
 
 function AboutMe() {
@@ -65,9 +66,14 @@ function AboutMe() {
     });
 
     const [loaded, setLoaded] = useState(null);
+    const [showEmail, setShowEmail] = useState(false);
+
+    function handleShowEmail() {
+        setShowEmail(true);
+    }
 
     const fetchData = useCallback(async () => {
-        const result = await getAboutMe();
+        const result = await getAboutMeApi();
         if(result.data) {
             setData(result.data);
             setLoaded(true);
@@ -392,7 +398,7 @@ function AboutMe() {
                                                     color="primary"
                                                     component="span"
                                                     aria-label="Resume"
-                                                    onClick={() => window.open(`mailto:${aboutMe.email}`)}
+                                                    onClick={() => window.open(`mailto:${aboutMe.email.split("").reverse()}`)}
                                                     className={classes.iconInline}
                                                 >
                                                     <EmailIcon
@@ -403,13 +409,25 @@ function AboutMe() {
                                                 </IconButton>
                                             </span>
                                             <Typography variant="h6">
-                                                <Link 
-                                                    href="#" 
-                                                    color="inherit"
-                                                    onClick={() => window.open(`mailto:${aboutMe.email}`)} 
+                                                {!showEmail ?
+                                                <Button
+                                                    variant="outlined"
+                                                    color="primary"
+                                                    onClick={handleShowEmail}
                                                 >
-                                                    {aboutMe.email}
-                                                </Link>
+                                                    Show Email
+                                                </Button>
+                                                :
+
+                                                    <Link
+                                                        href="#"
+                                                        color="inherit"
+                                                        onClick={() => window.open(`mailto:${aboutMe.email.split("").reverse()}`)}
+                                                        style={{ direction: "rtl", unicodeBidi: "bidi-override"}}
+                                                    >
+                                                        {aboutMe.email}
+                                                    </Link>
+                                                }
                                             </Typography>
                                         </div>
 

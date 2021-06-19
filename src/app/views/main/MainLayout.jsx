@@ -48,7 +48,7 @@ function MainLayout() {
                         value={staticRoutes.main.apps}
                         component={Link}
                         icon={<AppsOutlinedIcon />}
-                        label="Apps"
+                        label="My Projects"
                     />
                     <Tab
                         to={staticRoutes.admin.home}

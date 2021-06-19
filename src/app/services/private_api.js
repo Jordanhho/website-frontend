@@ -1,6 +1,8 @@
+import axios from "axios";
+
 import {
-    privateAxios
-} from "./auth_api";
+    handleApi
+} from "./api_utility";
 
 import {
     API_URL,
@@ -10,14 +12,15 @@ import {
 //* Get Admin Home */
 export const getAdminSettings = async (data) => {
     try {
-        return await privateAxios.get(
+        let res = await axios.get(
             API_URL + privateApiRoutes.GET_ADMIN_SETTINGS,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -26,28 +29,30 @@ export const getAdminSettings = async (data) => {
 
 export const updateApps = async (data) => {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_APPS,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
 export const removeApp = async (app_id) => {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.REMOVE_APP,
             app_id
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -56,7 +61,7 @@ export const removeApp = async (app_id) => {
 
 export const updateAboutMe = async (data) => {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_ABOUT_ME, 
             data,
             { //for file resume upload
@@ -65,10 +70,11 @@ export const updateAboutMe = async (data) => {
                 }
             }
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -76,14 +82,15 @@ export const updateAboutMe = async (data) => {
 /** Update Admin Home */
 export const updateAdminSettings = async (data) => {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }

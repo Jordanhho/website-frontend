@@ -15,7 +15,7 @@ import Loader from "../../components/Loader";
 import useStyles from "./styles";
 
 import {
-    getApps
+    getAppsApi
 } from "../../services/public_api";
 
 function Apps() {
@@ -42,7 +42,7 @@ function Apps() {
     }
 
     const fetchData = useCallback(async () => {
-        const result = await getApps();
+        const result = await getAppsApi();
         if (result.data) {
             setData(result.data);
             setLoaded(true);

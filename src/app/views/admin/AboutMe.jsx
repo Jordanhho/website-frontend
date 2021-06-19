@@ -38,7 +38,7 @@ import Loader from "../../components/Loader";
 import useStyles from "./styles";
 
 import {
-    getAboutMe,
+    getAboutMeApi,
 } from "../../services/public_api";
 
 import {
@@ -153,7 +153,7 @@ function AboutMe() {
     }
 
     const fetchData = useCallback(async () => {
-        const result = await getAboutMe();
+        const result = await getAboutMeApi();
         if (result.data) {
             setData(result.data);
             setAboutMeBak(result.data);

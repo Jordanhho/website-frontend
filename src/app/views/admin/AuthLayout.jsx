@@ -27,7 +27,7 @@ function AuthLayout() {
         dispatch(verifyLoginSessionAsync());
     }, [dispatch]);
 
-    // checking authentication
+    //checking authentication
     if (authLoading) {
         return <div className="content">Checking Authentication...</div>
     }

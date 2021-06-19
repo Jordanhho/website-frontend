@@ -33,7 +33,7 @@ import useStyles from "./styles";
 import Loader from "../../components/Loader";
 
 import {
-    getApps,
+    getAppsApi,
 } from "../../services/public_api";
 
 import {
@@ -189,7 +189,7 @@ function Apps() {
     }
 
     const fetchData = useCallback(async () => {
-        const result = await getApps();
+        const result = await getAppsApi();
         if (result.data) {
             setData(result.data);
             setAppsBak(result.data);

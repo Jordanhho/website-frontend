@@ -50,6 +50,7 @@ const auth = (state = initialState, action) => {
         // verify accessToken - success
         case USER_LOGIN_SUCCESS:
             const { accessToken, expiredAt, user } = action.payload;
+            //if also user login success, set a cookie to confirm that the user has logged in once before.
             return {
                 ...state,
                 accessToken,

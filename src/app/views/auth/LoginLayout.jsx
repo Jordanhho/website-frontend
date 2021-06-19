@@ -52,7 +52,6 @@ function LoginLayout() {
                 />
             </Switch>
         </div>
-     
     );
 }
 

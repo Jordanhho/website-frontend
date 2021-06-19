@@ -21,7 +21,7 @@ import {
 } from "../../services/auth_api";
 
 import ReCAPTCHA from "react-google-recaptcha";
-import { RECAPTCHA_INVISIBLE_PUBLIC_KEY } from "../../config/google_config";
+import { getRecaptchaInvisiblePublicKey } from "../../config/google_config";
 
 function SiguUp() {
     const pageTitle = "Admin Sign Up";
@@ -183,7 +183,7 @@ function SiguUp() {
                     <ReCAPTCHA
                         ref={recaptchaRef}
                         size="invisible"
-                        sitekey={RECAPTCHA_INVISIBLE_PUBLIC_KEY}
+                        sitekey={getRecaptchaInvisiblePublicKey()}
                     />
                 </Paper>
             </div>

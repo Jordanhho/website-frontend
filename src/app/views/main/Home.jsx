@@ -16,7 +16,7 @@ import Clock from "../../components/Clock";
 import Loader from "../../components/Loader";
 
 import {
-    getHome
+    getHomeApi
 } from "../../services/public_api";
 
 import useStyles from "./styles";
@@ -31,13 +31,13 @@ function Home() {
     const [loaded, setLoaded] = useState(null);
 
     const fetchData = useCallback(async () => {
-        const result = await getHome();
-        if (result.data) {
-            setData(result.data);
-            setLoaded(true);
+        const result = await getHomeApi();
+        if(result.error) {
+            setLoaded(false);
         }
         else {
-            setLoaded(false);
+            setData(result.data);
+            setLoaded(true);
         }
     }, []);
     

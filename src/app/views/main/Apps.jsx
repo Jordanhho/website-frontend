@@ -100,7 +100,7 @@ function Apps() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         My Github
                                     </Typography>
                                 </Grid>

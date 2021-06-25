@@ -254,7 +254,7 @@ function AdminResumeDisplay() {
                                                 {(readOnly) &&
                                                 <Grid
                                                     container
-                                                    justify="left"
+                                                    justify="center"
                                                     alignItems="left"
                                                 >
                                                     <Grid item xs={12} align="left">
@@ -290,7 +290,7 @@ function AdminResumeDisplay() {
                                                 {(!readOnly) &&
                                                 <Grid
                                                     container
-                                                    justify="left"
+                                                    justify="center"
                                                     alignItems="left"
                                                     spacing={3}
 
@@ -572,7 +572,7 @@ function AdminResumeDisplay() {
                                                 {(readOnly) &&
                                                     <Grid
                                                         container
-                                                        justify="left"
+                                                        justify="center"
                                                         alignItems="left"
                                                     >
                                                         <Grid item xs={12} align="left">
@@ -613,7 +613,7 @@ function AdminResumeDisplay() {
                                                 {(!readOnly) &&
                                                     <Grid
                                                         container
-                                                        justify="left"
+                                                        justify="center"
                                                         alignItems="left"
                                                         spacing={3}
                                                     >
@@ -740,7 +740,7 @@ function AdminResumeDisplay() {
                                                 {(readOnly) &&
                                                 <Grid
                                                     container
-                                                    justify="left"
+                                                    justify="center"
                                                     alignItems="left"
                                                 >
                                                     <Grid item xs={12} align="left">
@@ -776,7 +776,7 @@ function AdminResumeDisplay() {
                                                 {(!readOnly) &&
                                                     <Grid
                                                         container
-                                                        justify="left"
+                                                        justify="center"
                                                         alignItems="left"
                                                         spacing={3}
                                                     >
@@ -902,7 +902,7 @@ function AdminResumeDisplay() {
                                     {(readOnly) &&
                                     <Grid
                                         container
-                                        justify="left"
+                                        justify="center"
                                         alignItems="left"
                                     >
                                         <Grid item xs={12}>
@@ -921,7 +921,7 @@ function AdminResumeDisplay() {
                                     {(!readOnly) &&
                                         <Grid
                                             container
-                                            justify="left"
+                                            justify="center"
                                             alignItems="left"
                                             spacing={3}
                                         >

@@ -138,7 +138,7 @@ function ContactMe() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Contacts
                                     </Typography>
                                 </Grid>
@@ -254,7 +254,7 @@ function ContactMe() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Other
                                 </Typography>
                                 </Grid>
@@ -312,7 +312,7 @@ function ContactMe() {
                             <Box p={5} className={classes.center}>
                                             
                                 <Grid item xs={12} >
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Esports
                                 </Typography>
                                 </Grid>

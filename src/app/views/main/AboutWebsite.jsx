@@ -86,7 +86,7 @@ function AboutWebsite() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Details
                                     </Typography>
                                 </Grid>
@@ -131,7 +131,7 @@ function AboutWebsite() {
                                     spacing={3}
                                 >
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Backend Technologies
                                         </Typography>
                                     </Grid>
@@ -218,7 +218,7 @@ function AboutWebsite() {
                                 >
 
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Frontend Technologies
                                         </Typography>
                                     </Grid>
@@ -285,7 +285,7 @@ function AboutWebsite() {
                                     spacing={3}
                                 >
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Personal Website Github
                                             </Typography>
                                     </Grid>

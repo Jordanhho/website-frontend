@@ -92,7 +92,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         My Resume
                                     </Typography>
                                 </Grid>
@@ -141,7 +141,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Education
                                     </Typography>
                                 </Grid>
@@ -152,8 +152,8 @@ function ResumeDisplay() {
                                         <Box pb={5} key={index}>
                                             <Grid
                                                 container
-                                                justify="left"
-                                                alignItems="left"
+                                                justify="center"
+                                                alignItems="center"
                                             >
                                                 <Grid item xs={12}>
                                                     <Typography variant="h6" color="primary">
@@ -204,7 +204,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Programming Languages
                                     </Typography>
                                 </Grid>
@@ -257,7 +257,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Technologies
                                     </Typography>
                                 </Grid>
@@ -288,7 +288,7 @@ function ResumeDisplay() {
                                             <ul className={classes.ul_none_style}>
                                             {resumeData.technologies_experienced_with.map((tech, index) => (
                                                     <li key={index}>
-                                                    <Chip label={tech} className={classes.chip} variant="outlined" color="primary"/>
+                                                        <Chip label={tech} className={classes.chip} variant="outlined" color="primary"/>
                                                     </li>
                                                 ))}
                                             </ul>
@@ -310,7 +310,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Work Experience
                                     </Typography>
                                 </Grid>
@@ -321,8 +321,8 @@ function ResumeDisplay() {
                                         <Box pb={5} key={index}>
                                             <Grid
                                                 container
-                                                justify="left"
-                                                alignItems="left"
+                                                justify="center"
+                                                alignItems="center"
                                             >
                                                 <Grid item xs={12}>
                                                     <Typography variant="h5" color="primary">
@@ -361,7 +361,7 @@ function ResumeDisplay() {
                                                 <Grid item xs={12}>
                                                     <br />
                                                     {workXp.technologies.map((tech, index) => (
-                                                        <Chip label={tech} className={classes.chip} variant="outlined" color="primary"/>
+                                                        <Chip label={tech} className={classes.chip} variant="outlined" color="primary" key={index}/>
                                                     ))}
                                                 </Grid>
                                             </Grid>
@@ -383,7 +383,7 @@ function ResumeDisplay() {
                         <Paper className={classes.paper}>
                             <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" color="Primary" className={classes.underline}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Year Gap After University
                                     </Typography>
                                 </Grid>

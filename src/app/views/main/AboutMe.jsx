@@ -160,9 +160,6 @@ function AboutMe() {
                                             <li key={index}>
                                                 <br/>
                                                 <Chip label={fact} className={classes.chip} variant="outlined" color="primary" />
-                                                {/* <Typography variant="body1">
-                                                    {fact}
-                                                </Typography> */}
                                             </li>
                                         ))}
                                     </ul>
@@ -190,9 +187,7 @@ function AboutMe() {
                                 <br />
                                 <Grid item xs={12} align="left">
                                     {aboutMe.interested_in.map((interest, index) => (
-                               
-                                            <Chip label={interest} className={classes.chip} variant="outlined" color="primary"/>
-                          
+                                        <Chip label={interest} className={classes.chip} variant="outlined" color="primary" key={index}/>
                                     ))}
                                 </Grid>
                             </Box>

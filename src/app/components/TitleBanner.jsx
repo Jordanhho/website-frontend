@@ -11,7 +11,7 @@ const TitleBanner = (props) => {
 
     return (
         <div className={classes.title_banner} style={{ backgroundImage: `url(${BannerImg})` }}>
-            <Box pb={5} pt={5}>
+            <Box pb={10} pt={10}>
                 <Grid
                     container
                     direction="column"

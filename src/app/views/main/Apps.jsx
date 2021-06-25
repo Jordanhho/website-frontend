@@ -146,71 +146,76 @@ function Apps() {
                     spacing={3}
                 >
                     <Grid item xs={6}>
+                        <Grid item xs={12} align="left">
                         {appsData.apps.map((appDetails, index) => (
                             <Paper className={classes.paper} key={index}>
                                 <Box p={5}>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h4">
-                                            {appDetails.app_name}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h6" color="primary">
-                                            {getAppType(appDetails.app_type)}
-                                        </Typography>
-                                    </Grid>
-
-                                    <br />
-
-                                    <Grid item xs={12}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(appDetails.app_description)}
-                                        </Typography>
-                                    </Grid>
-
-                                    <br />
-
-                                    <Grid item xs={12}>
-                                        <Typography variant="h5" color="primary">
-                                            Status:
-                                        </Typography>
-                                    </Grid>
-
-                                    {(appDetails.is_wip) ?
-                                    <Grid item xs={12}>
-                                        <Typography variant="body1">
-                                            Coming soon! Work in progress!
-                                        </Typography>
-                                    </Grid>
-                                    :
-                                    <Grid item xs={12}>
-                                        <Typography variant="h6">
-                                            App Details:
-                                        </Typography>
-                                        <Typography variant="body1">
-                                            <Link
-                                                href="#"
-                                                color="inherit"
-                                                onClick={() => window.open(appDetails.app_url)}
-                                            >
-                                                {appDetails.app_url}
-                                            </Link>
-                                        </Typography>
-                                    </Grid>}
-                                    <br/>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h6" color="primary">
-                                            Github:
-                                        </Typography>
-                                    </Grid>
-                                        
-                                    {(appDetails.is_github_private) ?
+                                    <Grid
+                                        container
+                                        justify="center"
+                                        alignItems="center"
+                                        spacing={1}
+                                    >
                                         <Grid item xs={12}>
-                                            <Typography variant="h6" color="secondary">
-                                                Private
+                                            <Typography variant="h4" color="primary">
+                                                {appDetails.app_name}
                                             </Typography>
                                         </Grid>
-                                    :
+                                        <Grid item xs={12}>
+                                            <Typography variant="h6">
+                                                {getAppType(appDetails.app_type)}
+                                            </Typography>
+                                        </Grid>
+
+                                        <br />
+
+                                        <Grid item xs={12} align="left">
+                                            <Typography variant="body1" style={{wordWrap: "break-word"}}>
+                                                {ReactHtmlParser(appDetails.app_description)}
+                                            </Typography>
+                                        </Grid>
+                                        <br />
+                                        <Grid item xs={12}>
+                                            <Typography variant="h5" color="primary">
+                                                Status:
+                                            </Typography>
+                                        </Grid>
+
+                                        {(appDetails.is_wip) ?
+                                        <Grid item xs={12}>
+                                            <Typography variant="body1">
+                                                Coming soon! Work in progress!
+                                            </Typography>
+                                        </Grid>
+                                        :
+                                        <Grid item xs={12}>
+                                            <Typography variant="h6">
+                                                App Details:
+                                            </Typography>
+                                            <Typography variant="body1">
+                                                <Link
+                                                    href="#"
+                                                    color="inherit"
+                                                    onClick={() => window.open(appDetails.app_url)}
+                                                >
+                                                    {appDetails.app_url}
+                                                </Link>
+                                            </Typography>
+                                        </Grid>}
+                                        <br/>
+                                        <Grid item xs={12}>
+                                            <Typography variant="h6" color="primary">
+                                                Github:
+                                            </Typography>
+                                        </Grid>
+                                            
+                                        {(appDetails.is_github_private) ?
+                                            <Grid item xs={12}>
+                                                <Typography variant="h6" color="secondary">
+                                                    Private
+                                                </Typography>
+                                            </Grid>
+                                        :
                                         <Grid item xs={12}>
                                             <div className={classes.iconInlineAlign}>
                                                 <span className={classes.iconPadding}>
@@ -238,11 +243,12 @@ function Apps() {
                                                     </Link>
                                                 </Typography>
                                             </div>
-                                        </Grid>
-                                    }
+                                        </Grid>}
+                                    </Grid>
                                 </Box>
                             </Paper>
                         ))}
+                        </Grid>
                     </Grid>
                 </Grid>
             </Box>

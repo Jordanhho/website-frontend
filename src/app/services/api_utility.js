@@ -1,4 +1,4 @@
-async function handleApi(res) {
+export async function handleApi(res) {
     let error = false;
     let msg = "";
 
@@ -47,7 +47,3 @@ async function handleApi(res) {
     }
     return result;
 }
-
-module.exports = {
-    handleApi
-} 

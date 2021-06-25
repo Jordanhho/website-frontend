@@ -2,35 +2,23 @@ import React, { useState, useEffect, useCallback  } from 'react';
 
 import ReactHtmlParser from 'react-html-parser';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 //custom images
 import EseaIcon from "../../assets/img/esea_icon.png";
 import CfsIcon from "../../assets/img/cfs_icon.png";
 
-//icons
-import GamesIcon from '@material-ui/icons/Games';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import ContactMailIcon from '@material-ui/icons/ContactMail';
-import SchoolIcon from '@material-ui/icons/School';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
-import YouTubeIcon from '@material-ui/icons/YouTube';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import EmailIcon from '@material-ui/icons/Email';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import ComputerIcon from '@material-ui/icons/Computer';
-import WorkIcon from '@material-ui/icons/Work';
-
 import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Chip from '@material-ui/core/Chip';
+
+import TitleBanner from "../../components/TitleBanner";
+
+import staticRoutes from "../../routes/static_routes";
 
 import Loader from "../../components/Loader";
 
@@ -47,35 +35,20 @@ function AboutMe() {
     const [aboutMe, setData] = useState({
         firstname: "",
         lastname: "",
-        email: "",
-        education_description: "",
-        school_experience_description: "",
-        work_experience_description: "",
+        profile_picture_url: "",
         skill_specialization_description: "",
         hobby_description: "",
         esports_description: "",
         goal_description: "",
         crossfire_profile_url: "",
-        youtube_url: "",
-        linkedin_url: "",
-        github_url: "",
-        twitch_url: "",
-        steam_url: "",
         esea_url: "",
-        resume_url: ""
     });
 
     const [loaded, setLoaded] = useState(null);
-    const [showEmail, setShowEmail] = useState(false);
-
-    function handleShowEmail() {
-        setShowEmail(true);
-    }
 
     const fetchData = useCallback(async () => {
         const result = await getAboutMeApi();
         if(result.data) {
-            result.data.email = result.data.email.split("").reverse();
             setData(result.data);
             setLoaded(true);
         }
@@ -118,6 +91,7 @@ function AboutMe() {
 
     return (
         <Container>
+            <TitleBanner title={pageTitle} />
             <Box p={5}>
           
                 <Box pd={10}>
@@ -139,509 +113,209 @@ function AboutMe() {
                     </Grid>
                 </Box>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
+                                        My Personality & Passion
+                                    </Typography>
+                                </Grid>
                                 <br/>
-                                <Grid item xs={12}>
-                                    <SchoolIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Education
-                                </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.education_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid> 
-                    </Grid>
-                 </Box>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
-                                <Grid item xs={12}>
-                                    <ComputerIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4" align="center">
-                                        School Project Experience
+                                <br/>
+                                <Grid item xs={12} align="left">
+                                    <Typography variant="body1" gutterBottom>
+                                        {ReactHtmlParser(aboutMe.personality_and_passion)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.school_experience_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <WorkIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Work Experience
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
+                                        Facts about myself
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.work_experience_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
                                 <br />
-                                <Grid item xs={12}>
-                                    <MenuBookIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
+                                <Grid item xs={12} align="center">
+                                    <ul className={classes.ul_none_style}>
+                                        {aboutMe.details_about_self.map((fact, index) => (
+                                            <li key={index}>
+                                                <br/>
+                                                <Chip label={fact} className={classes.chip} variant="outlined" color="primary" />
+                                                {/* <Typography variant="body1">
+                                                    {fact}
+                                                </Typography> */}
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </Grid>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <Typography variant="h4" align="center">
-                                        Skill & Specialization
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
+                                        Interests
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.skill_specialization_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-                
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
                                 <br />
-                                <Grid item xs={12}>
-                                    <GamesIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
+                                <br />
+                                <Grid item xs={12} align="left">
+                                    {aboutMe.interested_in.map((interest, index) => (
+                               
+                                            <Chip label={interest} className={classes.chip} variant="outlined" color="primary"/>
+                          
+                                    ))}
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Hobby
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.hobby_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <SportsEsportsIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Esports
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.esports_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
-                                <Grid item xs={12}>
-                                    <SportsEsportsIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Goal
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <Typography variant="body1" gutterBottom>
-                                            {ReactHtmlParser(aboutMe.goal_description)}
-                                        </Typography>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
                                 <br />
-                                <Grid item xs={12}>
-                                    <ContactMailIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Contact Me
+                                <br />
+                                <Grid item xs={12} align="left">
+                                    <Typography variant="body1" gutterBottom>
+                                        {ReactHtmlParser(aboutMe.goal_description)}
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <Box p={5}>
-                                        <div className={classes.iconInlineAlign}>
-                                            <span className={classes.iconPadding}>
-                                                <IconButton
-                                                    color="primary"
-                                                    component="span"
-                                                    aria-label="Resume"
-                                                    onClick={() => window.open(`mailto:${aboutMe.email.split("").reverse()}`)}
-                                                    className={classes.iconInline}
-                                                >
-                                                    <EmailIcon
-                                                        fontSize="large"
-                                                        color="primary"
-                                                        className={classes.iconInline}
-                                                    />
-                                                </IconButton>
-                                            </span>
-                                            <Typography variant="h6">
-                                                {!showEmail ?
-                                                <Button
-                                                    variant="outlined"
-                                                    color="primary"
-                                                    onClick={handleShowEmail}
-                                                >
-                                                    Show Email
-                                                </Button>
-                                                :
-
-                                                    <Link
-                                                        href="#"
-                                                        color="inherit"
-                                                        onClick={() => window.open(`mailto:${aboutMe.email.split("").reverse()}`)}
-                                                        style={{ direction: "rtl", unicodeBidi: "bidi-override"}}
-                                                    >
-                                                        {aboutMe.email}
-                                                    </Link>
-                                                }
-                                            </Typography>
-                                        </div>
-
-                                        <div className={classes.iconInlineAlign}>
-                                            <span className={classes.iconPadding}>
-                                                <IconButton
-                                                    color="primary"
-                                                    component="span"
-                                                    aria-label="Resume"
-                                                    onClick={() => window.open(aboutMe.resume_url)}
-                                                    className={classes.iconInline}
-                                                >
-                                                    <GetAppIcon
-                                                        fontSize="large"
-                                                        color="primary"
-                                                        className={classes.iconInline}
-                                                    />
-                                                </IconButton>
-                                            </span>
-                                            <Typography variant="h6">
-                                                <Link 
-                                                    href="#"
-                                                    color="inherit"
-                                                    onClick={() => window.open(aboutMe.resume_url)} 
-                                                >
-                                                    Resume Link
-                                                </Link>
-                                            </Typography>
-                                        </div>
-
-                                        <div className={classes.iconInlineAlign}>
-                                            <span className={classes.iconPadding}>
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="Linkedin"
-                                                    onClick={() => window.open(aboutMe.linkedin_url)}
-                                                    className={classes.iconInline}
-                                                >
-                                                    <LinkedInIcon
-                                                        fontSize="large"
-                                                        color="primary"
-                                                        className={classes.iconInline}
-                                                    />
-                                                </IconButton>
-                                            </span>
-                                       
-                                            <Typography variant="h6">
-                                                <Link 
-                                                    href="#" 
-                                                    color="inherit"
-                                                    onClick={() => window.open(aboutMe.linkedin_url)} 
-                                                >
-                                                    LinkedIn
-                                                </Link>
-                                            </Typography>
-                                        </div>
-
-                                        <div className={classes.iconInlineAlign}>
-                                            <span className={classes.iconPadding}>
-                                                <IconButton
-                                                    color="primary"
-                                                    aria-label="Github"
-                                                    onClick={() => window.open(aboutMe.github_url)}
-                                                    className={classes.iconInline}
-                                                >
-                                                    <GitHubIcon
-                                                        fontSize="large"
-                                                        color="primary"
-                                                        className={classes.iconInline}
-                                                    />
-                                                </IconButton>
-                                            </span>
-
-                                            <Typography variant="h6">
-                                                <Link 
-                                                    href="#" 
-                                                    color="inherit"
-                                                    onClick={() => window.open(aboutMe.github_url)} 
-                                                >
-                                                    GitHub
-                                                </Link>
-                                            </Typography>
-                                        </div>
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
                                 <Grid item xs={12}>
-                                    <ContactMailIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        Other Contacts
-                                    </Typography>
-                                </Grid>
-                                <Grid item xs={12} align="center">
-                                    <Box p={5}>
-                                        <IconButton
-                                            color="primary"
-                                            component="span"
-                                            aria-label="Youtube"
-                                            onClick={() => window.open(aboutMe.youtube_url)}
-                                            className={classes.iconInline}
-                                        >
-                                            <YouTubeIcon
-                                                fontSize="large"
-                                                color="primary"
-                                                className={classes.iconInline}
-                                            />
-                                        </IconButton>
-
-                                        <IconButton
-                                            color="primary"
-                                            component="span"
-                                            aria-label="Steam"
-                                            onClick={() => window.open(aboutMe.steam_url)}
-                                            className={classes.iconInline}
-                                        >
-                                            <FontAwesomeIcon icon={["fab", "steam"]} className={classes.iconInline} styles={{"color": "primary"}}/>
-                                        </IconButton>
-
-                                        <IconButton
-                                            color="primary"
-                                            component="span"
-                                            aria-label="Twitch"
-                                            onClick={() => window.open(aboutMe.twitch_url)}
-                                            className={classes.iconInline}
-                                        >
-                                            <FontAwesomeIcon icon={["fab", "twitch"]} className={classes.iconInline} styles={{ "color": "primary" }} />
-                                        </IconButton>
-
-                                    </Box>
-                                </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <br />
-                                <Grid item xs={12}>
-                                    <ContactMailIcon
-                                        className={classes.displayIcon}
-                                        color="primary"
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
+                                    <Typography variant="h4" color="primary" className={classes.underline}>
                                         Esports
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={12} align="center">
-                                    <Box p={5}>
-                                        <IconButton
-                                            color="primary"
-                                            component="span"
-                                            aria-label="CFS"
-                                            onClick={() => window.open(aboutMe.crossfire_profile_url)}
-                                            className={classes.iconInline}
-                                        >
-                                            <img 
-                                                className={(classes.imgIcon)}
-                                                src={CfsIcon} 
-                                                alt="CFS" 
-                                                styles={{ "color": "primary" }}
-                                            />
-                                        </IconButton>
-
-                                        <IconButton
-                                            color="primary"
-                                            component="span"
-                                            aria-label="Esea"
-                                            onClick={() => window.open(aboutMe.esea_url)}
-                                            className={classes.iconInline}
-                                        >
-                                            <img
-                                                className={(classes.imgIcon)}
-                                                src={EseaIcon}
-                                                alt="ESEA"
-                                                styles={{ "color": "primary" }}
-                                            />
-                                        </IconButton>
-                                    </Box>
+                                <br />
+                                <br />
+                                <Grid item xs={12} align="left">
+                                    <Typography variant="body1" gutterBottom>
+                                        {ReactHtmlParser(aboutMe.esports_description)}
+                                    </Typography>
                                 </Grid>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Box>
 
+                                <Grid item xs={12} align="center">
+                            
+                                    <IconButton
+                                        color="primary"
+                                        component="span"
+                                        aria-label="CFS"
+                                        onClick={() => window.open(aboutMe.crossfire_profile_url)}
+                                        className={classes.iconInline}
+                                    >
+                                        <img
+                                            className={(classes.imgIcon)}
+                                            src={CfsIcon}
+                                            alt="CFS"
+                                            styles={{ "color": "primary" }}
+                                        />
+                                    </IconButton>
+
+                                    <IconButton
+                                        color="primary"
+                                        component="span"
+                                        aria-label="Esea"
+                                        onClick={() => window.open(aboutMe.esea_url)}
+                                        className={classes.iconInline}
+                                    >
+                                        <img
+                                            className={(classes.imgIcon)}
+                                            src={EseaIcon}
+                                            alt="ESEA"
+                                            styles={{ "color": "primary" }}
+                                        />
+                                    </IconButton>
+                                
+                                </Grid>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>
+
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h6" color="primary" className={classes.underline}>
+                                        Interested in me?<br/>Take a look at my resume
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <br />
+                                <Grid item xs={12} align="center">
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        href={staticRoutes.main.resumeDisplay}
+                                        className={classes.button}
+                                    >
+                                        View My Resume
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>
             </Box>
         </Container>
     );

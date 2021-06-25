@@ -56,3 +56,39 @@ export async function getAppsApi() {
         };
     }
 }
+
+export async function getResumeDisplayApi() {
+    try {
+        let res = await axios.get(API_URL + publicApiRoutes.RESUME_DISPLAY);
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+export async function getContactMeApi() {
+    try {
+        let res = await axios.get(API_URL + publicApiRoutes.CONTACT_ME);
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+export async function getAboutWebsiteApi() {
+    try {
+        let res = await axios.get(API_URL + publicApiRoutes.ABOUT_WEBSITE);
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}

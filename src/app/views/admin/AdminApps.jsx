@@ -21,7 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -37,24 +37,24 @@ import {
 } from "../../services/public_api";
 
 import {
-    removeApp,
-    updateApps,
+    removeAppApi,
+    updateAppsApi,
 } from "../../services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function Apps() {
+function AdminApps() {
     const pageTitle = "Admin Manage My Projects";
     const classes = useStyles();
 
     const formRef = React.createRef();
 
-    const [apps, setData] = useState([]);
+    const [appsData, setData] = useState({});
     const [newApps, setNewApps] = useState([]);
 
-    const [appsBak, setAppsBak] = useState([]);
+    const [appsBak, setAppsBak] = useState({});
 
     const [readOnly, setReadOnly] = useState(true)
 
@@ -70,7 +70,7 @@ function Apps() {
     }
 
     function handleOnClickEdit() {
-        setAppsBak(apps);
+        setAppsBak(appsData);
         setReadOnly(false);
     }
 
@@ -81,23 +81,30 @@ function Apps() {
 
     //index is the index of the app details item
     function handleOnChange(e, index) {
-        let copyApps = [...apps];
-        let appDetails = { ...copyApps[index] };
+        let copyAppsData = {...appsData};
+        let appDetails = { ...copyAppsData.apps[index] };
 
-        //for checkboxes
-        if(e.target.checked) {
-            appDetails[e.target.name] = e.target.checked;
+        //this is not part of apps array
+        if(typeof index === "undefined") {
+            copyAppsData[e.target.name] = e.target.value;
         }
         else {
-            appDetails[e.target.name] = e.target.value;
+            //for checkboxes
+            if (e.target.checked) {
+                appDetails[e.target.name] = e.target.checked;
+            }
+            else {
+                appDetails[e.target.name] = e.target.value;
+            }
         }
-        copyApps[index] = appDetails;
-        setData(copyApps);
+
+        copyAppsData.apps[index] = appDetails;
+        setData(copyAppsData);
     }
 
     //index is the index of the app new details item
     function handleOnChangeNewApps(e, index) {
-        let copyNewApps = [...newApps];
+        let copyNewApps =[...newApps];
         let appDetails = { ...copyNewApps[index] };
 
         //for checkboxes
@@ -114,17 +121,15 @@ function Apps() {
 
     async function handleOnDeleteApp(index) {
 
-        let app_id = apps[index].app_id;
-
+        let app_id = appsData.apps[index].app_id;
         let postData = {
             app_id: app_id
         }
-
-        let result = await removeApp(postData);
+        let result = await removeAppApi(postData);
 
         setReadOnly(true);
 
-        //if success update, remove app from apps list
+        //if success update, remove app from appsData list
         if (result.data) {
             setSuccessToastMsg("Successfully removed app!");
             setOpenSuccessToast(true);
@@ -142,21 +147,20 @@ function Apps() {
         //remove item from newApps array
         let copyNewApps = [...newApps];
         copyNewApps.splice(index, 1);
-
         setNewApps(copyNewApps);
     }
 
     async function handleUpdate(e) {
         e.preventDefault();
 
-        let combinedApps = ([...apps]).concat([...newApps]);
+        let combinedApps = ([...appsData.apps]).concat([...newApps]);
 
         let postData = {
-            apps: combinedApps
+            apps: combinedApps,
+            github_url: appsData.github_url
         };
 
-        const result = await updateApps(postData);
-
+        const result = await updateAppsApi(postData);
         setReadOnly(true);
 
         //if failed update, load backup
@@ -167,6 +171,9 @@ function Apps() {
         }
         else {
             setData(result.data);
+            setAppsBak(result.data);
+            //clear new apps data
+            setNewApps([]);
             //successfully updated!
             setSuccessToastMsg("Successfully updated app details!");
             setOpenSuccessToast(true);
@@ -182,7 +189,8 @@ function Apps() {
             github_url: "",
             app_type: "",
             app_url: "",
-            is_wip: false
+            is_wip: false,
+            is_private: false,
         }
         copyNewApps.push(appDetails);
         setNewApps(copyNewApps);
@@ -249,7 +257,7 @@ function Apps() {
                     {(!readOnly) &&
                     <Grid container justify="flex-end">
                         <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             onClick={handleOnClickCancel}
                             className={classes.pinnedCancelBtn}
@@ -258,7 +266,7 @@ function Apps() {
                             Cancel
                         </Button>
                         <Button
-                            variant="contained"
+                            variant="outlined"
                             color="primary"
                             onClick={handleUpdate}
                             className={classes.pinnedSaveBtn}
@@ -275,15 +283,53 @@ function Apps() {
                         spacing={3}
                     >
                         <Grid item xs={6}>
-                            {apps.map((appDetails, index) => (
+
+                            <Paper className={classes.paper}>
+                                <Box p={5} className={classes.center}>
+                                    <Grid item xs={12} align="left">
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
+                                            Github Repo
+                                        </Typography>
+                                    </Grid>
+                                    <br/>
+                                    <br/>
+                                    <Grid item xs={12} >
+                                        <TextField
+                                            fullWidth
+                                            name="github_url"
+                                            label="Github Url"
+                                            variant="outlined"
+                                            InputProps={{
+                                                readOnly: readOnly,
+                                                startAdornment: (
+                                                    <InputAdornment position="start">
+                                                        <IconButton
+                                                            color="primary"
+                                                            component="span"
+                                                            aria-label="email"
+                                                            onClick={() => window.open(appsData.github_url)}
+                                                        >
+                                                            <GitHubIcon />
+                                                        </IconButton>
+                                                    </InputAdornment>
+                                                )
+                                            }}
+                                            onChange={handleOnChange}
+                                            value={appsData.github_url}
+                                        />
+                                    </Grid>
+                                </Box>
+                            </Paper>
+
+                            {appsData.apps.map((appDetails, index) => (
                                 <Paper className={classes.paper} key={index}>
-                                    <Box p={5}>
+                                    <Box p={5} className={classes.center}>
 
                                         {(readOnly) &&
                                             <Grid item xs={12}>
                                                 <Grid container justify="flex-end">
                                                     <Button
-                                                        variant="contained"
+                                                    variant="outlined"
                                                         color="primary"
                                                         onClick={() => handleOnDeleteApp(index)}
                                                         className={classes.button}
@@ -294,9 +340,9 @@ function Apps() {
                                             </Grid>
                                         }
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <Typography variant="h4" color="primary">
-                                                App Details
+                                                {appDetails.app_name}
                                             </Typography>
                                         </Grid>
 
@@ -337,7 +383,7 @@ function Apps() {
                                         
                                         <br/>
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <FormControl variant="outlined" className={classes.formControl}>
                                                 <InputLabel>App Type</InputLabel>
                                                 <Select
@@ -379,13 +425,13 @@ function Apps() {
                                         <br />
                                         <br />
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <Typography variant="h5" color="primary">
                                                 Status:
                                             </Typography>
                                         </Grid>
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox 
@@ -453,6 +499,21 @@ function Apps() {
                                                 value={appDetails.github_url}
                                             />
                                         </Grid>
+                                        
+                                        <Grid item xs={12} align="left">
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={appDetails.is_github_private}
+                                                        onChange={(e) => handleOnChangeNewApps(e, index)}
+                                                        name="is_github_private"
+                                                        color="primary"
+                                                        disabled={readOnly}
+                                                    />
+                                                }
+                                                label="is Private Github"
+                                            />
+                                        </Grid>
                                     </Box>
                                 </Paper>
                             ))}
@@ -465,7 +526,7 @@ function Apps() {
                                             <Grid item xs={12}>
                                                 <Grid container justify="flex-end">
                                                     <Button
-                                                        variant="contained"
+                                                        variant="outlined"
                                                         color="primary"
                                                         onClick={() => handleOnLocalDeleteApp(index)}
                                                         className={classes.button}
@@ -476,9 +537,9 @@ function Apps() {
                                             </Grid>
                                         }
 
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4" color="primary">
-                                                App Details
+                                        <Grid item xs={12} align="left">
+                                            <Typography variant="h4" color="primary" align="left">
+                                                New App Details
                                             </Typography>
                                         </Grid>
 
@@ -520,7 +581,7 @@ function Apps() {
 
                                         <br />
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <FormControl variant="outlined" className={classes.formControl}>
                                                 <InputLabel>App Type</InputLabel>
                                                 <Select
@@ -562,13 +623,13 @@ function Apps() {
                                         <br />
                                         <br />
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <Typography variant="h5" color="primary">
                                                 Status:
                                             </Typography>
                                         </Grid>
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <FormControlLabel
                                                 control={
                                                     <Checkbox
@@ -612,7 +673,7 @@ function Apps() {
 
                                         <br />
 
-                                        <Grid item xs={12}>
+                                        <Grid item xs={12} align="left">
                                             <TextField
                                                 fullWidth
                                                 name="github_url"
@@ -638,6 +699,21 @@ function Apps() {
                                                 value={appDetails.github_url}
                                             />
                                         </Grid>
+
+                                        <Grid item xs={12} align="left">
+                                            <FormControlLabel
+                                                control={
+                                                    <Checkbox
+                                                        checked={appDetails.is_github_private}
+                                                        onChange={(e) => handleOnChangeNewApps(e, index)}
+                                                        name="is_github_private"
+                                                        color="primary"
+                                                        disabled={readOnly}
+                                                    />
+                                                }
+                                                label="is Private Github"
+                                            />
+                                        </Grid>
                                     </Box>
                                 </Paper>
                             ))}
@@ -648,7 +724,7 @@ function Apps() {
                                 <Grid item xs={12}>
                                     <Grid container justify="center">
                                         <Button
-                                            variant="contained"
+                                            variant="outlined"
                                             color="primary"
                                             onClick={handleOnClickAddApp}
                                             className={classes.button}
@@ -680,4 +756,4 @@ function Apps() {
         </Container>
     );
 }
-export default Apps;
+export default AdminApps;

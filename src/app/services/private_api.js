@@ -10,7 +10,7 @@ import {
 } from "../routes/api_routes";
 
 //* Get Admin Home */
-export const getAdminSettings = async (data) => {
+export async function getAdminSettingsApi(data) {
     try {
         let res = await axios.get(
             API_URL + privateApiRoutes.GET_ADMIN_SETTINGS,
@@ -27,7 +27,7 @@ export const getAdminSettings = async (data) => {
 
 //** Update Apps */
 
-export const updateApps = async (data) => {
+export async function updateAppsApi(data) {
     try {
         let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_APPS,
@@ -42,7 +42,7 @@ export const updateApps = async (data) => {
     }
 }
 
-export const removeApp = async (app_id) => {
+export async function removeAppApi(app_id) {
     try {
         let res = await axios.post(
             API_URL + privateApiRoutes.REMOVE_APP,
@@ -59,10 +59,57 @@ export const removeApp = async (app_id) => {
 
 //** Update About Me */
 
-export const updateAboutMe = async (data) => {
+export async function updateAboutMeApi(data) {
     try {
         let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_ABOUT_ME, 
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+/** Update Admin Home */
+export async function updateAdminSettingsApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+
+export async function updateResumeDisplayApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_RESUME_DISPLAY,
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+export async function updateJordanHoApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_JORDAN_HO,
             data,
             { //for file resume upload
                 headers: {
@@ -79,11 +126,10 @@ export const updateAboutMe = async (data) => {
     }
 }
 
-/** Update Admin Home */
-export const updateAdminSettings = async (data) => {
+export async function getJordanHoApi(data) {
     try {
         let res = await axios.post(
-            API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
+            API_URL + privateApiRoutes.GET_JORDAN_HO,
             data
         );
         return await handleApi(res);

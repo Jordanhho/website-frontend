@@ -3,23 +3,22 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Route, Switch, Link  } from 'react-router-dom';
 
 import moment from 'moment';
+import PersonalLogo from "../../assets/img/personal_logo.png";
 
-import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
-import HomeSharpIcon from '@material-ui/icons/HomeSharp';
-import AppsSharpIcon from '@material-ui/icons/AppsSharp';
-import ArrowBackSharpIcon from '@material-ui/icons/ArrowBackSharp';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import IconButton from '@material-ui/core/IconButton';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
 
-import Apps from "./Apps";
-import AboutMe from "./AboutMe";
+import AdminApps from "./AdminApps";
+import AdminAboutMe from "./AdminAboutMe";
 import AdminHome from "./AdminHome";
+import JordanHo from "./JordanHo";
+import AdminResumeDisplay from "./AdminResumeDisplay";
 
 import staticRoutes from "../../routes/static_routes";
 
@@ -33,6 +32,7 @@ import {
 import { setAccessTokenApi } from '../../services/auth_api';
 
 import useStyles from "./styles";
+import StyledTab from "../../components/StyledTab";
 
 function AdminLayout() {
     const location = useLocation();
@@ -90,65 +90,94 @@ function AdminLayout() {
 
     return (
         <div> 
-            <AppBar position="sticky">
-                <Tabs
-                    value={location.pathname}
-                    indicatorColor="secondary"
-                    textColor="inherit"
-                    aria-label=""
-                    centered
-                >
-                    <Tab
-                        to={staticRoutes.main.home}
-                        value={staticRoutes.main.home}
-                        component={Link}
-                        icon={<ArrowBackSharpIcon />}
-                        label="Back"
-                    />
-                    <Tab
-                        to={staticRoutes.admin.home}
-                        value={staticRoutes.admin.home}
-                        component={Link}
-                        icon={<HomeSharpIcon />}
-                        label="Admin Home"
-                    />
-                    <Tab
-                        to={staticRoutes.admin.aboutMe}
-                        value={staticRoutes.admin.aboutMe}
-                        component={Link}
-                        icon={<AccountBoxSharpIcon/>}
-                        label="Admin About Me"
-                    />
-                    <Tab
-                        to={staticRoutes.admin.apps}
-                        value={staticRoutes.admin.apps}
-                        component={Link}
-                        icon={<AppsSharpIcon />}
-                        label="Admin Apps"
-                    />
-                </Tabs>
+            <AppBar position="sticky" className={classes.appbar}>
+                <Toolbar>
+                    <Link to={staticRoutes.main.home} className={classes.personlLogoBtn}>
+                        <IconButton
+                            aria-label="Home"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="primary"
+                        >
+                            <img
+                                className={(classes.homeIcon)}
+                                src={PersonalLogo}
+                                alt="Jordan Logo"
+                            />
+                        </IconButton>
+                    </Link>
+                    <Tabs
+                        className={classes.tab}
+                        value={location.pathname}
+                        indicatorColor="secondary"
+                        textColor="primary"
+                        aria-label=""
+                        centered
+                    >
+                        <StyledTab
+                            to={staticRoutes.admin.home}
+                            value={staticRoutes.admin.home}
+                            component={Link}
+                            label="Manage Settings"
+                        />
+                        <StyledTab
+                            to={staticRoutes.admin.apps}
+                            value={staticRoutes.admin.apps}
+                            component={Link}
+                            label="Manage My Projects"
+                        />
+                        <StyledTab
+                            to={staticRoutes.admin.resumeDisplay}
+                            value={staticRoutes.admin.resumeDisplay}
+                            component={Link}
+                            label="Manage Resume"
+                        />
+                        <StyledTab
+                            to={staticRoutes.admin.aboutMe}
+                            value={staticRoutes.admin.aboutMe}
+                            component={Link}
+                            label="Manage About Me"
+                        />
+                        <StyledTab
+                            to={staticRoutes.admin.jordanHo}
+                            value={staticRoutes.admin.jordanHo}
+                            component={Link}
+                            label="Manage Jordan Ho"
+                        />  
+                    </Tabs>
+                    <div className={classes.logoutBtn}>
+                        <IconButton
+                            aria-label="Admin Settings"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            color="primary"
+                            onClick={handleLogout}
+                        >
+                            <ExitToAppIcon />
+                        </IconButton>
+                    </div>
+                </Toolbar>
             </AppBar>
-            <Button
-                color="primary"
-                disableElevation
-                startIcon={<ArrowBackIosIcon />}
-                className={classes.button}
-                onClick={handleLogout}
-            >
-                Logout
-            </Button>
             <Switch>
                 <Route
-                    path={staticRoutes.admin.aboutMe}
-                    component={AboutMe}
+                    exact path={staticRoutes.admin.home}
+                    component={AdminHome}
                 />
                 <Route
                     path={staticRoutes.admin.apps}
-                    component={Apps}
+                    component={AdminApps}
                 />
                 <Route
-                    path={staticRoutes.admin.home}
-                    component={AdminHome}
+                    path={staticRoutes.admin.resumeDisplay}
+                    component={AdminResumeDisplay}
+                />
+                <Route
+                    path={staticRoutes.admin.aboutMe}
+                    component={AdminAboutMe}
+                />
+                <Route
+                    path={staticRoutes.admin.jordanHo}
+                    component={JordanHo}
                 />
             </Switch> 
         </div>

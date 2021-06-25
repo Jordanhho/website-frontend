@@ -6,7 +6,7 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -14,8 +14,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Loader from "../../components/Loader";
 
 import {
-    getAdminSettings,
-    updateAdminSettings
+    getAdminSettingsApi,
+    updateAdminSettingsApi
 } from "../../services/private_api";
 
 import useStyles from "./styles";
@@ -55,7 +55,7 @@ function AdminHome() {
                 [name]: value
             }
         }
-        const result = await updateAdminSettings(postData);
+        const result = await updateAdminSettingsApi(postData);
 
         //if failed update, load backup
         if (!result.data) {
@@ -72,7 +72,7 @@ function AdminHome() {
     };
 
     const fetchData = useCallback(async () => {
-        const result = await getAdminSettings();
+        const result = await getAdminSettingsApi();
         if (result.data) {
             setData(result.data);
             setLoaded(true);
@@ -134,7 +134,7 @@ function AdminHome() {
                                         </Typography>
                                     </Grid>
                                     <br />
-                                    <Grid item xs={12}>
+                                    <Grid item xs={12} align="left">
                                         <form onSubmit={handleUpdate} ref={formRef}>
                                             <FormGroup row>
                                                 <FormControlLabel

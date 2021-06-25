@@ -1,9 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
-    tabs: {
-        backgroundColor: '#000'
-    },
     palette: {
         type: "dark",
         primary: {

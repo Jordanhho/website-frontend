@@ -18,17 +18,31 @@ export const authApiRoutes = {
 }
 
 export const publicApiRoutes = {
-    ABOUT_ME: "/api/about-me",
-    APPS: "/api/apps",
     HOME: "/api/home",
-    LOGIN_SETTINGS: "/api/login-settings"
+    APPS: "/api/apps",
+    RESUME_DISPLAY: "/api/resume-display",
+    ABOUT_ME: "/api/about-me",
+    CONTACT_ME: "/api/contact-me",
+    ABOUT_WEBSITE: "/api/about-website",
+    LOGIN_SETTINGS: "/api/login-settings",
 }
 
 export const privateApiRoutes = {
+    UPDATE_HOME: "/api/home/update",
+
     UPDATE_ABOUT_ME: "/api/about-me/update",
+
     UPDATE_APPS: "/api/apps/update",
     REMOVE_APP: "/api/apps/remove",
-    UPDATE_HOME: "/api/home/update",
+
     GET_ADMIN_SETTINGS: "/api/admin/settings",
-    UPDATE_ADMIN_SETTINGS: "/api/admin/settings/update"
+    UPDATE_ADMIN_SETTINGS: "/api/admin/settings/update",
+
+    UPDATE_RESUME_DISPLAY: "/api/admin/resume-display/update",
+
+    GET_JORDAN_HO: "/api/admin/jordan-ho",
+    UPDATE_JORDAN_HO: "/api/admin/jordan-ho/update",
+
+    GET_BUCKET_FILES: "/api/admin/bucket-files",
+    UPDATE_BUCKET_FILES: "/api/admin/bucket-files/update"
 }

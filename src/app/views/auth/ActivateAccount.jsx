@@ -20,7 +20,12 @@ import {
 import useStyles from "./styles";
 import useInput from "../../custom_hooks/useInput";
 
+import ReCAPTCHA from "react-google-recaptcha";
+import { getRecaptchaInvisiblePublicKey } from "../../config/google_config";
+
 function ActivateAccount() {
+    const pageTitle = "Admin Activate Account";
+    const recaptchaRef = React.createRef();
     const classes = useStyles();
 
     const { email, activation_code } = useParams();
@@ -32,11 +37,18 @@ function ActivateAccount() {
     const [showActivationFailure, setShowActivationFailure] = useState(false);
     const [noCodeErr, setNoCodeErr] = useState(false);
 
-
-    async function activateAccount(data) {
+    async function activateAccount() {
         //if params of activation_code and email exist, attempt to auto activate account
-        if (data.email && data.activation_code) {
-            const result = await activateAccountApi(data);
+        if (email && activation_code) {
+
+            const recaptcha_token = await recaptchaRef.current.executeAsync();
+
+            const postData = {
+                email: email,
+                activation_code: activation_code,
+                recaptcha_token: recaptcha_token
+            }
+            const result = await activateAccountApi(postData);
 
             //upon success show success screen
             if (result.data && result.data.activated_account) {
@@ -53,15 +65,35 @@ function ActivateAccount() {
     }
 
     const loadActivationLink = useCallback(async () => {
-        const postData = {
-            email: email, 
-            activation_code: activation_code
+        //if params of activation_code and email exist, attempt to auto activate account
+        if (email && activation_code) {
+
+            const recaptcha_token = await recaptchaRef.current.executeAsync();
+
+            const postData = {
+                email: email,
+                activation_code: activation_code,
+                recaptcha_token: recaptcha_token
+            }
+            const result = await activateAccountApi(postData);
+
+            //upon success show success screen
+            if (result.data && result.data.activated_account) {
+                setShowActivationSuccess(true);
+            }
+            //something went wrong, so just show invalid activation page
+            else {
+                setShowActivationFailure(true);
+            }
+            setShowActivationPage(false);
+            return;
         }
-        await activateAccount(postData);
-    }, [email, activation_code])
+        setShowActivationPage(true);
+    }, [email, activation_code, recaptchaRef]);
 
     //on page load
     useEffect(() => {
+        document.title = pageTitle;
         loadActivationLink();
     }, [loadActivationLink]);
 
@@ -200,6 +232,12 @@ function ActivateAccount() {
                             </Grid>
                         </Container>
                     }
+
+                    <ReCAPTCHA
+                        ref={recaptchaRef}
+                        size="invisible"
+                        sitekey={getRecaptchaInvisiblePublicKey()}
+                    />
                 </Paper>
             </div>
         </Container>

@@ -1,27 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import moment from "moment";
-
-import GitHubIcon from '@material-ui/icons/GitHub';
-
-import IconButton from '@material-ui/core/IconButton';
-import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 
-import Clock from "../../components/Clock";
 import Loader from "../../components/Loader";
+import Button from '@material-ui/core/Button';
+
+import TitleBanner from "../../components/TitleBanner";
+import staticRoutes from "../../routes/static_routes";
 
 import {
-    getHome
+    getHomeApi
 } from "../../services/public_api";
 
 import useStyles from "./styles";
 
 function Home() {
+    const pageTitle = "Home";
 
     const classes = useStyles();
 
@@ -30,17 +28,18 @@ function Home() {
     const [loaded, setLoaded] = useState(null);
 
     const fetchData = useCallback(async () => {
-        const result = await getHome();
-        if (result.data) {
-            setData(result.data);
-            setLoaded(true);
+        const result = await getHomeApi();
+        if(result.error) {
+            setLoaded(false);
         }
         else {
-            setLoaded(false);
+            setData(result.data);
+            setLoaded(true);
         }
     }, []);
     
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 
@@ -73,337 +72,183 @@ function Home() {
    
     return (
         <Container>
+            <TitleBanner title={"Lets connect!"}/>
             <Box p={5}>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h3" color="primary">
-                                            Welcome!
-                                        </Typography>
-                                    </Grid>
-                                    <br />
-                                    <Grid item xs={12}>
-                                        <Typography variant="body1" gutterBottom>
-                                            This my personal website to showcase my skills.
-                                            <br/>
-                                            The website is built with many mainstream technologies.
-                                        </Typography>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h4" color="primary">
+                                        Welcome!
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom>
+                                        This is my personal website to showcase my projects and experience.
+                                    </Typography>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        spacing={3}
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h5" color="primary" className={classes.underline}>
+                                        Web Development Specialization
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <br />
+                                <Grid item xs={12} align="left">
+                                    <Typography variant="body1" gutterBottom>
+                                        I am very familar and interested in full-stack website development. I am not afraid to admit that I am not the best at frontend website development with CSS and UI Layout, however, I am very confident that I can spot UI errors and make UX improvements. I also really like being in control of the entire development cycle of working on creating the database schema, the entries, and then creating the backend APIs. Afterward, the frontend would be implemented with the APIs to be used to display information and maybe manipulate the data. My main development languages include ReactJS, Javascript, PHP, Python, C, and PHP. I also prefer to develop projects in simple, efficient and optimal work pattern that includes clean code writing that is easy to understand and fast.
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <Grid item xs={12} align="center">
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        href={staticRoutes.main.aboutMe}
+                                        className={classes.button}
                                     >
-                                        <Grid item xs={12}>
-                                            <Typography variant="h3" color="primary">
-                                                <Clock />
-                                            </Typography>
-                                            <Typography variant="body1">
-                                                {moment().format("dddd, MMMM Do YYYY")}
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4">
-                                                {homeData.city}, {homeData.country}
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={6} align="right">
-                                            <img
-                                                className={(classes.weatherIcon)}
-                                                src={homeData.icon_url}
-                                                alt="Weather Icon"
-                                            />
-                                        </Grid>
-
-                                        <Grid item xs={6} align="left">
-                                            <Typography variant="h4" align="left">
-                                                {homeData.temperature_degrees}°C
-                                                </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={12}>
-                                            <Typography variant="h5">
-                                                {homeData.weather_description}
-                                            </Typography>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                                        Learn more about me
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        spacing={3}
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h5" color="primary" className={classes.underline}>
+                                        Personal Projects
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <br />
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom>
+                                        Take a look at my latest projects here.
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <Grid item xs={12} align="center">
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        href={staticRoutes.main.apps}
+                                        className={classes.button}
                                     >
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4" color="primary">
-                                                Techonologies
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.nodejs.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.nodejs.logo}
-                                                    alt="NodeJS"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.nginx.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.nginx.logo}
-                                                    alt="Nginx"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.expressjs.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.expressjs.logo}
-                                                    alt="ExpressJS"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.mongodb.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.mongodb.logo}
-                                                    alt="MongoDB"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.aws_s3.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.aws_s3.logo}
-                                                    alt="AWS S3"
-                                                />
-                                            </a> 
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.aws_cloudfront.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.aws_cloudfront.logo}
-                                                    alt="AWS CloudFront"
-                                                />
-                                            </a>
-                                        </Grid>
-                                   </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                                        View My Projects
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        spacing={3}
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h5" color="primary" className={classes.underline}>
+                                        Interested in my web development Skills?
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <br />
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom>
+                                        You can learn more about my skills and experience here.
+                                    </Typography>
+                                </Grid>
+                                <br/>
+
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        href={staticRoutes.main.resumeDisplay}
+                                        className={classes.button}
                                     >
-     
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4" color="primary">
-                                                Frontend
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.reactjs.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.reactjs.logo}
-                                                    alt="ReactJS"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.redux.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.redux.logo}
-                                                    alt="Redux"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.material_ui.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.material_ui.logo}
-                                                    alt="Material UI"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                        <Grid item xs={12} md={6}>
-                                            <a href={homeData.technologies.fontawesome.url}>
-                                                <img
-                                                    className={(classes.techonologyImg)}
-                                                    src={homeData.technologies.fontawesome.logo}
-                                                    alt="Fontawesome"
-                                                />
-                                            </a>
-                                        </Grid>
-
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                                        View My Resume
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
 
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid
-                                        container
-                                        justify="center"
-                                        alignItems="center"
-                                        spacing={3}
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={6}>
+                        <Paper className={classes.paper}>
+                            <Box p={5} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h5" color="primary" className={classes.underline}>
+                                        Looking for a full-stack web developer?
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <br />
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" gutterBottom>
+                                        Well look no further, you can contact me about the details of your offer here.
+                                    </Typography>
+                                </Grid>
+                                <br />
+
+                                <Grid item xs={12}>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        href={staticRoutes.main.contactMe}
+                                        className={classes.button}
                                     >
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4" color="primary">
-                                                Personal Website Github
-                                            </Typography>
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            <div className={classes.iconInlineAlign}>
-                                                <span className={classes.iconPadding}>
-                                                    <IconButton
-                                                        color="primary"
-                                                        aria-label="Github"
-                                                        onClick={() => window.open(homeData.website_github.backend_url)}
-                                                        className={classes.iconInline}
-                                                    >
-                                                        <GitHubIcon
-                                                            fontSize="large"
-                                                            color="primary"
-                                                            className={classes.iconInline}
-                                                        />
-                                                    </IconButton>
-                                                </span>
-
-                                                <Typography variant="h6">
-                                                    <Link
-                                                        href="#"
-                                                        color="inherit"
-                                                        onClick={() => window.open(homeData.website_github.backend_url)}
-                                                    >
-                                                        Backend
-                                                    </Link>
-                                                </Typography>
-                                            </div>
-                                        </Grid>
-
-                                        <Grid item xs={6}>
-                                            <div className={classes.iconInlineAlign}>
-                                                <span className={classes.iconPadding}>
-                                                    <IconButton
-                                                        color="primary"
-                                                        aria-label="Github"
-                                                        onClick={() => window.open(homeData.website_github.frontend_url)}
-                                                        className={classes.iconInline}
-                                                    >
-                                                        <GitHubIcon
-                                                            fontSize="large"
-                                                            color="primary"
-                                                            className={classes.iconInline}
-                                                        />
-                                                    </IconButton>
-                                                </span>
-
-                                                <Typography variant="h6">
-                                                    <Link
-                                                        href="#"
-                                                        color="inherit"
-                                                        onClick={() => window.open(homeData.website_github.frontend_url)}
-                                                    >
-                                                        Frontend
-                                                    </Link>
-                                                </Typography>
-                                            </div>
-                                        </Grid>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+                                        Contact Me
+                                    </Button>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
-                </Box>
+                </Grid>
             </Box>
         </Container>
     );

@@ -5,34 +5,38 @@ import {
     authApiRoutes 
 } from "../routes/api_routes";
 
+import {
+    handleApi
+} from "./api_utility";
+
 //force send credentials (cookies) to every axios request
 axios.defaults.withCredentials = true;
 
-let privateAxios = axios;
-
-const VERIFY_LOGIN_SESSION_TIMEOUT = 300; //300 ms for verifying login session.
+const VERIFY_LOGIN_SESSION_TIMEOUT_MS = 300; //300 ms for verifying login session.
 
 //** Sign Up Process */
 
 //sign up for user
 export const userSignUpApi = async (data) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.SIGNUP, data);
+        let res = await axios.post(API_URL + authApiRoutes.SIGNUP, data);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
 export const activateAccountApi = async (data) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.ACTIVATE_ACCOUNT, data);
+        let res = await axios.post(API_URL + authApiRoutes.ACTIVATE_ACCOUNT, data);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -40,24 +44,26 @@ export const activateAccountApi = async (data) => {
 //** User login process */
 
 // user login API to validate the credential
-export const userLoginApi = async (email, password) => {
+export const userLoginApi = async (data) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.LOGIN, { email, password });
+        let res = await axios.post(API_URL + authApiRoutes.LOGIN, data);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
 export const userLogoutApi = async () => {
     try {
-        return await axios.post(API_URL + authApiRoutes.LOGOUT);
+        let res = await axios.post(API_URL + authApiRoutes.LOGOUT);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -77,15 +83,16 @@ export const setAccessTokenApi = (accessToken) => {
 // verify refresh token to generate new access token if refresh token is present
 export const verifyLoginSessionApi = async () => {
     try {
-        return await axios({
+        let result = await axios({
                 method: "post",
                 url: (API_URL + authApiRoutes.VERIFY_LOGIN_SESSION),
-                timeout: VERIFY_LOGIN_SESSION_TIMEOUT
-            });
+                timeout: VERIFY_LOGIN_SESSION_TIMEOUT_MS
+        });
+        return handleApi(result);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -94,11 +101,12 @@ export const verifyLoginSessionApi = async () => {
 
 export const sendResetPasswordEmailApi = async (email) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.SEND_RESET_PASSWORD_EMAIL, email);
+        let res = await axios.post(API_URL + authApiRoutes.SEND_RESET_PASSWORD_EMAIL, email);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -106,11 +114,12 @@ export const sendResetPasswordEmailApi = async (email) => {
 // check if reset password link is valid
 export const verifyResetPasswordCodeApi = async (verification_code) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.VERIFY_RESET_PASSWORD_CODE, verification_code);
+        let res = await axios.post(API_URL + authApiRoutes.VERIFY_RESET_PASSWORD_CODE, verification_code);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
@@ -118,15 +127,12 @@ export const verifyResetPasswordCodeApi = async (verification_code) => {
 // send request to reset password with email 
 export const resetPasswordApi = async (data) => {
     try {
-        return await axios.post(API_URL + authApiRoutes.RESET_PASSWORD, data);
+        let res = await axios.post(API_URL + authApiRoutes.RESET_PASSWORD, data);
+        return handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
-
-export {
-    privateAxios
-};

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import ReactHtmlParser from 'react-html-parser';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
@@ -13,11 +11,11 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import YouTubeIcon from '@material-ui/icons/YouTube';
-import DescriptionIcon from '@material-ui/icons/Description'; //for resume
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import EmailIcon from '@material-ui/icons/Email';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import IconButton from '@material-ui/core/IconButton';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Fab from '@material-ui/core/Fab';
@@ -29,7 +27,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { Typography } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -38,34 +36,25 @@ import Loader from "../../components/Loader";
 import useStyles from "./styles";
 
 import {
-    getAboutMe,
-} from "../../services/public_api";
-
-import {
-    updateAboutMe
+    getJordanHoApi,
+    updateJordanHoApi
 } from "../../services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-function AboutMe() {
+function JordanHo() {
+    const pageTitle = "Admin Manage Jordan Ho Info";
     const classes = useStyles();
 
     const formRef = React.createRef();
 
-    const [aboutMeBak, setAboutMeBak] = useState({});
-    const [aboutMe, setData] = useState({
+    const [jordanHoBak, setJordanHoBak] = useState({});
+    const [jordanHoData, setData] = useState({
+        email: "",
         firstname: "",
         lastname: "",
-        email: "",
-        education_description: "",
-        school_experience_description: "",
-        work_experience_description: "",
-        skill_specialization_description: "",
-        hobby_description: "",
-        esports_description: "",
-        goal_description: "",
         crossfire_profile_url: "",
         youtube_url: "",
         linkedin_url: "",
@@ -73,13 +62,16 @@ function AboutMe() {
         twitch_url: "",
         steam_url: "",
         esea_url: "",
-        resume_url: ""
+        website_frontend_github_url: "",
+        website_backend_github_url: "",
+        resume_file_id: "",
+        profile_picture_id: ""
     });
 
-    const [ resume, setResume ] = useState(null);
-    const [ profilePicture, setProfilePicture] = useState(null);
+    const [resume, setResume] = useState(null);
+    const [profilePicture, setProfilePicture] = useState(null);
 
-    const [ readOnly, setReadOnly ] = useState(true);
+    const [readOnly, setReadOnly] = useState(true);
 
     const [loaded, setLoaded] = useState(null);
     const [openSuccessToast, setOpenSuccessToast] = useState(false);
@@ -103,13 +95,13 @@ function AboutMe() {
 
         //use formData for multi part data
         let formData = new FormData();
-        Object.keys(aboutMe).forEach(function (key) {
-            formData.append(key, aboutMe[key]);
+        Object.keys(jordanHoData).forEach(function (key) {
+            formData.append(key, jordanHoData[key]);
         })
 
         //add on resume if its not empty.
-        if(resume) {
-            formData.append("resume", resume); 
+        if (resume) {
+            formData.append("resume", resume);
         }
 
         //add on profile picture if its not empty.
@@ -117,16 +109,17 @@ function AboutMe() {
             formData.append("profile_picture", profilePicture);
         }
 
-        const result = await updateAboutMe(formData);
+        const result = await updateJordanHoApi(formData);
 
         //if failed update, load backup
-        if(!result.data) {
-            setData(aboutMeBak);
+        if (!result.data) {
+            setData(jordanHoBak);
             setReadOnly(true);
             setOpenFailureToast(true);
         }
         else {
             setData(result.data);
+            setJordanHoBak(result.data);
 
             //successfully updated!
             setReadOnly(true);
@@ -135,27 +128,27 @@ function AboutMe() {
     }
 
     function handleOnClickEdit() {
-        setAboutMeBak(aboutMe);
+        setJordanHoBak(jordanHoData);
         setReadOnly(false);
     }
 
     function handleOnClickCancel() {
-        setData(aboutMeBak);
+        setData(jordanHoBak);
         setReadOnly(true);
     }
 
     function handleOnChange(e) {
         setData({
-            ...aboutMe, 
+            ...jordanHoData,
             [e.target.name]: e.target.value
         });
     }
 
     const fetchData = useCallback(async () => {
-        const result = await getAboutMe();
+        const result = await getJordanHoApi();
         if (result.data) {
             setData(result.data);
-            setAboutMeBak(result.data);
+            setJordanHoBak(result.data);
             setLoaded(true);
         }
         else {
@@ -164,6 +157,7 @@ function AboutMe() {
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 
@@ -199,9 +193,9 @@ function AboutMe() {
                 <Paper className={classes.paper}>
                     <Box p={5}>
                         {(readOnly) &&
-                        <Fab 
-                            color="primary" 
-                            aria-label="edit" 
+                        <Fab
+                            color="primary"
+                            aria-label="edit"
                             className={classes.pinnedEditBtn}
                             onClick={handleOnClickEdit}
                         >
@@ -228,7 +222,7 @@ function AboutMe() {
                                 type="submit"
                             >
                                 Save
-                        </Button>
+                            </Button>
                         </Grid>}
 
                         <Box pb={10}>
@@ -241,12 +235,12 @@ function AboutMe() {
                             >
                                 <Grid item xs={12}>
                                     <Typography variant="h3">
-                                        {aboutMe.firstname} {aboutMe.lastname}
+                                        {jordanHoData.firstname} {jordanHoData.lastname}
                                     </Typography>
                                 </Grid>
 
                                 <Grid item xs={12} >
-                                    <Avatar src={aboutMe.profile_picture_url} alt="Profile Picture" className={classes.profilePicture} />
+                                    <Avatar src={jordanHoData.profile_picture_url} alt="Profile Picture" className={classes.profilePicture} />
                                 </Grid>
 
                                 {(!readOnly) &&
@@ -262,163 +256,6 @@ function AboutMe() {
                                     </Grid>}
                             </Grid>
                         </Box>
-   
-                        <Box pb={10}>
-                            <Grid
-                                container
-                                direction="column"
-                                justify="center"
-                                alignItems="center"
-                            >
-                                <Grid item xs={12}>
-                                    <Typography variant="h4">
-                                        About Me
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-
-                            <br/>
-
-                            <Grid
-                                container
-                                justify="center"
-                                alignItems="center"
-                                spacing={3}
-                            >
-                                <Grid item xs={12} >
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.school_experience_description)
-                                    :
-                                    <TextField
-                                        fullWidth
-                                        multiline
-                                        label="Education"
-                                        name="education_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.education_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-                                <Grid item xs={12} >
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.school_experience_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="School Experience"
-                                        name="school_experience_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                            value={aboutMe.school_experience_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-
-                                <Grid item xs={12} >
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.work_experience_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="Work Experience"
-                                        name="work_experience_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.work_experience_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-
-                                <Grid item xs={12} >
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.skill_specialization_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="Skill & Specialization"
-                                        name="skill_specialization_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.skill_specialization_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-
-
-                                <Grid item xs={12}>
-                                    {(readOnly) ?
-                                        ReactHtmlParser(aboutMe.hobby_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="Hobby"
-                                        name="hobby_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.hobby_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.esports_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="Esports"
-                                        name="esports_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.esports_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-
-                                <Grid item xs={12}>
-                                    {(readOnly) ?
-                                    ReactHtmlParser(aboutMe.goal_description)
-                                    :
-                                    <TextField
-                                        fullWidth={true}
-                                        multiline
-                                        label="Goal"
-                                        name="goal_description"
-                                        rows={10}
-                                        variant="outlined"
-                                        onChange={handleOnChange}
-                                        value={aboutMe.goal_description}
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                        }}
-                                    />}
-                                </Grid>
-                            </Grid>
-                        </Box>
 
                         <Box pb={10}>
                             <Grid
@@ -430,11 +267,11 @@ function AboutMe() {
                             >
                                 <Grid item xs={12} >
                                     <Typography variant="h4">
-                                        Contact Me
+                                        Jordan Ho Data
                                     </Typography>
                                 </Grid>
                             </Grid>
-                            <br/>
+                            <br />
                             <Grid item xs={12} >
                                 <Grid
                                     container
@@ -445,8 +282,8 @@ function AboutMe() {
                                     <Grid item xs={12} >
                                         <TextField
                                             fullWidth
-                                            name="email"
                                             label="Email"
+                                            name="email"
                                             variant="outlined"
                                             InputProps={{
                                                 readOnly: readOnly,
@@ -456,7 +293,7 @@ function AboutMe() {
                                                             color="primary"
                                                             component="span"
                                                             aria-label="email"
-                                                            onClick={() => window.open(aboutMe.email)}
+                                                            onClick={() => window.open(jordanHoData.email)}
                                                         >
                                                             <EmailIcon />
                                                         </IconButton>
@@ -464,14 +301,14 @@ function AboutMe() {
                                                 )
                                             }}
                                             onChange={handleOnChange}
-                                            value={aboutMe.email}
+                                            value={jordanHoData.email}
                                         />
                                     </Grid>
                                     <Grid item xs={12} >
                                         <TextField
                                             fullWidth
-                                            name="linkedin_url"
                                             label="LinkedIn"
+                                            name="linkedin_url"
                                             variant="outlined"
                                             InputProps={{
                                                 readOnly: readOnly,
@@ -481,7 +318,7 @@ function AboutMe() {
                                                             color="primary"
                                                             component="span"
                                                             aria-label="Linkedin"
-                                                            onClick={() => window.open(aboutMe.linkedin_url)}
+                                                            onClick={() => window.open(jordanHoData.linkedin_url)}
                                                         >
                                                             <LinkedInIcon />
                                                         </IconButton>
@@ -489,14 +326,14 @@ function AboutMe() {
                                                 )
                                             }}
                                             onChange={handleOnChange}
-                                            value={aboutMe.linkedin_url}
+                                            value={jordanHoData.linkedin_url}
                                         />
                                     </Grid>
                                     <Grid item xs={12} >
                                         <TextField
                                             fullWidth
-                                            name="github_url"
                                             label="Github"
+                                            name="github_url"
                                             variant="outlined"
                                             InputProps={{
                                                 readOnly: readOnly,
@@ -506,7 +343,7 @@ function AboutMe() {
                                                             color="primary"
                                                             component="span"
                                                             aria-label="Github"
-                                                            onClick={() => window.open(aboutMe.github_url)}
+                                                            onClick={() => window.open(jordanHoData.github_url)}
                                                         >
                                                             <GitHubIcon />
                                                         </IconButton>
@@ -514,7 +351,7 @@ function AboutMe() {
                                                 )
                                             }}
                                             onChange={handleOnChange}
-                                            value={aboutMe.github_url}
+                                            value={jordanHoData.github_url}
                                         />
                                     </Grid>
                                     <Grid
@@ -529,9 +366,9 @@ function AboutMe() {
                                                 color="primary"
                                                 component="span"
                                                 aria-label="Resume"
-                                                onClick={() => window.open(aboutMe.resume_url)}
+                                                onClick={() => window.open(jordanHoData.resume_url)}
                                             >
-                                                <DescriptionIcon
+                                                <GetAppIcon
                                                     fontSize="large"
                                                     color="primary"
                                                 />
@@ -574,12 +411,12 @@ function AboutMe() {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <br/>
+                                <br />
                                 <Grid item xs={12} >
                                     <TextField
                                         fullWidth
-                                        name="youtube_url"
                                         label="Youtube"
+                                        name="youtube_url"
                                         variant="outlined"
                                         InputProps={{
                                             readOnly: readOnly,
@@ -589,7 +426,7 @@ function AboutMe() {
                                                         color="primary"
                                                         component="span"
                                                         aria-label="Youtube"
-                                                        onClick={() => window.open(aboutMe.youtube_url)}
+                                                        onClick={() => window.open(jordanHoData.youtube_url)}
                                                     >
                                                         <YouTubeIcon />
                                                     </IconButton>
@@ -597,14 +434,14 @@ function AboutMe() {
                                             )
                                         }}
                                         onChange={handleOnChange}
-                                        value={aboutMe.youtube_url}
+                                        value={jordanHoData.youtube_url}
                                     />
                                 </Grid>
                                 <Grid item xs={12} >
                                     <TextField
                                         fullWidth
-                                        name="twitch_url"
                                         label="Twitch"
+                                        name="twitch_url"
                                         variant="outlined"
                                         InputProps={{
                                             readOnly: readOnly,
@@ -614,7 +451,7 @@ function AboutMe() {
                                                         color="primary"
                                                         component="span"
                                                         aria-label="Twitch"
-                                                        onClick={() => window.open(aboutMe.twitch_url)}
+                                                        onClick={() => window.open(jordanHoData.twitch_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "twitch"]} />
                                                     </IconButton>
@@ -622,14 +459,14 @@ function AboutMe() {
                                             )
                                         }}
                                         onChange={handleOnChange}
-                                        value={aboutMe.twitch_url}
+                                        value={jordanHoData.twitch_url}
                                     />
                                 </Grid>
                                 <Grid item xs={12} >
                                     <TextField
                                         fullWidth
-                                        name="steam_url"
                                         label="Steam"
+                                        name="steam_url"
                                         variant="outlined"
                                         InputProps={{
                                             readOnly: readOnly,
@@ -639,7 +476,7 @@ function AboutMe() {
                                                         color="primary"
                                                         component="span"
                                                         aria-label="Steam"
-                                                        onClick={() => window.open(aboutMe.steam_url)}
+                                                        onClick={() => window.open(jordanHoData.steam_url)}
                                                     >
                                                         <FontAwesomeIcon icon={["fab", "steam"]} />
                                                     </IconButton>
@@ -647,12 +484,12 @@ function AboutMe() {
                                             )
                                         }}
                                         onChange={handleOnChange}
-                                        value={aboutMe.steam_url}
+                                        value={jordanHoData.steam_url}
                                     />
                                 </Grid>
                             </Grid>
                         </Box>
-                    
+
                         <Box pd={10}>
                             <Grid
                                 container
@@ -674,12 +511,12 @@ function AboutMe() {
                                         </Grid>
                                     </Grid>
                                 </Grid>
-                                <br/>
+                                <br />
                                 <Grid item xs={12} >
                                     <TextField
                                         fullWidth
-                                        name="crossfire_url"
                                         label="Crossfire Profile"
+                                        name="crossfire_url"
                                         variant="outlined"
                                         InputProps={{
                                             readOnly: readOnly,
@@ -689,7 +526,7 @@ function AboutMe() {
                                                         color="primary"
                                                         component="span"
                                                         aria-label="CFS"
-                                                        onClick={() => window.open(aboutMe.crossfire_profile_url)}
+                                                        onClick={() => window.open(jordanHoData.crossfire_profile_url)}
                                                     >
                                                         <img className={classes.icon} src={CfsIcon} alt="CFS" />
                                                     </IconButton>
@@ -697,14 +534,14 @@ function AboutMe() {
                                             )
                                         }}
                                         onChange={handleOnChange}
-                                        value={aboutMe.crossfire_profile_url}
+                                        value={jordanHoData.crossfire_profile_url}
                                     />
                                 </Grid>
                                 <Grid item xs={12} >
                                     <TextField
                                         fullWidth
-                                        name="esea_url"
                                         label="ESEA Profile"
+                                        name="esea_url"
                                         variant="outlined"
                                         InputProps={{
                                             readOnly: readOnly,
@@ -714,7 +551,7 @@ function AboutMe() {
                                                         color="primary"
                                                         component="span"
                                                         aria-label="esea"
-                                                        onClick={() => window.open(aboutMe.esea_url)}
+                                                        onClick={() => window.open(jordanHoData.esea_url)}
                                                     >
                                                         <img className={classes.icon} src={EseaIcon} alt="ESEA" />
                                                     </IconButton>
@@ -722,7 +559,7 @@ function AboutMe() {
                                             )
                                         }}
                                         onChange={handleOnChange}
-                                        value={aboutMe.esea_url}
+                                        value={jordanHoData.esea_url}
                                     />
                                 </Grid>
                             </Grid>
@@ -743,4 +580,4 @@ function AboutMe() {
         </Container>
     )
 }
-export default AboutMe;
+export default JordanHo;

@@ -1,6 +1,8 @@
+import axios from "axios";
+
 import {
-    privateAxios
-} from "./auth_api";
+    handleApi
+} from "./api_utility";
 
 import {
     API_URL,
@@ -8,56 +10,106 @@ import {
 } from "../routes/api_routes";
 
 //* Get Admin Home */
-export const getAdminSettings = async (data) => {
+export async function getAdminSettingsApi(data) {
     try {
-        return await privateAxios.get(
+        let res = await axios.get(
             API_URL + privateApiRoutes.GET_ADMIN_SETTINGS,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
 //** Update Apps */
 
-export const updateApps = async (data) => {
+export async function updateAppsApi(data) {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_APPS,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
-export const removeApp = async (app_id) => {
+export async function removeAppApi(app_id) {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.REMOVE_APP,
             app_id
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
 //** Update About Me */
 
-export const updateAboutMe = async (data) => {
+export async function updateAboutMeApi(data) {
     try {
-        return await privateAxios.post(
+        let res = await axios.post(
             API_URL + privateApiRoutes.UPDATE_ABOUT_ME, 
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+/** Update Admin Home */
+export async function updateAdminSettingsApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+
+export async function updateResumeDisplayApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_RESUME_DISPLAY,
+            data
+        );
+        return await handleApi(res);
+    } catch (err) {
+        return {
+            error: true,
+            msg: err.response
+        };
+    }
+}
+
+export async function updateJordanHoApi(data) {
+    try {
+        let res = await axios.post(
+            API_URL + privateApiRoutes.UPDATE_JORDAN_HO,
             data,
             { //for file resume upload
                 headers: {
@@ -65,25 +117,26 @@ export const updateAboutMe = async (data) => {
                 }
             }
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }
 
-/** Update Admin Home */
-export const updateAdminSettings = async (data) => {
+export async function getJordanHoApi(data) {
     try {
-        return await privateAxios.post(
-            API_URL + privateApiRoutes.UPDATE_ADMIN_SETTINGS,
+        let res = await axios.post(
+            API_URL + privateApiRoutes.GET_JORDAN_HO,
             data
         );
+        return await handleApi(res);
     } catch (err) {
         return {
             error: true,
-            response: err.response
+            msg: err.response
         };
     }
 }

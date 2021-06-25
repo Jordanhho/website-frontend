@@ -20,18 +20,26 @@ import staticRoutes from "../../routes/static_routes";
 import { userLoginAsync } from '../../redux/asyncActions/authAsyncActions';
 
 import { 
-    getLoginSettings
+    getLoginSettingsApi
 } from "../../services/public_api";
 
 import useStyles from "./styles";
 import useInput from "../../custom_hooks/useInput";
 import useInputPass from "../../custom_hooks/useInputPass";
 
+import ReCAPTCHA from "react-google-recaptcha";
+import { getRecaptchaInvisiblePublicKey } from "../../config/google_config";
+
 function Login() {
+    const pageTitle = "Admin Login";
     const classes = useStyles();
+    const recaptchaRef = React.createRef();
 
-
-    const [loginSettings, setData] = useState(null);
+    const [loginSettings, setData] = useState({
+        enable_change_password: false,
+        enable_new_accounts: false,
+        enable_emailing: false
+    });
     const [loaded, setLoaded] = useState(null);
 
     const authObj = useSelector(state => state.auth);
@@ -45,21 +53,28 @@ function Login() {
     // handle button click of login form
     const handleLogin = async  (e) => {
         e.preventDefault();
-        await dispatch(userLoginAsync(email.value, password.value));
+        const recaptcha_token = await recaptchaRef.current.executeAsync();
+        let postData = {
+            email: email.value,
+            password: password.value,
+            recaptcha_token: recaptcha_token
+        }
+        await dispatch(userLoginAsync(postData));
     }
 
     const fetchData = useCallback(async () => {
-        const result = await getLoginSettings();
-        if (result.data) {
-            setData(result.data);
-            setLoaded(true);
+        const result = await getLoginSettingsApi();
+        if (result.error) {
+            setLoaded(false);
         }
         else {
-            setLoaded(false);
+            setData(result.data);
+            setLoaded(true);
         }
     }, []);
 
     useEffect(() => {
+        document.title = pageTitle;
         fetchData();
     }, [fetchData]);
 
@@ -112,6 +127,9 @@ function Login() {
                                     autoComplete="email"
                                     autoFocus
                                     {...email}
+                                    inputProps={{
+                                        tabIndex: "1"
+                                    }}
                                 />
                                 <TextField
                                     variant="outlined"
@@ -123,6 +141,9 @@ function Login() {
                                     id="password"
                                     autoComplete="current-password"
                                     {...password}
+                                    inputProps={{
+                                        tabIndex: "2"
+                                    }}
                                 />
                                 <br/>
                                 <br />
@@ -133,6 +154,7 @@ function Login() {
                                     color="primary"
                                     value={userLoginLoading ? 'Loading...' : 'Login'}
                                     onClick={handleLogin}
+                                    tabIndex="3"
                                 >
                                     Login
                                 </Button>
@@ -168,6 +190,11 @@ function Login() {
                     </Box>
                 </Paper>
             </div>
+            <ReCAPTCHA
+                ref={recaptchaRef}
+                size="invisible"
+                sitekey={getRecaptchaInvisiblePublicKey()}
+            />
         </Container>
     );
 }

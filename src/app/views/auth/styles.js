@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
     link: {
         cursor: "pointer"
     },
+    error_text: {
+        color: 'red', 
+        marginTop: 10
+    }
 }));
 
 export default useStyles;

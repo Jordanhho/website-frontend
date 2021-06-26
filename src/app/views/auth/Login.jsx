@@ -158,7 +158,7 @@ function Login() {
                                 >
                                     Login
                                 </Button>
-                                {loginError && <div style={{ color: 'red', marginTop: 10 }}>Something went wrong. Please try again later.</div>}
+                                {loginError && <div className={classes.error_text}>Something went wrong. Please try again later.</div>}
                             </form>
                             <br/>
                             <Grid container>

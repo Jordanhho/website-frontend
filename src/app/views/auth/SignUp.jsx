@@ -150,9 +150,9 @@ function SiguUp() {
                                     </Grid>
                                 </Grid>
 
-                                {createAccErr && <div style={{ color: 'red', marginTop: 10 }}>{createAccErr}</div>}
+                                {createAccErr && <div className={classes.error_text}>{createAccErr}</div>}
 
-                                {confirmPasswordNotMatch && <div style={{ color: 'red', marginTop: 10 }}>{"Entered password does not match."}</div>}
+                                {confirmPasswordNotMatch && <div className={classes.error_text}>{"Entered password does not match."}</div>}
           
                                 <Grid container justify="center">
                                     <Grid item>

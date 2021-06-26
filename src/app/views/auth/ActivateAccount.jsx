@@ -151,7 +151,7 @@ function ActivateAccount() {
 
                                     <Grid container justify="center">
                                         <Grid item>
-                                            {noCodeErr && <div style={{ color: 'red', marginTop: 10 }}>Please enter the activation code.</div>}
+                                        {noCodeErr && <div className={classes.error_text}>Please enter the activation code.</div>}
                                         </Grid>
                                     </Grid>
 

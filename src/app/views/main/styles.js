@@ -95,6 +95,10 @@ const useStyles = makeStyles((theme) => (
             width: "200px !important",
             height: "200px !important"
         },
+        flip_text: {
+            direction: "rtl", 
+            unicodeBidi: "bidi-override"
+        }
     }
 ));
 

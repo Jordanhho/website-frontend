@@ -176,7 +176,7 @@ function ContactMe() {
                                                         href="#"
                                                         color="inherit"
                                                         onClick={() => window.open(`mailto:${contactMeData.email.split("").reverse()}`)}
-                                                        style={{ direction: "rtl", unicodeBidi: "bidi-override" }}
+                                                        className={classes.flip_text}
                                                     >
                                                         {contactMeData.email}
                                                     </Link>

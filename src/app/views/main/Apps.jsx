@@ -170,7 +170,7 @@ function Apps() {
                                         <br />
 
                                         <Grid item xs={12} align="left">
-                                            <Typography variant="body1" style={{wordWrap: "break-word"}}>
+                                            <Typography variant="body1">
                                                 {ReactHtmlParser(appDetails.app_description)}
                                             </Typography>
                                         </Grid>

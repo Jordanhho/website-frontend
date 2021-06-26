@@ -178,7 +178,7 @@ function ForgotPassword() {
                                     </Grid>
                                 </Grid>
                     
-                                {sendEmailErr && <div style={{ color: 'red', marginTop: 10 }}>{"Email not found or incorrect email entered"}</div>}
+                                {sendEmailErr && <div className={classes.error_text}>{"Email not found or incorrect email entered"}</div>}
                             
                                 <Grid container justify="flex-end">
                                     <Grid item xs={6}>
@@ -242,7 +242,7 @@ function ForgotPassword() {
                                     </Grid>
                                 </Grid>
 
-                                {invalidVerificationCode && <div style={{ color: 'red', marginTop: 10 }}>{"Verification code is invalid or has expired."}</div>}
+                                {invalidVerificationCode && <div className={classes.error_text}>{"Verification code is invalid or has expired."}</div>}
 
                                 <Grid container justify="center" spacing={2}>
                                     <Grid item xs={6} >
@@ -313,9 +313,9 @@ function ForgotPassword() {
                                     </Grid>
                                 </Grid>
 
-                                {passwordChangeErr && <div style={{ color: 'red', marginTop: 10 }}>{"Error, something went wrong with changing your password. Please try again later."}</div>}
+                                {passwordChangeErr && <div className={classes.error_text}>{"Error, something went wrong with changing your password. Please try again later."}</div>}
 
-                                {confirmPasswordNotMatch && <div style={{ color: 'red', marginTop: 10 }}>{"Entered password does not match."}</div>}
+                                {confirmPasswordNotMatch && <div className={classes.error_text}>{"Entered password does not match."}</div>}
 
                                 <Grid container justify="flex-end" spacing={2}>
                                     <Grid item xs={6} >

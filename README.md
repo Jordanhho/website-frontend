@@ -71,6 +71,6 @@ It has been developed targeted towards Chrome Browsers desktops.
 ## to build static files
 1. Build reactjs 
 ``` 
-    $ npm run build
+    $ INLINE_RUNTIME_CHUNK=false npm run build
 ```
 2. The built app will be at /build

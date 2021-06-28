@@ -189,16 +189,13 @@ function Apps() {
                                         </Grid>
                                         :
                                         <Grid item xs={12}>
-                                            <Typography variant="h6">
-                                                App Details:
-                                            </Typography>
                                             <Typography variant="body1">
                                                 <Link
                                                     href="#"
                                                     color="inherit"
                                                     onClick={() => window.open(appDetails.app_url)}
                                                 >
-                                                    {appDetails.app_url}
+                                                    App Demo
                                                 </Link>
                                             </Typography>
                                         </Grid>}

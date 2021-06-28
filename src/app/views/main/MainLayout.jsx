@@ -28,7 +28,7 @@ function MainLayout() {
         <div className={classes.root}>   
             <AppBar position="sticky" className={classes.appbar}>
                 <Toolbar>
-                    <Link to={staticRoutes.main.home} className={classes.personlLogoBtn}>
+                    <Link to={staticRoutes.personal_website} className={classes.personlLogoBtn}>
                         <IconButton
                             aria-label="Home"
                             aria-controls="menu-appbar"

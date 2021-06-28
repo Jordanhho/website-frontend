@@ -1,4 +1,5 @@
 const staticRoutes = {
+    personal_website: "https://jordanho.ca/",
     main: {
         home: "/",
         resumeDisplay: "/resume-display",

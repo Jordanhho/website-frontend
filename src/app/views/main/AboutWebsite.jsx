@@ -24,6 +24,8 @@ function AboutWebsite() {
 
     const classes = useStyles();
 
+    const xsSize = 12;
+    const mdSize = 6;
 
     const [aboutWebsiteData, setData] = useState([]);
 
@@ -75,16 +77,16 @@ function AboutWebsite() {
     return (
         <Container>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
                 <Grid
                     container
                     justify="center"
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Details
@@ -121,9 +123,9 @@ function AboutWebsite() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid
                                     container
                                     justify="center"
@@ -207,9 +209,9 @@ function AboutWebsite() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid
                                     container
                                     justify="center"
@@ -275,9 +277,9 @@ function AboutWebsite() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid
                                     container
                                     justify="center"
@@ -287,7 +289,7 @@ function AboutWebsite() {
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Personal Website Github
-                                            </Typography>
+                                        </Typography>
                                     </Grid>
 
                                     <Grid item xs={6}>
@@ -343,7 +345,7 @@ function AboutWebsite() {
                                                     onClick={() => window.open(aboutWebsiteData.website_frontend_github_url)}
                                                 >
                                                     Frontend
-                                                    </Link>
+                                                </Link>
                                             </Typography>
                                         </div>
                                     </Grid>

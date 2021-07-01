@@ -1,18 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, Route, Switch, Link  } from 'react-router-dom';
+import { useLocation, Route, Switch } from 'react-router-dom';
 
 import moment from 'moment';
-import PersonalLogo from "../../assets/img/personal_logo.png";
-
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-
-import IconButton from '@material-ui/core/IconButton';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import AdminApps from "./AdminApps";
 import AdminAboutMe from "./AdminAboutMe";
@@ -24,6 +16,8 @@ import staticRoutes from "../../routes/static_routes";
 
 import Loader from "../../components/Loader";
 
+import NavBar from "../../components/NavBar";
+
 import { 
     verifyLoginSessionAsync, 
     userLogoutAsync 
@@ -32,7 +26,6 @@ import {
 import { setAccessTokenApi } from '../../services/auth_api';
 
 import useStyles from "./styles";
-import StyledTab from "../../components/StyledTab";
 
 function AdminLayout() {
     const location = useLocation();
@@ -46,6 +39,29 @@ function AdminLayout() {
     const handleLogout = () => {
         dispatch(userLogoutAsync());
     }
+
+    const navList = [
+        {
+            to: staticRoutes.admin.home,
+            name: "Settings"
+        },
+        {
+            to: staticRoutes.admin.apps,
+            name: "Manage Projects"
+        },
+        {
+            to: staticRoutes.admin.resumeDisplay,
+            name: "Manage Resume"
+        },
+        {
+            to: staticRoutes.admin.aboutMe,
+            name: "Manage About Me"
+        },
+        {
+            to: staticRoutes.admin.jordanHo,
+            name: "Manage Jordan Ho"
+        },
+    ];
 
     const [loaded, setLoaded] = useState(null);
 
@@ -90,74 +106,12 @@ function AdminLayout() {
 
     return (
         <div> 
-            <AppBar position="sticky" className={classes.appbar}>
-                <Toolbar>
-                    <Link to={staticRoutes.main.home} className={classes.personlLogoBtn}>
-                        <IconButton
-                            aria-label="Home"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            color="primary"
-                        >
-                            <img
-                                className={(classes.homeIcon)}
-                                src={PersonalLogo}
-                                alt="Jordan Logo"
-                            />
-                        </IconButton>
-                    </Link>
-                    <Tabs
-                        className={classes.tab}
-                        value={location.pathname}
-                        indicatorColor="secondary"
-                        textColor="primary"
-                        aria-label=""
-                        centered
-                    >
-                        <StyledTab
-                            to={staticRoutes.admin.home}
-                            value={staticRoutes.admin.home}
-                            component={Link}
-                            label="Manage Settings"
-                        />
-                        <StyledTab
-                            to={staticRoutes.admin.apps}
-                            value={staticRoutes.admin.apps}
-                            component={Link}
-                            label="Manage My Projects"
-                        />
-                        <StyledTab
-                            to={staticRoutes.admin.resumeDisplay}
-                            value={staticRoutes.admin.resumeDisplay}
-                            component={Link}
-                            label="Manage Resume"
-                        />
-                        <StyledTab
-                            to={staticRoutes.admin.aboutMe}
-                            value={staticRoutes.admin.aboutMe}
-                            component={Link}
-                            label="Manage About Me"
-                        />
-                        <StyledTab
-                            to={staticRoutes.admin.jordanHo}
-                            value={staticRoutes.admin.jordanHo}
-                            component={Link}
-                            label="Manage Jordan Ho"
-                        />  
-                    </Tabs>
-                    <div className={classes.logoutBtn}>
-                        <IconButton
-                            aria-label="Admin Settings"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            color="primary"
-                            onClick={handleLogout}
-                        >
-                            <ExitToAppIcon />
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
+            <NavBar
+                navList={navList}
+                personal_website={staticRoutes.main.home}
+                location={location.pathname}
+                handleLogout={handleLogout}
+            />
             <Switch>
                 <Route
                     exact path={staticRoutes.admin.home}

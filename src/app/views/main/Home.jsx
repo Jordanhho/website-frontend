@@ -24,8 +24,10 @@ function Home() {
     const classes = useStyles();
 
     const [homeData, setData] = useState([]);
-
     const [loaded, setLoaded] = useState(null);
+
+    const xsSize = 12;
+    const mdSize = 6;
 
     const fetchData = useCallback(async () => {
         const result = await getHomeApi();
@@ -73,17 +75,16 @@ function Home() {
     return (
         <Container>
             <TitleBanner title={"Lets connect!"}/>
-            <Box p={5}>
-
+            <Box p={2}>
                 <Grid
                     container
                     justify="center"
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary">
                                         Welcome!
@@ -106,9 +107,9 @@ function Home() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h5" color="primary" className={classes.underline}>
                                         Web Development Specialization
@@ -143,9 +144,9 @@ function Home() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h5" color="primary" className={classes.underline}>
                                         Personal Projects
@@ -180,9 +181,9 @@ function Home() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h5" color="primary" className={classes.underline}>
                                         Interested in my web development Skills?
@@ -218,9 +219,9 @@ function Home() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h5" color="primary" className={classes.underline}>
                                         Looking for a full-stack web developer?

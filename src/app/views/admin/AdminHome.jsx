@@ -12,6 +12,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import Loader from "../../components/Loader";
+import TitleBanner from "../../components/TitleBanner";
 
 import {
     getAdminSettingsApi,
@@ -29,6 +30,9 @@ function AdminHome() {
     const classes = useStyles();
 
     const formRef = React.createRef();
+
+    const xsSize = 12;
+    const mdSize = 6;
 
     const [adminHomeData, setData] = useState();
 
@@ -115,82 +119,80 @@ function AdminHome() {
     }
 
     return (
-        <Container>
-            <Box p={5}>
-
-                <Box pd={10}>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="center"
-                        spacing={3}
-                    >
-                        <Grid item xs={6}>
-                            <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h3" color="primary" align="center">
-                                            Admin Settings
-                                        </Typography>
-                                    </Grid>
-                                    <br />
-                                    <Grid item xs={12} align="left">
-                                        <form onSubmit={handleUpdate} ref={formRef}>
-                                            <FormGroup row>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Switch 
-                                                            checked={adminHomeData.enable_new_accounts} 
-                                                            onChange={handleUpdate}
-                                                            name="enable_new_accounts" 
-                                                            color="primary"
-                                                        />}
-                                                    label="Enable Sign Up"
-                                                />
-                                            </FormGroup>
-                                            <FormGroup row>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Switch
-                                                            checked={adminHomeData.enable_emailing}
-                                                            onChange={handleUpdate}
-                                                            name="enable_emailing"
-                                                            color="primary"
-                                                        />}
-                                                    label="Enable Emails"
-                                                />
-                                            </FormGroup>
-                                            <FormGroup row>
-                                                <FormControlLabel
-                                                    control={
-                                                        <Switch
-                                                            checked={adminHomeData.enable_change_password}
-                                                            onChange={handleUpdate}
-                                                            name="enable_change_password"
-                                                            color="primary"
-                                                        />}
-                                                    label="Enable Change Password"
-                                                />
-                                            </FormGroup>
-                                        </form>
-                                    </Grid>
-                                </Box>
-                            </Paper>
-                        </Grid>
+        <Container> 
+            <TitleBanner title={pageTitle} />
+            <Box p={2}>
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={xsSize} md={mdSize}>
+                        <Paper className={classes.paper}>
+                            <Box p={3} className={classes.center}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h3" color="primary" align="center">
+                                        Admin Settings
+                                    </Typography>
+                                </Grid>
+                                <br />
+                                <Grid item xs={12} align="left">
+                                    <form onSubmit={handleUpdate} ref={formRef}>
+                                        <FormGroup row>
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch 
+                                                        checked={adminHomeData.enable_new_accounts} 
+                                                        onChange={handleUpdate}
+                                                        name="enable_new_accounts" 
+                                                        color="primary"
+                                                    />}
+                                                label="Enable Sign Up"
+                                            />
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch
+                                                        checked={adminHomeData.enable_emailing}
+                                                        onChange={handleUpdate}
+                                                        name="enable_emailing"
+                                                        color="primary"
+                                                    />}
+                                                label="Enable Emails"
+                                            />
+                                        </FormGroup>
+                                        <FormGroup row>
+                                            <FormControlLabel
+                                                control={
+                                                    <Switch
+                                                        checked={adminHomeData.enable_change_password}
+                                                        onChange={handleUpdate}
+                                                        name="enable_change_password"
+                                                        color="primary"
+                                                    />}
+                                                label="Enable Change Password"
+                                            />
+                                        </FormGroup>
+                                    </form>
+                                </Grid>
+                            </Box>
+                        </Paper>
                     </Grid>
+                </Grid>
 
-                    <Snackbar open={openSuccessToast} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success">
-                            {successToastMsg}
-                        </Alert>
-                    </Snackbar>
-                    <Snackbar open={openFailureToast} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="error">
-                            {failureToastMsg}
-                            Error, something went wrong with saving.
-                        </Alert>
-                    </Snackbar>
-                </Box>
+                <Snackbar open={openSuccessToast} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        {successToastMsg}
+                    </Alert>
+                </Snackbar>
+                <Snackbar open={openFailureToast} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="error">
+                        {failureToastMsg}
+                        Error, something went wrong with saving.
+                    </Alert>
+                </Snackbar>
             </Box>
         </Container>
     );

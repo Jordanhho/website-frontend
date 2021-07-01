@@ -30,6 +30,7 @@ import Fab from '@material-ui/core/Fab';
 
 import useStyles from "./styles";
 
+import TitleBanner from "../../components/TitleBanner";
 import Loader from "../../components/Loader";
 
 import {
@@ -48,6 +49,9 @@ function Alert(props) {
 function AdminApps() {
     const pageTitle = "Admin Manage My Projects";
     const classes = useStyles();
+
+    const xsSize = 12;
+    const mdSize = 6;
 
     const formRef = React.createRef();
 
@@ -242,8 +246,9 @@ function AdminApps() {
 
     return (
         <Container>
-            <form onSubmit={handleUpdate} ref={formRef}>
-                <Box p={5}>
+            <TitleBanner title={pageTitle} />
+            <Box p={2}>
+                <form onSubmit={handleUpdate} ref={formRef}>
                     {(readOnly) &&
                     <Fab
                         color="primary"
@@ -257,7 +262,7 @@ function AdminApps() {
                     {(!readOnly) &&
                     <Grid container justify="flex-end">
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             color="primary"
                             onClick={handleOnClickCancel}
                             className={classes.pinnedCancelBtn}
@@ -266,7 +271,7 @@ function AdminApps() {
                             Cancel
                         </Button>
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             color="primary"
                             onClick={handleUpdate}
                             className={classes.pinnedSaveBtn}
@@ -282,10 +287,9 @@ function AdminApps() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={6}>
-
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12} align="left">
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Github Repo
@@ -323,19 +327,18 @@ function AdminApps() {
 
                             {appsData.apps.map((appDetails, index) => (
                                 <Paper className={classes.paper} key={index}>
-                                    <Box p={5} className={classes.center}>
+                                    <Box p={3} className={classes.center}>
 
                                         {(readOnly) &&
                                             <Grid item xs={12}>
                                                 <Grid container justify="flex-end">
-                                                    <Button
-                                                    variant="outlined"
+                                                    <IconButton
                                                         color="primary"
                                                         onClick={() => handleOnDeleteApp(index)}
-                                                        className={classes.button}
-                                                        endIcon={<DeleteIcon />}
+                                                        className={classes.deleteBtn}
                                                     >
-                                                    </Button>
+                                                        <DeleteIcon />
+                                                    </IconButton>
                                                 </Grid>
                                             </Grid>
                                         }
@@ -520,19 +523,18 @@ function AdminApps() {
 
                             {newApps.map((appDetails, index) => (
                                 <Paper className={classes.paper} key={index}>
-                                    <Box p={5}>
+                                    <Box p={3} className={classes.center}>
 
                                         {(!readOnly) &&
                                             <Grid item xs={12}>
                                                 <Grid container justify="flex-end">
-                                                    <Button
-                                                        variant="outlined"
+                                                    <IconButton
                                                         color="primary"
                                                         onClick={() => handleOnLocalDeleteApp(index)}
-                                                        className={classes.button}
-                                                        endIcon={<DeleteIcon />}
+                                                        className={classes.deleteBtn}
                                                     >
-                                                    </Button>
+                                                        <DeleteIcon />
+                                                    </IconButton>
                                                 </Grid>
                                             </Grid>
                                         }
@@ -721,21 +723,18 @@ function AdminApps() {
                             <br/>
                                     
                             {(!readOnly) &&
-                                <Grid item xs={12}>
-                                    <Grid container justify="center">
-                                        <Button
-                                            variant="outlined"
-                                            color="primary"
-                                            onClick={handleOnClickAddApp}
-                                            className={classes.button}
-                                            endIcon={<AddIcon />}
-                                        >
-                                            Add App
+                            <Grid item xs={12}>
+                                <Grid container justify="center">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={handleOnClickAddApp}
+                                        endIcon={<AddIcon />}
+                                    >
+                                        Add App
                                     </Button>
-                                    </Grid>
                                 </Grid>
-                            }
-
+                            </Grid>}
                         </Grid>
                     </Grid>
 
@@ -750,9 +749,8 @@ function AdminApps() {
                             Error, something went wrong with saving.
                         </Alert>
                     </Snackbar>
-
-                </Box>
-            </form>
+                </form>
+            </Box>
         </Container>
     );
 }

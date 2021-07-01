@@ -21,6 +21,11 @@ const StyledTab = withStyles((theme) => ({
             filter: "brightness(100%)"
         },
     },
-}))((props) => <Tab disableRipple {...props} />);
+}))((props) => 
+    <Tab 
+        disableRipple 
+        {...props} 
+    />
+);
 
 export default StyledTab;

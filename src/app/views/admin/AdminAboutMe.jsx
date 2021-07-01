@@ -42,7 +42,9 @@ function AdminAboutMe() {
     const classes = useStyles();
 
     const formRef = React.createRef();
-    const paperWidth = 10;
+
+    const xsSize = 12;
+    const mdSize = 10;
 
     const [aboutMeBak, setAboutMeBak] = useState({});
     const [aboutMe, setData] = useState({
@@ -167,9 +169,9 @@ function AdminAboutMe() {
         );
     }
     return (
-        <Container>
+        <div>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
 
                 <Box pd={10}>
                     <Grid
@@ -230,9 +232,9 @@ function AdminAboutMe() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Personality & Passion
@@ -271,9 +273,9 @@ function AdminAboutMe() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Facts about myself
@@ -302,9 +304,9 @@ function AdminAboutMe() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Interests
@@ -331,9 +333,9 @@ function AdminAboutMe() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Goal
@@ -371,9 +373,9 @@ function AdminAboutMe() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Esports
@@ -418,7 +420,7 @@ function AdminAboutMe() {
                     </Alert>
                 </Snackbar>
             </Box>
-        </Container>
+        </div>
     )
 }
 export default AdminAboutMe;

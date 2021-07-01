@@ -12,7 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+    import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
@@ -31,6 +31,9 @@ import {
 function AboutMe() {
     const pageTitle = "About Me";
     const classes = useStyles();
+
+    const xsSize = 12;
+    const mdSize = 6;
 
     const [aboutMe, setData] = useState({
         firstname: "",
@@ -92,7 +95,7 @@ function AboutMe() {
     return (
         <Container>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
           
                 <Box pd={10}>
                     <Grid
@@ -119,9 +122,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         My Personality & Passion
@@ -145,9 +148,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Facts about myself
@@ -175,9 +178,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Interests
@@ -201,9 +204,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Goal
@@ -227,9 +230,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Esports
@@ -287,9 +290,9 @@ function AboutMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h6" color="primary" className={classes.underline}>
                                         Interested in me?<br/>Take a look at my resume

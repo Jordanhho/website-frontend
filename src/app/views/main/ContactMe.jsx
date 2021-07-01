@@ -37,6 +37,9 @@ function ContactMe() {
 
     const classes = useStyles();
 
+    const xsSize = 12;
+    const mdSize = 6;
+
     const [contactMeData, setData] = useState({
         email: "",
         crossfire_profile_url: "",
@@ -102,16 +105,16 @@ function ContactMe() {
     return (
         <Container>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
                 <Grid
                     container
                     justify="center"
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary">
                                         Interested? Lets have a chat!
@@ -134,9 +137,9 @@ function ContactMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Contacts
@@ -205,6 +208,7 @@ function ContactMe() {
                                                     href="#"
                                                     color="inherit"
                                                     onClick={() => window.open(contactMeData.linkedin_url)}
+                                                    className={classes.displayLink}
                                                 >
                                                     LinkedIn
                                             </Link>
@@ -232,6 +236,7 @@ function ContactMe() {
                                                     href="#"
                                                     color="inherit"
                                                     onClick={() => window.open(contactMeData.github_url)}
+                                                    className={classes.displayLink}
                                                 >
                                                     GitHub
                                             </Link>
@@ -250,9 +255,9 @@ function ContactMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Other
@@ -307,9 +312,9 @@ function ContactMe() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                             
                                 <Grid item xs={12} >
                                     <Typography variant="h4" color="primary" className={classes.underline}>

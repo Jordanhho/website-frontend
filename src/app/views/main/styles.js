@@ -14,6 +14,12 @@ const useStyles = makeStyles((theme) => (
             listStyle: "none",
             padding: 0
         },
+        list: {
+            width: 250,
+        },
+        fullList: {
+            width: 'auto',
+        },
         button: {
             color: "white",
             "&:hover": {
@@ -21,37 +27,15 @@ const useStyles = makeStyles((theme) => (
             }
         },
         chip: {
-            color: "white !important"
+            color: "white !important",
+            maxWidth: "100%"
         },
-        homeIcon: {
-            maxWidth: "25px",
-            maxheight: "35px"
-        },
-        appbar: {
-            borderBottom: "1px solid " + theme.palette.primary.main,
-            borderColor: "skyblue",
-            backgroundColor: "#303030"
-        },
-        personlLogoBtn: {
-            cursor: "pointer",
-            position: "absolute",
-            padding: "6px",
-            top: "0px",
-            left: "0px",
-            zIndex: "999"
-        },
-        settingsBtn: {
-            position: "absolute",
-            padding: "6px",
-            top: "0px",
-            right: "0px",
-            zIndex: "999"
+        displayLink: {
+            textDecoration: "underline !important",
+            cursor: "pointer"
         },
         underline: {
             borderBottom: "1px solid " + theme.palette.primary.main,
-        },
-        tab: {
-            flexGrow: 1,
         },
         link: {
             cursor: "pointer"
@@ -72,7 +56,7 @@ const useStyles = makeStyles((theme) => (
             "fontSize": "50px",
         },
         iconPadding: {
-            "paddingRight": "10px"
+            "paddingRight": "0px"
         },
         weatherIcon: {
             width: "100px",
@@ -85,7 +69,8 @@ const useStyles = makeStyles((theme) => (
             maxWidth: "200px"
         },
         center: {
-            textAlign: "center"
+            textAlign: "center",
+            maxWidth: "100%"
         },
         loader: { 
             paddingTop: '30vh', 

@@ -14,43 +14,15 @@ const useStyles = makeStyles((theme) => ({
         listStyle: "none",
         padding: 0
     },
-    appbar: {
-        borderBottom: "1px solid " + theme.palette.primary.main,
-        borderColor: "skyblue",
-        backgroundColor: "#303030"
-    },
     chip: {
-        color: "white !important"
-    },
-    logoutBtn: {
-        position: "absolute",
-        padding: "6px",
-        top: "0px",
-        right: "0px",
-    },
-    homeIcon: {
-        maxWidth: "25px",
-        maxheight: "35px"
-    },
-    personlLogoBtn: {
-        cursor: "pointer",
-        position: "absolute",
-        padding: "6px",
-        top: "0px",
-        left: "0px",
-        zIndex: "999"
+        color: "white !important",
+        maxWidth: "100%"
     },
     underline: {
         borderBottom: "1px solid " + theme.palette.primary.main,
     },
-    button: {
-        color: "white",
-        "&:hover": {
-            backgroundColor: theme.palette.primary.dark + " !important",
-        }
-    },
-    tab: {
-        flexGrow: 1,
+    deleteBtn: {
+        border: "1px solid " + theme.palette.primary.main + " !important",
     },
     formControl: {
         margin: theme.spacing(1)

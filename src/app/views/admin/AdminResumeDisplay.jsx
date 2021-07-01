@@ -19,9 +19,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Chip from '@material-ui/core/Chip';
 
+import TitleBanner from "../../components/TitleBanner";
 import Loader from "../../components/Loader";
 import ChipInput from "../../components/ChipInput";
-import TitleBanner from "../../components/TitleBanner";
 import useStyles from "./styles";
 
 import {
@@ -40,9 +40,10 @@ function AdminResumeDisplay() {
     const pageTitle = "Admin Manage Resume";
     const classes = useStyles();
 
-    const formRef = React.createRef();
+    const xsSize = 12;
+    const mdSize = 10;
 
-    const paperWidth = 10;
+    const formRef = React.createRef();
 
     const [resumeDataBak, setJordanHoBak] = useState({});
     const [resumeData, setData] = useState({
@@ -196,9 +197,9 @@ function AdminResumeDisplay() {
         );
     }
     return (
-        <Container>
+        <div>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
                 {(readOnly) &&
                     <Fab
                         color="primary"
@@ -212,7 +213,7 @@ function AdminResumeDisplay() {
                 {(!readOnly) &&
                     <Grid container justify="flex-end">
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             color="primary"
                             onClick={handleOnClickCancel}
                             className={classes.pinnedCancelBtn}
@@ -221,7 +222,7 @@ function AdminResumeDisplay() {
                             Cancel
                         </Button>
                         <Button
-                            variant="outlined"
+                            variant="contained"
                             color="primary"
                             onClick={handleUpdate}
                             className={classes.pinnedSaveBtn}
@@ -230,7 +231,7 @@ function AdminResumeDisplay() {
                         >
                             Save
                     </Button>
-                    </Grid>}
+                </Grid>}
 
                 <form onSubmit={handleUpdate} ref={formRef}>
                     <Grid
@@ -239,9 +240,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="Primary" className={classes.underline}>
                                             Education
@@ -250,7 +251,7 @@ function AdminResumeDisplay() {
                                     <Grid item xs={12} align="left">
                                         <br />
                                         {resumeData.education.map((educ, index) => (
-                                            <Box pb={5} key={index}>
+                                            <Box pb={2} key={index}>
                                                 {(readOnly) &&
                                                 <Grid
                                                     container
@@ -402,9 +403,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Programming Languages
@@ -478,9 +479,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="primary" className={classes.underline}>
                                             Technologies
@@ -557,9 +558,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="Primary" className={classes.underline}>
                                             Work Experience
@@ -725,9 +726,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="Primary" className={classes.underline}>
                                             School Experience
@@ -890,9 +891,9 @@ function AdminResumeDisplay() {
                         alignItems="center"
                         spacing={3}
                     >
-                        <Grid item xs={paperWidth}>
+                        <Grid item xs={xsSize} md={mdSize}>
                             <Paper className={classes.paper}>
-                                <Box p={5} className={classes.center}>
+                                <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
                                         <Typography variant="h4" color="Primary" className={classes.underline}>
                                             Year Gap After University
@@ -985,7 +986,7 @@ function AdminResumeDisplay() {
                     </Alert>
                 </Snackbar>
             </Box>
-        </Container>
+        </div>
     )
 }
 export default AdminResumeDisplay;

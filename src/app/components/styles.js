@@ -6,7 +6,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: "cover",
     },
     chip: {
-        color: "white !important"
+        color: "white !important",
+        maxWidth: "100%"
     },
 }));
 

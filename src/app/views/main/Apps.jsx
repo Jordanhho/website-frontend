@@ -29,6 +29,8 @@ function Apps() {
 
     const [loaded, setLoaded] = useState(null);
 
+    const xsSize = 12;
+    const mdSize = 6;
 
     function getAppType(app_type) {
         switch(app_type) {
@@ -89,16 +91,16 @@ function Apps() {
     return (
         <Container>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
                 <Grid
                     container
                     justify="center"
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         My Github
@@ -145,11 +147,11 @@ function Apps() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Grid item xs={12} align="left">
                         {appsData.apps.map((appDetails, index) => (
                             <Paper className={classes.paper} key={index}>
-                                <Box p={5}>
+                                <Box p={3}>
                                     <Grid
                                         container
                                         justify="center"
@@ -191,6 +193,7 @@ function Apps() {
                                         <Grid item xs={12}>
                                             <Typography variant="body1">
                                                 <Link
+                                                    className={classes.displayLink}
                                                     href="#"
                                                     color="inherit"
                                                     onClick={() => window.open(appDetails.app_url)}

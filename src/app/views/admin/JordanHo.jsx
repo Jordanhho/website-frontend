@@ -32,7 +32,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 import Loader from "../../components/Loader";
-
+import TitleBanner from "../../components/TitleBanner";
 import useStyles from "./styles";
 
 import {
@@ -47,6 +47,9 @@ function Alert(props) {
 function JordanHo() {
     const pageTitle = "Admin Manage Jordan Ho Info";
     const classes = useStyles();
+
+    const xsSize = 12;
+    const mdSize = 10;
 
     const formRef = React.createRef();
 
@@ -188,396 +191,408 @@ function JordanHo() {
         );
     }
     return (
-        <Container>
-            <form onSubmit={handleUpdate} ref={formRef}>
-                <Paper className={classes.paper}>
-                    <Box p={5}>
-                        {(readOnly) &&
-                        <Fab
-                            color="primary"
-                            aria-label="edit"
-                            className={classes.pinnedEditBtn}
-                            onClick={handleOnClickEdit}
-                        >
-                            <EditIcon />
-                        </Fab>}
-
-                        {(!readOnly) &&
-                        <Grid container justify="flex-end">
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleOnClickCancel}
-                                className={classes.pinnedCancelBtn}
-                                endIcon={<CancelIcon />}
-                            >
-                                Cancel
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleUpdate}
-                                className={classes.pinnedSaveBtn}
-                                endIcon={<SaveIcon />}
-                                type="submit"
-                            >
-                                Save
-                            </Button>
-                        </Grid>}
-
-                        <Box pb={10}>
-                            <Grid
-                                container
-                                direction="column"
-                                justify="center"
-                                alignItems="center"
-                                spacing={3}
-                            >
-                                <Grid item xs={12}>
-                                    <Typography variant="h3">
-                                        {jordanHoData.firstname} {jordanHoData.lastname}
-                                    </Typography>
-                                </Grid>
-
-                                <Grid item xs={12} >
-                                    <Avatar src={jordanHoData.profile_picture_url} alt="Profile Picture" className={classes.profilePicture} />
-                                </Grid>
-
-                                {(!readOnly) &&
-                                    <Grid item xs={12}>
-                                        <Typography variant="h6">
-                                            Update Profile Picture
-                                        </Typography>
-                                    </Grid>}
-
-                                {(!readOnly) &&
-                                    <Grid item xs={12}>
-                                        <Input type="file" name="profile_picture" onChange={handleOnChangeProfilePicture} />
-                                    </Grid>}
-                            </Grid>
-                        </Box>
-
-                        <Box pb={10}>
-                            <Grid
-                                container
-                                direction="column"
-                                justify="center"
-                                alignItems="center"
-                                spacing={3}
-                            >
-                                <Grid item xs={12} >
-                                    <Typography variant="h4">
-                                        Jordan Ho Data
-                                    </Typography>
-                                </Grid>
-                            </Grid>
-                            <br />
-                            <Grid item xs={12} >
-                                <Grid
-                                    container
-                                    justify="center"
-                                    alignItems="center"
-                                    spacing={3}
-                                >
-                                    <Grid item xs={12} >
-                                        <TextField
-                                            fullWidth
-                                            label="Email"
-                                            name="email"
-                                            variant="outlined"
-                                            InputProps={{
-                                                readOnly: readOnly,
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <IconButton
-                                                            color="primary"
-                                                            component="span"
-                                                            aria-label="email"
-                                                            onClick={() => window.open(jordanHoData.email)}
-                                                        >
-                                                            <EmailIcon />
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                            onChange={handleOnChange}
-                                            value={jordanHoData.email}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} >
-                                        <TextField
-                                            fullWidth
-                                            label="LinkedIn"
-                                            name="linkedin_url"
-                                            variant="outlined"
-                                            InputProps={{
-                                                readOnly: readOnly,
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <IconButton
-                                                            color="primary"
-                                                            component="span"
-                                                            aria-label="Linkedin"
-                                                            onClick={() => window.open(jordanHoData.linkedin_url)}
-                                                        >
-                                                            <LinkedInIcon />
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                            onChange={handleOnChange}
-                                            value={jordanHoData.linkedin_url}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={12} >
-                                        <TextField
-                                            fullWidth
-                                            label="Github"
-                                            name="github_url"
-                                            variant="outlined"
-                                            InputProps={{
-                                                readOnly: readOnly,
-                                                startAdornment: (
-                                                    <InputAdornment position="start">
-                                                        <IconButton
-                                                            color="primary"
-                                                            component="span"
-                                                            aria-label="Github"
-                                                            onClick={() => window.open(jordanHoData.github_url)}
-                                                        >
-                                                            <GitHubIcon />
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                )
-                                            }}
-                                            onChange={handleOnChange}
-                                            value={jordanHoData.github_url}
-                                        />
-                                    </Grid>
-                                    <Grid
-                                        container
-                                        direction="column"
-                                        justify="center"
-                                        alignItems="center"
-                                        spacing={3}
+        <div>
+            <TitleBanner title={pageTitle} />
+            <Box p={2}>
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="center"
+                    spacing={3}
+                >
+                    <Grid item xs={xsSize} md={mdSize}>
+                        <Paper className={classes.paper}>
+                            <Box p={3}>
+                                <form onSubmit={handleUpdate} ref={formRef}>
+                                    {(readOnly) &&
+                                    <Fab
+                                        color="primary"
+                                        aria-label="edit"
+                                        className={classes.pinnedEditBtn}
+                                        onClick={handleOnClickEdit}
                                     >
-                                        <Grid item xs={12} >
-                                            <IconButton
-                                                color="primary"
-                                                component="span"
-                                                aria-label="Resume"
-                                                onClick={() => window.open(jordanHoData.resume_url)}
-                                            >
-                                                <GetAppIcon
-                                                    fontSize="large"
-                                                    color="primary"
-                                                />
-                                                Resume
-                                        </IconButton>
-                                        </Grid>
-                                        {(!readOnly) &&
+                                        <EditIcon />
+                                    </Fab>}
+
+                                    {(!readOnly) &&
+                                    <Grid container justify="flex-end">
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleOnClickCancel}
+                                            className={classes.pinnedCancelBtn}
+                                            endIcon={<CancelIcon />}
+                                        >
+                                            Cancel
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={handleUpdate}
+                                            className={classes.pinnedSaveBtn}
+                                            endIcon={<SaveIcon />}
+                                            type="submit"
+                                        >
+                                            Save
+                                        </Button>
+                                    </Grid>}
+
+                                    <Box pb={10}>
+                                        <Grid
+                                            container
+                                            direction="column"
+                                            justify="center"
+                                            alignItems="center"
+                                            spacing={3}
+                                        >
                                             <Grid item xs={12}>
-                                                <Typography variant="h6">
-                                                    Update Resume
+                                                <Typography variant="h3">
+                                                    {jordanHoData.firstname} {jordanHoData.lastname}
                                                 </Typography>
-                                            </Grid>}
-                                        {(!readOnly) &&
+                                            </Grid>
+
+                                            <Grid item xs={12} >
+                                                <Avatar src={jordanHoData.profile_picture_url} alt="Profile Picture" className={classes.profilePicture} />
+                                            </Grid>
+
+                                            {(!readOnly) &&
+                                                <Grid item xs={12}>
+                                                    <Typography variant="h6">
+                                                        Update Profile Picture
+                                                    </Typography>
+                                                </Grid>}
+
+                                            {(!readOnly) &&
+                                                <Grid item xs={12}>
+                                                    <Input type="file" name="profile_picture" onChange={handleOnChangeProfilePicture} />
+                                                </Grid>}
+                                        </Grid>
+                                    </Box>
+
+                                    <Box pb={10}>
+                                        <Grid
+                                            container
+                                            direction="column"
+                                            justify="center"
+                                            alignItems="center"
+                                            spacing={3}
+                                        >
+                                            <Grid item xs={12} >
+                                                <Typography variant="h4" color="primary" className={classes.underline}>
+                                                    Contact
+                                                </Typography>
+                                            </Grid>
+                                        </Grid>
+                                        <br />
+                                        <Grid item xs={12} >
+                                            <Grid
+                                                container
+                                                justify="center"
+                                                alignItems="center"
+                                                spacing={3}
+                                            >
+                                                <Grid item xs={12} >
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Email"
+                                                        name="email"
+                                                        variant="outlined"
+                                                        InputProps={{
+                                                            readOnly: readOnly,
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <IconButton
+                                                                        color="primary"
+                                                                        component="span"
+                                                                        aria-label="email"
+                                                                        onClick={() => window.open(jordanHoData.email)}
+                                                                    >
+                                                                        <EmailIcon />
+                                                                    </IconButton>
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        onChange={handleOnChange}
+                                                        value={jordanHoData.email}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} >
+                                                    <TextField
+                                                        fullWidth
+                                                        label="LinkedIn"
+                                                        name="linkedin_url"
+                                                        variant="outlined"
+                                                        InputProps={{
+                                                            readOnly: readOnly,
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <IconButton
+                                                                        color="primary"
+                                                                        component="span"
+                                                                        aria-label="Linkedin"
+                                                                        onClick={() => window.open(jordanHoData.linkedin_url)}
+                                                                    >
+                                                                        <LinkedInIcon />
+                                                                    </IconButton>
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        onChange={handleOnChange}
+                                                        value={jordanHoData.linkedin_url}
+                                                    />
+                                                </Grid>
+                                                <Grid item xs={12} >
+                                                    <TextField
+                                                        fullWidth
+                                                        label="Github"
+                                                        name="github_url"
+                                                        variant="outlined"
+                                                        InputProps={{
+                                                            readOnly: readOnly,
+                                                            startAdornment: (
+                                                                <InputAdornment position="start">
+                                                                    <IconButton
+                                                                        color="primary"
+                                                                        component="span"
+                                                                        aria-label="Github"
+                                                                        onClick={() => window.open(jordanHoData.github_url)}
+                                                                    >
+                                                                        <GitHubIcon />
+                                                                    </IconButton>
+                                                                </InputAdornment>
+                                                            )
+                                                        }}
+                                                        onChange={handleOnChange}
+                                                        value={jordanHoData.github_url}
+                                                    />
+                                                </Grid>
+                                                <Grid
+                                                    container
+                                                    direction="column"
+                                                    justify="center"
+                                                    alignItems="center"
+                                                    spacing={3}
+                                                >
+                                                    <Grid item xs={12} >
+                                                        <IconButton
+                                                            color="primary"
+                                                            component="span"
+                                                            aria-label="Resume"
+                                                            onClick={() => window.open(jordanHoData.resume_url)}
+                                                        >
+                                                            <GetAppIcon
+                                                                fontSize="large"
+                                                                color="primary"
+                                                            />
+                                                            Resume
+                                                    </IconButton>
+                                                    </Grid>
+                                                    {(!readOnly) &&
+                                                        <Grid item xs={12}>
+                                                            <Typography variant="h6">
+                                                                Update Resume
+                                                            </Typography>
+                                                        </Grid>}
+                                                    {(!readOnly) &&
+                                                        <Grid item xs={12}>
+                                                            <Input type="file" name="resume" onChange={handleOnChangeResume} />
+                                                        </Grid>}
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Box>
+
+                                    <Box pb={10}>
+                                        <Grid
+                                            container
+                                            justify="center"
+                                            alignItems="center"
+                                            spacing={3}
+                                        >
                                             <Grid item xs={12}>
-                                                <Input type="file" name="resume" onChange={handleOnChangeResume} />
-                                            </Grid>}
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Box>
-
-                        <Box pb={10}>
-                            <Grid
-                                container
-                                justify="center"
-                                alignItems="center"
-                                spacing={3}
-                            >
-                                <Grid item xs={12}>
-                                    <Grid
-                                        container
-                                        direction="column"
-                                        justify="center"
-                                        alignItems="center"
-                                    >
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4">
-                                                Other Contacts
-                                            </Typography>
+                                                <Grid
+                                                    container
+                                                    direction="column"
+                                                    justify="center"
+                                                    alignItems="center"
+                                                >
+                                                    <Grid item xs={12}>
+                                                        <Typography variant="h4" color="primary" className={classes.underline}>
+                                                            Other Contacts
+                                                        </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <br />
+                                            <Grid item xs={12} >
+                                                <TextField
+                                                    fullWidth
+                                                    label="Youtube"
+                                                    name="youtube_url"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        readOnly: readOnly,
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    component="span"
+                                                                    aria-label="Youtube"
+                                                                    onClick={() => window.open(jordanHoData.youtube_url)}
+                                                                >
+                                                                    <YouTubeIcon />
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                    onChange={handleOnChange}
+                                                    value={jordanHoData.youtube_url}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} >
+                                                <TextField
+                                                    fullWidth
+                                                    label="Twitch"
+                                                    name="twitch_url"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        readOnly: readOnly,
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    component="span"
+                                                                    aria-label="Twitch"
+                                                                    onClick={() => window.open(jordanHoData.twitch_url)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={["fab", "twitch"]} />
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                    onChange={handleOnChange}
+                                                    value={jordanHoData.twitch_url}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} >
+                                                <TextField
+                                                    fullWidth
+                                                    label="Steam"
+                                                    name="steam_url"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        readOnly: readOnly,
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    component="span"
+                                                                    aria-label="Steam"
+                                                                    onClick={() => window.open(jordanHoData.steam_url)}
+                                                                >
+                                                                    <FontAwesomeIcon icon={["fab", "steam"]} />
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                    onChange={handleOnChange}
+                                                    value={jordanHoData.steam_url}
+                                                />
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Grid>
-                                <br />
-                                <Grid item xs={12} >
-                                    <TextField
-                                        fullWidth
-                                        label="Youtube"
-                                        name="youtube_url"
-                                        variant="outlined"
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton
-                                                        color="primary"
-                                                        component="span"
-                                                        aria-label="Youtube"
-                                                        onClick={() => window.open(jordanHoData.youtube_url)}
-                                                    >
-                                                        <YouTubeIcon />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleOnChange}
-                                        value={jordanHoData.youtube_url}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} >
-                                    <TextField
-                                        fullWidth
-                                        label="Twitch"
-                                        name="twitch_url"
-                                        variant="outlined"
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton
-                                                        color="primary"
-                                                        component="span"
-                                                        aria-label="Twitch"
-                                                        onClick={() => window.open(jordanHoData.twitch_url)}
-                                                    >
-                                                        <FontAwesomeIcon icon={["fab", "twitch"]} />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleOnChange}
-                                        value={jordanHoData.twitch_url}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} >
-                                    <TextField
-                                        fullWidth
-                                        label="Steam"
-                                        name="steam_url"
-                                        variant="outlined"
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton
-                                                        color="primary"
-                                                        component="span"
-                                                        aria-label="Steam"
-                                                        onClick={() => window.open(jordanHoData.steam_url)}
-                                                    >
-                                                        <FontAwesomeIcon icon={["fab", "steam"]} />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleOnChange}
-                                        value={jordanHoData.steam_url}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Box>
+                                    </Box>
 
-                        <Box pd={10}>
-                            <Grid
-                                container
-                                justify="center"
-                                alignItems="center"
-                                spacing={3}
-                            >
-                                <Grid item xs={12}>
-                                    <Grid
-                                        container
-                                        direction="column"
-                                        justify="center"
-                                        alignItems="center"
-                                    >
-                                        <Grid item xs={12}>
-                                            <Typography variant="h4">
-                                                Esports
-                                        </Typography>
+                                    <Box pd={10}>
+                                        <Grid
+                                            container
+                                            justify="center"
+                                            alignItems="center"
+                                            spacing={3}
+                                        >
+                                            <Grid item xs={12}>
+                                                <Grid
+                                                    container
+                                                    direction="column"
+                                                    justify="center"
+                                                    alignItems="center"
+                                                >
+                                                    <Grid item xs={12}>
+                                                        <Typography variant="h4" color="primary" className={classes.underline}>
+                                                            Esports
+                                                    </Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                            <br />
+                                            <Grid item xs={12} >
+                                                <TextField
+                                                    fullWidth
+                                                    label="Crossfire Profile"
+                                                    name="crossfire_url"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        readOnly: readOnly,
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    component="span"
+                                                                    aria-label="CFS"
+                                                                    onClick={() => window.open(jordanHoData.crossfire_profile_url)}
+                                                                >
+                                                                    <img className={classes.icon} src={CfsIcon} alt="CFS" />
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                    onChange={handleOnChange}
+                                                    value={jordanHoData.crossfire_profile_url}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} >
+                                                <TextField
+                                                    fullWidth
+                                                    label="ESEA Profile"
+                                                    name="esea_url"
+                                                    variant="outlined"
+                                                    InputProps={{
+                                                        readOnly: readOnly,
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <IconButton
+                                                                    color="primary"
+                                                                    component="span"
+                                                                    aria-label="esea"
+                                                                    onClick={() => window.open(jordanHoData.esea_url)}
+                                                                >
+                                                                    <img className={classes.icon} src={EseaIcon} alt="ESEA" />
+                                                                </IconButton>
+                                                            </InputAdornment>
+                                                        )
+                                                    }}
+                                                    onChange={handleOnChange}
+                                                    value={jordanHoData.esea_url}
+                                                />
+                                            </Grid>
                                         </Grid>
-                                    </Grid>
-                                </Grid>
-                                <br />
-                                <Grid item xs={12} >
-                                    <TextField
-                                        fullWidth
-                                        label="Crossfire Profile"
-                                        name="crossfire_url"
-                                        variant="outlined"
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton
-                                                        color="primary"
-                                                        component="span"
-                                                        aria-label="CFS"
-                                                        onClick={() => window.open(jordanHoData.crossfire_profile_url)}
-                                                    >
-                                                        <img className={classes.icon} src={CfsIcon} alt="CFS" />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleOnChange}
-                                        value={jordanHoData.crossfire_profile_url}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} >
-                                    <TextField
-                                        fullWidth
-                                        label="ESEA Profile"
-                                        name="esea_url"
-                                        variant="outlined"
-                                        InputProps={{
-                                            readOnly: readOnly,
-                                            startAdornment: (
-                                                <InputAdornment position="start">
-                                                    <IconButton
-                                                        color="primary"
-                                                        component="span"
-                                                        aria-label="esea"
-                                                        onClick={() => window.open(jordanHoData.esea_url)}
-                                                    >
-                                                        <img className={classes.icon} src={EseaIcon} alt="ESEA" />
-                                                    </IconButton>
-                                                </InputAdornment>
-                                            )
-                                        }}
-                                        onChange={handleOnChange}
-                                        value={jordanHoData.esea_url}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Box>
-                        <Snackbar open={openSuccessToast} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="success">
-                                Successfully saved!
-                        </Alert>
-                        </Snackbar>
-                        <Snackbar open={openFailureToast} autoHideDuration={6000} onClose={handleClose}>
-                            <Alert onClose={handleClose} severity="error">
-                                Error, something went wrong with saving.
-                        </Alert>
-                        </Snackbar>
-                    </Box>
-                </Paper>
-            </form>
-        </Container>
+                                    </Box>
+                                    <Snackbar open={openSuccessToast} autoHideDuration={6000} onClose={handleClose}>
+                                        <Alert onClose={handleClose} severity="success">
+                                            Successfully saved!
+                                    </Alert>
+                                    </Snackbar>
+                                    <Snackbar open={openFailureToast} autoHideDuration={6000} onClose={handleClose}>
+                                        <Alert onClose={handleClose} severity="error">
+                                            Error, something went wrong with saving.
+                                    </Alert>
+                                    </Snackbar>
+                                </form>
+                            </Box>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Box>
+        </div>
     )
 }
 export default JordanHo;

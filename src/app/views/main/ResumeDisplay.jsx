@@ -29,10 +29,11 @@ function ResumeDisplay() {
 
     const classes = useStyles();
 
-    const [resumeData, setData] = useState({
-
-    });
+    const [resumeData, setData] = useState({});
     const [loaded, setLoaded] = useState(null);
+
+    const xsSize = 12;
+    const mdSize = 6;
 
     const fetchData = useCallback(async () => {
         const result = await getResumeDisplayApi();
@@ -80,7 +81,7 @@ function ResumeDisplay() {
     return (
         <Container>
             <TitleBanner title={pageTitle} />
-            <Box p={5}>
+            <Box p={2}>
 
                 <Grid
                     container
@@ -88,9 +89,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         My Resume
@@ -120,6 +121,7 @@ function ResumeDisplay() {
                                                 href="#"
                                                 color="inherit"
                                                 onClick={() => window.open(resumeData.resume_url)}
+                                                className={classes.displayLink}
                                             >
                                                 Resume Link
                                             </Link>
@@ -137,9 +139,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Education
@@ -200,9 +202,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Programming Languages
@@ -226,7 +228,9 @@ function ResumeDisplay() {
                                             <ul className={classes.ul_none_style}>
                                                 {resumeData.programming_languages_comfortable_with.map((progLang, index) => (
                                                     <li key={index}>
-                                                        <Chip label={progLang} className={classes.chip} variant="outlined" color="primary"/>
+                                                        <Chip 
+                                                            label={progLang} className={classes.chip} variant="outlined" color="primary"
+                                                        />
                                                     </li>
                                                 ))}
                                             </ul>
@@ -253,9 +257,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Technologies
@@ -306,9 +310,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Work Experience
@@ -379,9 +383,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h4" color="primary" className={classes.underline}>
                                         Year Gap After University
@@ -410,9 +414,9 @@ function ResumeDisplay() {
                     alignItems="center"
                     spacing={3}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={xsSize} md={mdSize}>
                         <Paper className={classes.paper}>
-                            <Box p={5} className={classes.center}>
+                            <Box p={3} className={classes.center}>
                                 <Grid item xs={12}>
                                     <Typography variant="h6" color="primary" className={classes.underline}>
                                        Like what you see? <br/>Hire a full-stack developer today!

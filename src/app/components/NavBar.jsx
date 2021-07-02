@@ -23,14 +23,14 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
         backgroundColor: theme.palette.background.paper,
-        personlLogoBtn: {
-            cursor: "pointer",
-            position: "absolute",
-            padding: "6px",
-            top: "0px",
-            left: "0px",
-            zIndex: "999"
-        },
+    },
+    personlLogoBtn: {
+        cursor: "pointer",
+        position: "absolute",
+        padding: "6px",
+        top: "0px",
+        left: "0px",
+        zIndex: "999"
     },
     noLink: {
         textDecoration: "None",
@@ -64,27 +64,25 @@ const useStyles = makeStyles((theme) => ({
         color: "white"
     },
     menuButton: {
+        zIndex: "999",
         left: "5px",
         [theme.breakpoints.up('md')]: { //hide menu icon if screen is above xs
             display: 'none',
         },
     },
     tabs: {
-        left: "0px",
-        top: "0px",
-        paddingTop: "10px",
-        position: "absolute",
-        width: "100%",
         flexGrow: 1,
         [theme.breakpoints.down('sm')]: { //hide tabs if below md
             display: 'none',
         },
     },
     homeIcon: {
+        zIndex: "999",
         maxWidth: "25px",
         maxheight: "35px"
     },
     logoutBtn: {
+        zIndex: "999",
         position: "absolute",
         padding: "6px",
         top: "0px",

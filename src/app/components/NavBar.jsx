@@ -70,6 +70,11 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     tabs: {
+        left: "0px",
+        top: "0px",
+        paddingTop: "10px",
+        position: "absolute",
+        width: "100%",
         flexGrow: 1,
         [theme.breakpoints.down('sm')]: { //hide tabs if below md
             display: 'none',

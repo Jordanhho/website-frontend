@@ -57,14 +57,19 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: "#303030 !important"
     },
     locationLabel: {
-        marginLeft: "10px",
+        margin: "auto",
         [theme.breakpoints.up('md')]: { //hide location label if screen is above xs
             display: 'none',
         },
         color: "white"
     },
-    menuButton: {
+    mobileMenu: {
+        display: "inherit",
         zIndex: "999",
+        position: "absolute",
+        left: "50px"
+    },
+    menuButton: {
         left: "5px",
         [theme.breakpoints.up('md')]: { //hide menu icon if screen is above xs
             display: 'none',
@@ -156,19 +161,20 @@ function NavBar(props) {
                             />
                         </IconButton>
                     </Link>
-                    <IconButton 
-                        edge="start" 
-                        className={classes.menuButton} 
-                        color="inherit" 
-                        aria-label="menu"
-                        onClick={toggleDrawer(true)}
-                    >
-                        <MenuIcon color="primary"/>
-                    </IconButton>
-                    <Typography variant="h5" className={classes.locationLabel}>
-                        {getCurrentPageName()}
-                    </Typography>
-
+                    <div className={classes.mobileMenu}>
+                        <IconButton
+                            edge="start"
+                            className={classes.menuButton}
+                            color="inherit"
+                            aria-label="menu"
+                            onClick={toggleDrawer(true)}
+                        >
+                            <MenuIcon color="primary" />
+                        </IconButton>
+                        <Typography variant="h5" className={classes.locationLabel}>
+                            {getCurrentPageName()}
+                        </Typography>
+                    </div>
                     <Tabs
                         className={classes.tabs}
                         value={props.location || false}

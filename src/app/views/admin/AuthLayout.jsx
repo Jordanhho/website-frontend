@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { Switch, Redirect } from 'react-router-dom';
+import { Routes, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import PrivateRoute from "../../routes/PrivateRoute";
@@ -34,22 +34,22 @@ function AuthLayout() {
     
     return (
         <div>
-            <Switch>
+            <Routes>
                 <PublicRoute 
                     path={staticRoutes.admin.login}
-                    component={LoginLayout}
+                    element={<LoginLayout />}
                     isAuthenticated={isAuthenticated} 
                 />
                 <PrivateRoute 
                     path={staticRoutes.admin.home}
-                    component={AdminLayout}
+                    element={<AdminLayout />}
                     isAuthenticated={isAuthenticated} 
                 /> 
-                <Redirect to={isAuthenticated 
+                <Navigate to={isAuthenticated 
                     ? staticRoutes.admin.home 
                     : staticRoutes.admin.login
                 }/> 
-            </Switch>
+            </Routes>
         </div>
     )
 }

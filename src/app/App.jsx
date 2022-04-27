@@ -4,6 +4,7 @@ import { CookiesProvider } from "react-cookie";
 import theme from './theme/theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import {
+    Routes,
     Route,
     BrowserRouter
 } from "react-router-dom";
@@ -25,7 +26,9 @@ function App() {
             <BrowserRouter>
                 <MuiThemeProvider theme={theme}>
                     <CssBaseline/>
-                    <Route path="/" component={AppLayout} />
+                    <Routes>
+                        <Route path="/" element={<AppLayout />} />
+                    </Routes>
                 </MuiThemeProvider>
             </BrowserRouter>
         </CookiesProvider>

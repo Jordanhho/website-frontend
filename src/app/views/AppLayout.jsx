@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Box from '@material-ui/core/Box';
 
@@ -15,17 +15,17 @@ import NotFound from "./NotFound";
 function AppLayout() {
     return (
         <div>
-            <Switch>
+            <Routes>
                 <Route
                     path={staticRoutes.admin.home}
-                    component={AuthLayout}
+                    element={<AuthLayout />}
                 />
                 <Route
                     path={staticRoutes.main.home}
-                    component={MainLayout}
+                    element={<MainLayout />}
                 />
-                <Route component={NotFound} />
-            </Switch>
+                <Route element={<NotFound />} />
+            </Routes>
 
             <Box mt={8}>
                 <Copyright />

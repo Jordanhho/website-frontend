@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/runtime": "^7.17.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
@@ -25,7 +27,7 @@
     "react-html-parser": "^2.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "latest",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0"
   },
@@ -49,5 +51,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080"
+  "proxy": "http://localhost:8080",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
+  }
 }

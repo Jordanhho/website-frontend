@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 
 import staticRoutes from "./static_routes";
 
@@ -10,7 +10,7 @@ function PublicRoute({ component: Component, ...rest }) {
             {...rest}
             render={(props) => !rest.isAuthenticated 
                 ? <Component {...props} /> 
-                : <Redirect to={{ pathname: staticRoutes.admin.home }} />
+                : <Navigate to={{ pathname: staticRoutes.admin.home }} />
             }
         />
     )

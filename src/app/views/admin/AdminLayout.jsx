@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Routes } from 'react-router-dom';
 
 import moment from 'moment';
 import Container from '@material-ui/core/Container';
@@ -112,28 +112,29 @@ function AdminLayout() {
                 location={location.pathname}
                 handleLogout={handleLogout}
             />
-            <Switch>
+            <Routes>
                 <Route
-                    exact path={staticRoutes.admin.home}
-                    component={AdminHome}
+                    exact
+                    path={staticRoutes.admin.home}
+                    element={<AdminHome />}
                 />
                 <Route
                     path={staticRoutes.admin.apps}
-                    component={AdminApps}
+                    element={<AdminApps />}
                 />
                 <Route
                     path={staticRoutes.admin.resumeDisplay}
-                    component={AdminResumeDisplay}
+                    element={<AdminResumeDisplay />}
                 />
                 <Route
                     path={staticRoutes.admin.aboutMe}
-                    component={AdminAboutMe}
+                    element={<AdminAboutMe />}
                 />
                 <Route
                     path={staticRoutes.admin.jordanHo}
-                    component={JordanHo}
+                    element={<JordanHo />}
                 />
-            </Switch> 
+            </Routes> 
         </div>
     )
 }

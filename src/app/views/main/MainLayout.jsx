@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Routes } from 'react-router-dom';
 
 import staticRoutes from "../../routes/static_routes";
 
@@ -54,32 +54,33 @@ function MainLayout() {
                 location={location.pathname}
         
             />
-            <Switch>
+            <Routes>
                 <Route
-                    exact path={staticRoutes.main.home}
-                    component={Home}
+                    exact 
+                    path={staticRoutes.main.home}
+                    element={<Home/>}
                 />
                 <Route
                     path={staticRoutes.main.apps}
-                    component={Apps}
+                    element={<Apps />}
                 />
                 <Route
                     path={staticRoutes.main.resumeDisplay}
-                    component={ResumeDisplay}
+                    element={<ResumeDisplay />}
                 />
                 <Route
                     path={staticRoutes.main.aboutMe}
-                    component={AboutMe}
+                    element={<AboutMe />}
                 />
                 <Route
                     path={staticRoutes.main.contactMe}
-                    component={ContactMe}
+                    element={<ContactMe />}
                 />
                 <Route
                     path={staticRoutes.main.aboutWebsite}
-                    component={AboutWebsite}
+                    element={<AboutWebsite />}
                 />
-            </Switch>
+            </Routes>
         </div>
     )
 }

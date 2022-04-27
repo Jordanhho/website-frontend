@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -27,7 +27,7 @@ function SiguUp() {
     const pageTitle = "Admin Sign Up";
     const classes = useStyles();
     const recaptchaRef = React.createRef();
-    const history = useHistory();
+    const history = useNavigate();
 
     const [createAccErr, setCreateAccErr] = useState(false);
     const [confirmPasswordNotMatch, setConfirmPasswordNotMatch] = useState(false);
@@ -61,7 +61,7 @@ function SiguUp() {
         if (result.data && result.data.activation_email_sent) {
             setCreateAccErr(false);
 
-            //redirect to activation page
+            //Navigate to activation page
             history.push(staticRoutes.admin.activateAccountTemplate(email.value));
         }
         else {

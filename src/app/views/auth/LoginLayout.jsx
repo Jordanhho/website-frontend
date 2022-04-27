@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
@@ -33,24 +33,24 @@ function LoginLayout() {
             >
                 Back Home
             </Button>
-            <Switch>
+            <Routes>
                 <Route
                     path={staticRoutes.admin.activateAccount}
-                    component={ActivateAccount}
+                    element={<ActivateAccount />}
                 />
                 <Route
                     path={staticRoutes.admin.signUp}
-                    component={SignUp}
+                    element={<SignUp />}
                 />
                 <Route
                     path={staticRoutes.admin.forgotPassword}
-                    component={ChangePassword}
+                    element={<ChangePassword />}
                 />
                 <Route
                     path={staticRoutes.admin.login}
-                    component={Login}
+                    element={<Login />}
                 />
-            </Switch>
+            </Routes>
         </div>
     );
 }

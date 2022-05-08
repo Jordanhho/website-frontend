@@ -17,10 +17,13 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.4",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "customize-cra": "^1.0.0",
     "fontsource-roboto": "^2.2.6",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "react": "^17.0.2",
+    "react-app-rewired": "^2.2.1",
     "react-cookie": "^4.0.3",
     "react-dom": "^17.0.2",
     "react-google-recaptcha": "^2.1.0",
@@ -32,10 +35,10 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-app-rewired start",
     "build": "export INLINE_RUNTIME_CHUNK=false&&react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": "react-app"

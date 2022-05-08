@@ -30,24 +30,26 @@ import Fab from '@material-ui/core/Fab';
 
 import useStyles from "./styles";
 
-import TitleBanner from "../../components/TitleBanner";
-import Loader from "../../components/Loader";
+import TitleBanner from "Components/TitleBanner";
+import Loader from "Components/Loader";
+
+import staticRoutes from "Routes/static_routes";
 
 import {
     getAppsApi,
-} from "../../services/public_api";
+} from "Services/public_api";
 
 import {
     removeAppApi,
     updateAppsApi,
-} from "../../services/private_api";
+} from "Services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function AdminApps() {
-    const pageTitle = "Admin Manage My Projects";
+    const pageTitle = staticRoutes.admin.apps.name;
     const classes = useStyles();
 
     const xsSize = 12;
@@ -215,7 +217,7 @@ function AdminApps() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (

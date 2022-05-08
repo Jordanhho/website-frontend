@@ -10,17 +10,19 @@ import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import Loader from "../../components/Loader";
-import TitleBanner from "../../components/TitleBanner";
+import Loader from "Components/Loader";
+import TitleBanner from "Components/TitleBanner";
 
 import useStyles from "./styles";
 
+import staticRoutes from "Routes/static_routes";
+
 import {
     getAboutWebsiteApi
-} from "../../services/public_api";
+} from "Services/public_api";
 
 function AboutWebsite() {
-    const pageTitle = "About My Personal Website";
+    const pageTitle = staticRoutes.main.aboutWebsite.name;
 
     const classes = useStyles();
 
@@ -45,7 +47,7 @@ function AboutWebsite() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (

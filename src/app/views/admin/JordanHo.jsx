@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
-import EseaIcon from "../../assets/img/esea_icon.png";
-import CfsIcon from "../../assets/img/cfs_icon.png";
+import EseaIcon from "Assets/img/esea_icon.png";
+import CfsIcon from "Assets/img/cfs_icon.png";
 
 //icons
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -31,21 +31,24 @@ import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import Loader from "../../components/Loader";
-import TitleBanner from "../../components/TitleBanner";
+import Loader from "Components/Loader";
+import TitleBanner from "Components/TitleBanner";
 import useStyles from "./styles";
+
+
+import staticRoutes from "Routes/static_routes";
 
 import {
     getJordanHoApi,
     updateJordanHoApi
-} from "../../services/private_api";
+} from "Services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function JordanHo() {
-    const pageTitle = "Admin Manage Jordan Ho Info";
+    const pageTitle = staticRoutes.admin.jordanHo.name;
     const classes = useStyles();
 
     const xsSize = 12;
@@ -162,7 +165,7 @@ function JordanHo() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (

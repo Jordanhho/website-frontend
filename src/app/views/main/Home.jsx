@@ -6,20 +6,21 @@ import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import Loader from "../../components/Loader";
 import Button from '@material-ui/core/Button';
 
-import TitleBanner from "../../components/TitleBanner";
-import staticRoutes from "../../routes/static_routes";
+import Loader from "Components/Loader";
+import TitleBanner from "Components/TitleBanner";
+
+import staticRoutes from "Routes/static_routes";
 
 import {
     getHomeApi
-} from "../../services/public_api";
+} from "Services/public_api";
 
 import useStyles from "./styles";
 
 function Home() {
-    const pageTitle = "Home";
+    const pageTitle = staticRoutes.main.name;
 
     const classes = useStyles();
 
@@ -43,7 +44,7 @@ function Home() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if(loaded === null) {
         return (
@@ -127,7 +128,7 @@ function Home() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.aboutMe}
+                                        href={staticRoutes.main.aboutMe.abs}
                                         className={classes.button}
                                     >
                                         Learn more about me
@@ -164,7 +165,7 @@ function Home() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.apps}
+                                        href={staticRoutes.main.apps.abs}
                                         className={classes.button}
                                     >
                                         View My Projects
@@ -202,7 +203,7 @@ function Home() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.resumeDisplay}
+                                        href={staticRoutes.main.resumeDisplay.abs}
                                         className={classes.button}
                                     >
                                         View My Resume
@@ -240,7 +241,7 @@ function Home() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.contactMe}
+                                        href={staticRoutes.main.contactMe.abs}
                                         className={classes.button}
                                     >
                                         Contact Me

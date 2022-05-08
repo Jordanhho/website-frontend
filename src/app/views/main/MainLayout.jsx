@@ -1,47 +1,72 @@
 import React from 'react';
 import { useLocation, Route, Routes } from 'react-router-dom';
 
-import staticRoutes from "../../routes/static_routes";
+import staticRoutes from "Routes/static_routes";
 
 import useStyles from "./styles";
 
-import AboutMe from "./AboutMe";
-import Apps from "./Apps";
-import Home from "./Home";
-import ResumeDisplay from "./ResumeDisplay";
-import AboutWebsite from "./AboutWebsite";
-import ContactMe from "./ContactMe";
+import AboutMe from "Main_view/AboutMe";
+import Apps from "Main_view/Apps";
+import Home from "Main_view/Home";
+import ResumeDisplay from "Main_view/ResumeDisplay";
+import AboutWebsite from "Main_view/AboutWebsite";
+import ContactMe from "Main_view/ContactMe";
 
-import NavBar from"../../components/NavBar";
+import NavBar from "Components/NavBar";
 
 function MainLayout() {
     const location = useLocation();
     const classes = useStyles();
 
+    const currPaths = staticRoutes.main;
     const navList = [
         {
-            to: staticRoutes.main.home,
-            name: "Home"
+            to: currPaths.abs,
+            path: currPaths.relLink,
+            name: currPaths.name,
+            element: (
+                <Home />
+            )
         },
         {
-            to: staticRoutes.main.apps,
-            name: "My Projects"
+            to: currPaths.apps.abs,
+            path: currPaths.apps.relLink,
+            name: currPaths.apps.name,
+            element: (
+                 <Apps />
+            )
         },
         {
-            to: staticRoutes.main.resumeDisplay,
-            name: "Resume"
+            to: currPaths.resumeDisplay.abs,
+            path: currPaths.resumeDisplay.relLink,
+            name: currPaths.resumeDisplay.name,
+            element: (
+                <ResumeDisplay />
+            )
         },
         {
-            to: staticRoutes.main.aboutMe,
-            name: "About Me"
+            to: currPaths.aboutMe.abs,
+            path: currPaths.aboutMe.relLink,
+            name: currPaths.aboutMe.name,
+            element: (
+                <AboutMe />
+            )
         },
         {
-            to: staticRoutes.main.contactMe,
-            name: "Contact Me"
+            to: currPaths.contactMe.abs,
+            path: currPaths.contactMe.relLink,
+            name: currPaths.contactMe.name,
+            element: (
+                <ContactMe />
+            )
         },
         {
-            to: staticRoutes.main.aboutWebsite,
-            name: "About Website"
+            to: currPaths.aboutWebsite.abs,
+            path: currPaths.aboutWebsite.relLink,
+            name: currPaths.aboutWebsite.name,
+            element: (
+                <AboutWebsite />
+            )
         },
     ];
 
@@ -49,37 +74,20 @@ function MainLayout() {
         <div className={classes.root}>   
             <NavBar
                 navList={navList}
-                personal_website={staticRoutes.main.home}
-                login={staticRoutes.admin.home}
+                personal_website={currPaths.abs}
+                login={staticRoutes.admin.login.abs}
                 location={location.pathname}
-        
             />
             <Routes>
-                <Route
-                    exact 
-                    path={staticRoutes.main.home}
-                    element={<Home/>}
-                />
-                <Route
-                    path={staticRoutes.main.apps}
-                    element={<Apps />}
-                />
-                <Route
-                    path={staticRoutes.main.resumeDisplay}
-                    element={<ResumeDisplay />}
-                />
-                <Route
-                    path={staticRoutes.main.aboutMe}
-                    element={<AboutMe />}
-                />
-                <Route
-                    path={staticRoutes.main.contactMe}
-                    element={<ContactMe />}
-                />
-                <Route
-                    path={staticRoutes.main.aboutWebsite}
-                    element={<AboutWebsite />}
-                />
+                {navList.map((nav, index) => {
+                    return (
+                        <Route
+                            key={`main-route-${index}`}
+                            path={nav.path}
+                            element={nav.element}
+                        />
+                    )
+                })}
             </Routes>
         </div>
     )

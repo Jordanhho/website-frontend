@@ -1,33 +1,33 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLocation, Route, Routes } from 'react-router-dom';
+import { useLocation, Route, Routes, Navigate } from 'react-router-dom';
 
 import moment from 'moment';
+
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
-import AdminApps from "./AdminApps";
-import AdminAboutMe from "./AdminAboutMe";
-import AdminHome from "./AdminHome";
-import JordanHo from "./JordanHo";
-import AdminResumeDisplay from "./AdminResumeDisplay";
+import AdminApps from "Admin_view/AdminApps";
+import AdminAboutMe from "Admin_view/AdminAboutMe";
+import AdminHome from "Admin_view/AdminHome";
+import JordanHo from "Admin_view/JordanHo";
+import AdminResumeDisplay from "Admin_view/AdminResumeDisplay";
 
-import staticRoutes from "../../routes/static_routes";
+import staticRoutes from "Routes/static_routes";
 
-import Loader from "../../components/Loader";
-
-import NavBar from "../../components/NavBar";
+import Loader from "Components/Loader";
+import NavBar from "Components/NavBar";
 
 import { 
     verifyLoginSessionAsync, 
     userLogoutAsync 
-} from "../../redux/asyncActions/authAsyncActions";
+} from "Redux/asyncActions/authAsyncActions";
 
-import { setAccessTokenApi } from '../../services/auth_api';
+import { setAccessTokenApi } from 'Services/auth_api';
 
 import useStyles from "./styles";
 
-function AdminLayout() {
+function AdminLayout(props) {
     const location = useLocation();
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -40,26 +40,47 @@ function AdminLayout() {
         dispatch(userLogoutAsync());
     }
 
+    const currPaths = staticRoutes.admin;
     const navList = [
         {
-            to: staticRoutes.admin.home,
-            name: "Settings"
+            to: currPaths.abs,
+            path: currPaths.relLink,
+            name: currPaths.name,
+            element: (
+                <AdminHome />
+            )
         },
         {
-            to: staticRoutes.admin.apps,
-            name: "Manage Projects"
+            to: currPaths.apps.abs,
+            path: currPaths.apps.relLink,
+            name: currPaths.apps.name,
+            element: (
+                <AdminApps />
+            )
         },
         {
-            to: staticRoutes.admin.resumeDisplay,
-            name: "Manage Resume"
+            to: currPaths.resumeDisplay.abs,
+            path: currPaths.resumeDisplay.relLink,
+            name: currPaths.resumeDisplay.name,
+            element: (
+                <AdminResumeDisplay />
+            )
         },
         {
-            to: staticRoutes.admin.aboutMe,
-            name: "Manage About Me"
+            to: currPaths.aboutMe.abs,
+            path: currPaths.aboutMe.relLink,
+            name: currPaths.aboutMe.name,
+            element: (
+                <AdminAboutMe />
+            )
         },
         {
-            to: staticRoutes.admin.jordanHo,
-            name: "Manage Jordan Ho"
+            to: currPaths.jordanHo.abs,
+            path: currPaths.jordanHo.relLink,
+            name: currPaths.jordanHo.name,
+            element: (
+                <JordanHo />
+            )
         },
     ];
 
@@ -78,11 +99,14 @@ function AdminLayout() {
             clearTimeout(verifyLoginSessionTimeOutTimer);
         }
     }, [dispatch, expiredAt]);
-
     useEffect(() => {
         fetchData();
         sessionTimeoutTimer();
     }, [fetchData, sessionTimeoutTimer]);
+
+    if (!props.isAuthenticated) {
+        return <Navigate to={props.redirectTo} />;
+    }
 
     if (loaded === null) {
         return (
@@ -108,33 +132,21 @@ function AdminLayout() {
         <div> 
             <NavBar
                 navList={navList}
-                personal_website={staticRoutes.main.home}
+                personal_website={staticRoutes.main.abs}
                 location={location.pathname}
                 handleLogout={handleLogout}
             />
             <Routes>
-                <Route
-                    exact
-                    path={staticRoutes.admin.home}
-                    element={<AdminHome />}
-                />
-                <Route
-                    path={staticRoutes.admin.apps}
-                    element={<AdminApps />}
-                />
-                <Route
-                    path={staticRoutes.admin.resumeDisplay}
-                    element={<AdminResumeDisplay />}
-                />
-                <Route
-                    path={staticRoutes.admin.aboutMe}
-                    element={<AdminAboutMe />}
-                />
-                <Route
-                    path={staticRoutes.admin.jordanHo}
-                    element={<JordanHo />}
-                />
-            </Routes> 
+                {navList.map((nav, index) => {
+                    return (
+                        <Route
+                            key={`admin-route-${index}`}
+                            path={nav.path}
+                            element={nav.element}
+                        />
+                    )
+                })}
+            </Routes>
         </div>
     )
 }

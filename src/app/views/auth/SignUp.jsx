@@ -10,21 +10,21 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 
-import staticRoutes from "../../routes/static_routes";
+import staticRoutes from "Routes/static_routes";
 
 import useStyles from "./styles";
-import useInput from "../../custom_hooks/useInput";
-import useInputPass from "../../custom_hooks/useInputPass";
+import useInput from "Custom_hooks/useInput";
+import useInputPass from "Custom_hooks/useInputPass";
 
 import {
     userSignUpApi
-} from "../../services/auth_api";
+} from "Services/auth_api";
 
 import ReCAPTCHA from "react-google-recaptcha";
-import { getRecaptchaInvisiblePublicKey } from "../../config/google_config";
+import { getRecaptchaInvisiblePublicKey } from "Config/google_config";
 
 function SiguUp() {
-    const pageTitle = "Admin Sign Up";
+    const pageTitle = staticRoutes.admin.login.signUp;
     const classes = useStyles();
     const recaptchaRef = React.createRef();
     const history = useNavigate();
@@ -71,7 +71,7 @@ function SiguUp() {
 
     useEffect(() => {
         document.title = pageTitle;
-    }, []);
+    }, [pageTitle]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -156,7 +156,7 @@ function SiguUp() {
           
                                 <Grid container justify="center">
                                     <Grid item>
-                                        <Link href={staticRoutes.admin.login} variant="body2">
+                                        <Link href={staticRoutes.admin.login.abs} variant="body2">
                                             Already have an account? Sign in
                                         </Link>
                                     </Grid>

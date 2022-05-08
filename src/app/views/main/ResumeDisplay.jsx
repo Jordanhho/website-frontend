@@ -13,19 +13,19 @@ import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 
-import staticRoutes from "../../routes/static_routes";
-import TitleBanner from "../../components/TitleBanner";
+import staticRoutes from "Routes/static_routes";
+import TitleBanner from "Components/TitleBanner";
 
-import Loader from "../../components/Loader";
+import Loader from "Components/Loader";
 
 import useStyles from "./styles";
 
 import {
     getResumeDisplayApi
-} from "../../services/public_api";
+} from "Services/public_api";
 
 function ResumeDisplay() {
-    const pageTitle = "My Experience";
+    const pageTitle = staticRoutes.main.resumeDisplay.name;
 
     const classes = useStyles();
 
@@ -49,7 +49,7 @@ function ResumeDisplay() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (
@@ -428,7 +428,7 @@ function ResumeDisplay() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.contactMe}
+                                        href={staticRoutes.main.contactMe.abs}
                                         className={classes.button}
                                     >
                                         Contact Me

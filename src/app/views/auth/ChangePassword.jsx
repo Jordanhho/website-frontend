@@ -13,22 +13,22 @@ import Paper from '@material-ui/core/Paper';
 import ReCAPTCHA from "react-google-recaptcha";
 import { 
     getRecaptchaInvisiblePublicKey
- } from "../../config/google_config";
+ } from "Config/google_config";
 
-import staticRoutes from "../../routes/static_routes";
+import staticRoutes from "Routes/static_routes";
 
 import {
     sendResetPasswordEmailApi,
     verifyResetPasswordCodeApi,
     resetPasswordApi
-} from "../../services/auth_api";
+} from "Services/auth_api";
 
 import useStyles from "./styles";
-import useInput from "../../custom_hooks/useInput";
-import useInputPass from "../../custom_hooks/useInputPass";
+import useInput from "Custom_hooks/useInput";
+import useInputPass from "Custom_hooks/useInputPass";
 
 function ForgotPassword() {
-    const pageTitle = "Admin Change Password"
+    const pageTitle = staticRoutes.admin.login.forgotPassword.name;
     const classes = useStyles();
     const recaptchaRef = React.createRef();
 
@@ -146,7 +146,7 @@ function ForgotPassword() {
 
     useEffect(() => {
         document.title = pageTitle;
-    }, []);
+    }, [pageTitle]);
 
     return (
         <Container component="main" maxWidth="xs">
@@ -196,7 +196,7 @@ function ForgotPassword() {
                                 </Grid>
                                 <Grid container justify="flex-end">
                                     <Grid item>
-                                        <Link href={staticRoutes.admin.login} variant="body2">
+                                        <Link href={staticRoutes.admin.login.abs} variant="body2">
                                             Already have an account? Sign in
                                         </Link>
                                     </Grid>

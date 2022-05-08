@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 
+import { makeStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,11 +12,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import SettingsIcon from '@material-ui/icons/Settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import PersonalLogo from "../assets/img/personal_logo.png";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import StyledTab from "./StyledTab";
+import PersonalLogo from "Assets/img/personal_logo.png";
 
+import StyledTab from "./StyledTab";
 
 const useStyles = makeStyles((theme) => ({
     root: {

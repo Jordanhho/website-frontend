@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback  } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 
 //custom images
-import EseaIcon from "../../assets/img/esea_icon.png";
-import CfsIcon from "../../assets/img/cfs_icon.png";
+import EseaIcon from "Assets/img/esea_icon.png";
+import CfsIcon from "Assets/img/cfs_icon.png";
 
 import IconButton from '@material-ui/core/IconButton';
 import Paper from '@material-ui/core/Paper';
@@ -16,20 +16,20 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 
-import TitleBanner from "../../components/TitleBanner";
+import TitleBanner from "Components/TitleBanner";
 
-import staticRoutes from "../../routes/static_routes";
+import staticRoutes from "Routes/static_routes";
 
-import Loader from "../../components/Loader";
+import Loader from "Components/Loader";
 
 import useStyles from "./styles";
 
 import {
     getAboutMeApi
-} from "../../services/public_api";
+} from "Services/public_api";
 
 function AboutMe() {
-    const pageTitle = "About Me";
+    const pageTitle = staticRoutes.main.aboutMe.name;
     const classes = useStyles();
 
     const xsSize = 12;
@@ -63,7 +63,7 @@ function AboutMe() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (
@@ -304,7 +304,7 @@ function AboutMe() {
                                     <Button
                                         variant="outlined"
                                         color="primary"
-                                        href={staticRoutes.main.resumeDisplay}
+                                        href={staticRoutes.main.resumeDisplay.abs}
                                         className={classes.button}
                                     >
                                         View My Resume

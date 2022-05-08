@@ -19,26 +19,28 @@ import Typography from '@material-ui/core/Typography';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
-import ChipInput from "../../components/ChipInput";
-import Loader from "../../components/Loader";
-import TitleBanner from "../../components/TitleBanner";
+import ChipInput from "Components/ChipInput";
+import Loader from "Components/Loader";
+import TitleBanner from "Components/TitleBanner";
 
 import useStyles from "./styles";
 
+import staticRoutes from "Routes/static_routes";
+
 import {
     getAboutMeApi,
-} from "../../services/public_api";
+} from "Services/public_api";
 
 import {
     updateAboutMeApi
-} from "../../services/private_api";
+} from "Services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function AdminAboutMe() {
-    const pageTitle = "Admin Manage AboutMe";
+    const pageTitle = staticRoutes.admin.aboutMe.name;
     const classes = useStyles();
 
     const formRef = React.createRef();
@@ -140,7 +142,7 @@ function AdminAboutMe() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (
@@ -205,7 +207,7 @@ function AdminAboutMe() {
                 {(!readOnly) &&
                 <Grid container justify="flex-end">
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         color="primary"
                         onClick={handleOnClickCancel}
                         className={classes.pinnedCancelBtn}
@@ -214,7 +216,7 @@ function AdminAboutMe() {
                         Cancel
                         </Button>
                     <Button
-                        variant="outlined"
+                        variant="contained"
                         color="primary"
                         onClick={handleUpdate}
                         className={classes.pinnedSaveBtn}

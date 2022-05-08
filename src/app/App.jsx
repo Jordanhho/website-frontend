@@ -1,17 +1,15 @@
 import React from 'react';
 import { CookiesProvider } from "react-cookie";
 
-import theme from './theme/theme';
+import theme from 'Theme/theme';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import {
-    Routes,
-    Route,
     BrowserRouter
 } from "react-router-dom";
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
-import AppLayout from "./views/AppLayout";
+import AppLayout from "Views/AppLayout";
 
 //add font awesome icon library
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -26,9 +24,7 @@ function App() {
             <BrowserRouter>
                 <MuiThemeProvider theme={theme}>
                     <CssBaseline/>
-                    <Routes>
-                        <Route path="/" element={<AppLayout />} />
-                    </Routes>
+                    <AppLayout />
                 </MuiThemeProvider>
             </BrowserRouter>
         </CookiesProvider>

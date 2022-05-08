@@ -3,8 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //custom images
-import EseaIcon from "../../assets/img/esea_icon.png";
-import CfsIcon from "../../assets/img/cfs_icon.png";
+import EseaIcon from "Assets/img/esea_icon.png";
+import CfsIcon from "Assets/img/cfs_icon.png";
 
 //icons
 import YouTubeIcon from '@material-ui/icons/YouTube';
@@ -22,18 +22,20 @@ import Container from '@material-ui/core/Grid';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
-import TitleBanner from "../../components/TitleBanner";
+import TitleBanner from "Components/TitleBanner";
 
-import Loader from "../../components/Loader";
+import Loader from "Components/Loader";
 
 import useStyles from "./styles";
 
+import staticRoutes from "Routes/static_routes";
+
 import {
     getContactMeApi
-} from "../../services/public_api";
+} from "Services/public_api";
 
 function ContactMe() {
-    const pageTitle = "Contact Me";
+    const pageTitle = staticRoutes.main.contactMe.name;
 
     const classes = useStyles();
 
@@ -73,7 +75,7 @@ function ContactMe() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (

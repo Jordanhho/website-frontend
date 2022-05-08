@@ -11,13 +11,15 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import Loader from "../../components/Loader";
-import TitleBanner from "../../components/TitleBanner";
+import Loader from "Components/Loader";
+import TitleBanner from "Components/TitleBanner";
+
+import staticRoutes from "Routes/static_routes";
 
 import {
     getAdminSettingsApi,
     updateAdminSettingsApi
-} from "../../services/private_api";
+} from "Services/private_api";
 
 import useStyles from "./styles";
 
@@ -26,7 +28,7 @@ function Alert(props) {
 }
 
 function AdminHome() {
-    const pageTitle = "Admin Manage Settings";
+    const pageTitle = staticRoutes.admin.name;
     const classes = useStyles();
 
     const formRef = React.createRef();
@@ -89,7 +91,7 @@ function AdminHome() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (

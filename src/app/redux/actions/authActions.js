@@ -7,11 +7,11 @@ import {
 
     USER_LOGIN_SUCCESS,
     USER_LOGOUT
-} from "../constants/authTypes";
+} from "Redux/constants/authTypes";
 
 import {
     setAccessTokenApi
-} from "../../services/auth_api";
+} from "Services/auth_api";
 
 
 // user login - start

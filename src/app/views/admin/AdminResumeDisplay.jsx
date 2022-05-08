@@ -19,25 +19,27 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Chip from '@material-ui/core/Chip';
 
-import TitleBanner from "../../components/TitleBanner";
-import Loader from "../../components/Loader";
-import ChipInput from "../../components/ChipInput";
+import TitleBanner from "Components/TitleBanner";
+import Loader from "Components/Loader";
+import ChipInput from "Components/ChipInput";
 import useStyles from "./styles";
+
+import staticRoutes from "Routes/static_routes";
 
 import {
     getResumeDisplayApi,
-} from "../../services/public_api";
+} from "Services/public_api";
 
 import {
     updateResumeDisplayApi
-} from "../../services/private_api";
+} from "Services/private_api";
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 function AdminResumeDisplay() {
-    const pageTitle = "Admin Manage Resume";
+    const pageTitle = staticRoutes.admin.resumeDisplay.name;
     const classes = useStyles();
 
     const xsSize = 12;
@@ -168,7 +170,7 @@ function AdminResumeDisplay() {
     useEffect(() => {
         document.title = pageTitle;
         fetchData();
-    }, [fetchData]);
+    }, [fetchData, pageTitle]);
 
     if (loaded === null) {
         return (
@@ -244,7 +246,7 @@ function AdminResumeDisplay() {
                             <Paper className={classes.paper}>
                                 <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Education
                                         </Typography>
                                     </Grid>
@@ -256,7 +258,6 @@ function AdminResumeDisplay() {
                                                 <Grid
                                                     container
                                                     justify="center"
-                                                    alignItems="left"
                                                 >
                                                     <Grid item xs={12} align="left">
                                                         <Typography variant="h6" color="primary">
@@ -292,9 +293,7 @@ function AdminResumeDisplay() {
                                                 <Grid
                                                     container
                                                     justify="center"
-                                                    alignItems="left"
                                                     spacing={3}
-
                                                 >
                                                     <Grid item xs={12}>
                                                         <Typography variant="h6" color="primary" align="left">
@@ -562,7 +561,7 @@ function AdminResumeDisplay() {
                             <Paper className={classes.paper}>
                                 <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Work Experience
                                         </Typography>
                                     </Grid>
@@ -574,7 +573,6 @@ function AdminResumeDisplay() {
                                                     <Grid
                                                         container
                                                         justify="center"
-                                                        alignItems="left"
                                                     >
                                                         <Grid item xs={12} align="left">
                                                             <Typography variant="h6" color="primary">
@@ -615,7 +613,6 @@ function AdminResumeDisplay() {
                                                     <Grid
                                                         container
                                                         justify="center"
-                                                        alignItems="left"
                                                         spacing={3}
                                                     >
                                                         <Grid item xs={12}>
@@ -730,7 +727,7 @@ function AdminResumeDisplay() {
                             <Paper className={classes.paper}>
                                 <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             School Experience
                                         </Typography>
                                     </Grid>
@@ -742,7 +739,6 @@ function AdminResumeDisplay() {
                                                 <Grid
                                                     container
                                                     justify="center"
-                                                    alignItems="left"
                                                 >
                                                     <Grid item xs={12} align="left">
                                                         <Typography variant="h6" color="primary">
@@ -778,7 +774,6 @@ function AdminResumeDisplay() {
                                                     <Grid
                                                         container
                                                         justify="center"
-                                                        alignItems="left"
                                                         spacing={3}
                                                     >
                                                         <Grid item xs={12}>
@@ -895,7 +890,7 @@ function AdminResumeDisplay() {
                             <Paper className={classes.paper}>
                                 <Box p={3} className={classes.center}>
                                     <Grid item xs={12}>
-                                        <Typography variant="h4" color="Primary" className={classes.underline}>
+                                        <Typography variant="h4" color="primary" className={classes.underline}>
                                             Year Gap After University
                                             </Typography>
                                     </Grid>
@@ -904,7 +899,6 @@ function AdminResumeDisplay() {
                                     <Grid
                                         container
                                         justify="center"
-                                        alignItems="left"
                                     >
                                         <Grid item xs={12}>
                                             <Typography variant="h6" color="primary">
@@ -923,7 +917,6 @@ function AdminResumeDisplay() {
                                         <Grid
                                             container
                                             justify="center"
-                                            alignItems="left"
                                             spacing={3}
                                         >
                                             <Grid item xs={12}>

@@ -24,6 +24,7 @@ The application uses the following npm packages:
 - react-dom
 - react-router-dom
 - react-cookie
+- react-app-rewired
 
 ### Redux:
 - react-redux
@@ -35,7 +36,7 @@ Material UI:
 - @material-ui/icons
 - @material-ui/lab
 
-### Fontawesome:
+ptawesome:
 - react-fontawesome
 - fontawesome-svg-core
 - free-brands-svg-icons
@@ -48,6 +49,7 @@ Material UI:
 - moment
 - axios
 - react-html-parser
+- babel-plugin-module-resolver
 
 ## Requirements
 This project is meant to be paired with the personal website backend in order to load apis. However, the website can still be run.

@@ -71,8 +71,14 @@ It has been developed targeted towards Chrome Browsers desktops.
 ```
 
 ## to build static files
-1. Build reactjs 
+1. Build reactjs when on linux VM:
 ``` 
-    $ INLINE_RUNTIME_CHUNK=false npm run build
+    $ INLINE_RUNTIME_CHUNK=false npm run build-rewired-linux
 ```
+Or build on windows dev ENV
+
+``` 
+    $ npm run build-rewired-windows
+```
+
 2. The built app will be at /build

@@ -27,7 +27,7 @@ function SiguUp() {
     const pageTitle = staticRoutes.admin.login.signUp;
     const classes = useStyles();
     const recaptchaRef = React.createRef();
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const [createAccErr, setCreateAccErr] = useState(false);
     const [confirmPasswordNotMatch, setConfirmPasswordNotMatch] = useState(false);
@@ -62,7 +62,7 @@ function SiguUp() {
             setCreateAccErr(false);
 
             //Navigate to activation page
-            history.push(staticRoutes.admin.activateAccountTemplate(email.value));
+            navigate(staticRoutes.admin.activateAccountTemplate(email.value));
         }
         else {
             setCreateAccErr(true);

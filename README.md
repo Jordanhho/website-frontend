@@ -50,6 +50,7 @@ ptawesome:
 - axios
 - react-html-parser
 - babel-plugin-module-resolver
+- customize-cra
 
 ## Requirements
 This project is meant to be paired with the personal website backend in order to load apis. However, the website can still be run.

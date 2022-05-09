@@ -81,7 +81,7 @@ const staticRoutes = {
                 abs: '/admin/login/forgot-password',
                 relLink: '/forgot-password',
             },
-            activateAccountTemplate: (email, activation_code = "") => `/activate_account/${email}/${activation_code}`,
+            activateAccountTemplate: (email, activation_code = "") => `/admin/login/activate_account/${email}/${activation_code}`,
         }, 
     },
 }
